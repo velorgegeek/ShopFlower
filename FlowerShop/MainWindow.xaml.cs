@@ -20,5 +20,20 @@ namespace FlowerShop
         {
             InitializeComponent();
         }
+
+    private void Exit_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+
+        private void Statistics_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void data_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace DOMAIN.Statistics
 {
-    public record MounthStatistics
+    public record MouthStatistics
     {
         public required int Year { get; set; }
         public required int Month { get; set; }
         public required int count { get; set; }
-        public  string GetMounthName()
+        public  string GetMouthName()
         {
             var date = new DateTime(Year, Month, 1);
             return date.ToString("MMM yyyy");
