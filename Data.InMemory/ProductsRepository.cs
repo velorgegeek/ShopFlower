@@ -12,6 +12,14 @@ namespace Data.InMemory
     {
         List<Product> products { get; set; } = new List<Product>();
         public int Id = 0;
+        public Product GetProductsById(int id)
+        {
+            return products[0];
+        }
+        public bool ProductUpdate(Product product)
+        {
+            return true;
+        }
         public bool ProductAdd(Product product)
         {
             if (product == null)

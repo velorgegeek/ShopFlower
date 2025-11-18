@@ -13,13 +13,10 @@ namespace UI
         public RegWindow()
         {
             InitializeComponent();
-
         }
         void Registration()
         {
-            string t = log.Text;
-            string q = pass.Text;
-            tq.GetByLogin(t,q);
+            //tq.GetByLogin(t,q);
         }
     }
 }

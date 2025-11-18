@@ -15,8 +15,9 @@ namespace DOMAIN
         public string Fio{ get; set; }
         public string Phone { get; set; }
         public string? Mail { get; set; }
-        public string HashPassword { get; set; }
+        public string HashPassword { get; set; } 
         public role Role { get; set; } = role.User;
+        public List<ProductInSale> ShoppingCard{ get; set; }
         public User(int id, string fio, string phone, string mail, string hashPassword)
         {
             ID = id;

@@ -11,10 +11,19 @@ namespace Data.InMemory
 {
     public class SaleRepository : ISaleRepository
     {
-        private readonly List<Sale> _saleList;
+        private readonly List<Sale> _saleList = new List<Sale>();
+        int countId = 0;
+        public bool AddSale(List<ProductInSale> product)
+        {
+            if (product == null) return false;
+            countId++;
+            _saleList.Add(new Sale(countId, product));
+            return true;
+        }
         public List<Sale> GetAll(SaleFilter filter)
         {
             var result = _saleList.AsEnumerable();
+ 
             if (filter.StartDate.HasValue)
             {
                 result = result.Where(r => r.DateCreate >= filter.StartDate.Value); 

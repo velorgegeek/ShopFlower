@@ -1,0 +1,68 @@
+﻿<Window x:Class="UI.ShoppingCart"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:UI"
+        mc:Ignorable="d"
+        Title="ShoppingCart" Height="450" Width="800">
+    <Grid>
+        <ListBox x:Name="ShopCart" Margin="0,70,280,0">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Border BorderBrush="#E0E0E0" Margin="5" Padding="10" Background="White">
+                        <StackPanel Orientation="Horizontal">
+                            <!-- Изображение товара -->
+                            <Image Source="{Binding ProductVariation.ImagePath}" 
+                                   Width="100" Height="100" 
+                                   Stretch="Uniform"
+                                   Margin="0,0,10,0"/>
+
+                            <StackPanel>
+                                <TextBlock Text="{Binding ProductVariation.Product.Name}" FontWeight="Bold"/>
+                                <TextBlock Text="{Binding Quantity, StringFormat={}Количество: {0}}"/>
+                                <TextBlock Text="{Binding ProductVariation.Price, StringFormat={}Общая стоимость: {0}₽}"/>
+                            </StackPanel>
+                            <StackPanel Margin="20,0,0,0" VerticalAlignment="Center">
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                    <Button Content="-" 
+                                            Width="30" 
+                                            Height="30"
+                                            Click="DecreaseQuantity_Click"
+                                            Background="White"
+                                            BorderBrush="#E0E0E0"
+                                            FontWeight="Bold"/>
+
+                                    <TextBlock x:Name="QuantityTextBlock" Text="{Binding Quantity}" 
+                                               Width="40" 
+                                               Height="30"
+                                               TextAlignment="Center"
+                                               VerticalAlignment="Center"
+                                               Background="White"
+                                               Padding="0,5"/>
+
+                                    <Button Content="+" 
+                                            Width="30" 
+                                            Height="30"
+                                            Click="IncreaseQuantity_Click"
+                                            Background="White"
+                                            BorderBrush="#E0E0E0"
+                                            FontWeight="Bold"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <Border BorderBrush="#E0E0E0" BorderThickness="2" Margin="556,70,10,130" Padding="10" Background="White">
+            <StackPanel Margin="-12,-12,-12,-12">
+                <TextBlock x:Name="AmountPaid" Text="Сумма: 0₽" FontWeight="Bold" FontSize="16" Margin="20,130,20,15" Width="163"/>
+                <Button x:Name="Buy" Content="Оплатить" Height="35" FontWeight="Bold" FontSize="20" Margin="20,0,20,0" Click="Paid_Click"/>
+            </StackPanel>
+        </Border>
+        <TextBlock x:Name="Cart" Margin="10,47,0,0" TextWrapping="Wrap" Text="Корзина" Height="22" Width="77" FontSize="18" FontWeight="Bold" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+        <TextBlock x:Name="ListSize" HorizontalAlignment="Left" Margin="87,56,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="#FF6D7777" Width="68" Height="13" FontSize="10"><Run Language="ru-ru" Text="0 Товаров"/></TextBlock>
+    </Grid>
+</Window>

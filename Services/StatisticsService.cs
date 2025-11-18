@@ -7,6 +7,7 @@ namespace Services
     public class StatisticsService
     {
         private readonly ISaleRepository _saleRepository;
+
         public StatisticsService(ISaleRepository saleRep)
         {
             _saleRepository = saleRep;
@@ -37,7 +38,7 @@ namespace Services
                 .GroupBy(x => x.Product)
                 .Select(g => new ProductStaticsItem
                 {
-                    ProductName = g.Key.name,
+                    ProductName = g.Key.Name,
                     Count = g.Count()
                 }).OrderByDescending(m=>m.Count)
                 .ToList();

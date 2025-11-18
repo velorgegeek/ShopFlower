@@ -10,6 +10,6 @@ namespace Data.Interfaces
         bool ProductRemove(Product product);
         bool ProductUpdate(Product product);
 
-        List<Product> GetProductsById(int id);
+        Product GetProductsById(int id);
     }
 }

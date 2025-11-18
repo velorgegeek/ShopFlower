@@ -9,5 +9,6 @@ namespace Data.Interfaces
     public interface ISaleRepository
     {
         List<Sale> GetAll(SaleFilter filter);
+        public bool AddSale(List<ProductInSale> product);
     }
 }

@@ -8,9 +8,9 @@
         Title="RegWindow" Height="450" Width="800">
     <Grid>
         <TextBox x:Name="log" HorizontalAlignment="Left" Margin="250,117,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="222" Height="35"/>
-        <TextBox x:Name="pass" HorizontalAlignment="Left" Margin="250,217,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="222" Height="35"/>
         <Button Content="Button" HorizontalAlignment="Left" Margin="672,346,0,0" VerticalAlignment="Top"/>
         <Button Content="Button" HorizontalAlignment="Left" Margin="529,346,0,0" VerticalAlignment="Top"/>
+        <PasswordBox x:Name="PassBox" HorizontalAlignment="Left" Margin="250,243,0,0" VerticalAlignment="Top" Width="222" Height="34"/>
 
     </Grid>
 </Window>
