@@ -4,11 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DOMAIN;
+
 namespace Data.Interfaces
 {
-    public interface ISaleRepository
+    public interface ICategoryRepository
     {
-        List<Sale> GetAll(SaleFilter filter);
-        bool AddSale(int userid,List<ProductInSale> product);
+        bool Add(string category);
+        List<CategoryProduct> GetAll();
+
     }
 }

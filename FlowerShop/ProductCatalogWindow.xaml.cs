@@ -24,11 +24,14 @@ namespace UI
     /// </summary>
     public partial class ProductCatalogWindow : Window
     {
-
+        User user = new User(0,"da","da","da","hash");
         List<Product> Products;
-        public ProductCatalogWindow()
+        ISaleRepository sale;
+        public ProductCatalogWindow(ISaleRepository sale,User user)
         {
+            
             InitializeComponent();
+            this.sale = sale;
             DataContext = Products;
             Products = new List<Product>();
 
@@ -36,33 +39,24 @@ namespace UI
             Product product1 = new Product("Молоко", "Свежее молоко","da");
             Product product2 = new Product("Хлеб", "Свежий хлеб", "da");
 
-            // Добавляем вариации для продуктов
-            product1.Variations = new List<ProductVariation>
-        {
-            new ProductVariation(product1, "Молоко 2.5%", "C:/Users/BEBERISHKA/Downloads/ShopFlower-main/ShopFlower-main/maxresdefault (1).jpg"),
-            new ProductVariation(product1, "Молоко 3.2%", "C:/Users/BEBERISHKA/Downloads/ShopFlower-main/ShopFlower-main/maxresdefault.jpg")
-        };
+            product1.AddVariation("Молоко 2.5%", System.IO.Path.GetFullPath("Images/maxresdefault (1).jpg"));
+            product1.AddVariation("Молоко 3.2%", System.IO.Path.GetFullPath("Images/maxresdefault.jpg"));
             product1.Variations[0].Price = 500;
             product1.Variations[1].Price = 550;
-
-            product2.Variations = new List<ProductVariation>
-        {
-            new ProductVariation(product2, "Хлеб белый", "C:/Users/BEBERISHKA/Downloads/ShopFlower-main/ShopFlower-main/maxresdefault.jpg"),
-            new ProductVariation(product2, "Хлеб черный", "C:/Users/BEBERISHKA/Downloads/ShopFlower-main/ShopFlower-main/maxresdefault (1).jpg")
-        };
+            product2.AddVariation("Хлеб черный", System.IO.Path.GetFullPath("Images/maxresdefault (1).jpg"));
+            product2.AddVariation("Хлеб бели", System.IO.Path.GetFullPath("Images/maxresdefault.jpg"));
             product2.Variations[0].Price = 400;
             product2.Variations[1].Price = 5054;
 
+            Products.Add(product1);
+            Products.Add(product2);
+            Products.Add(product1);
+            Products.Add(product2);
+            Products.Add(product1);
+            Products.Add(product2);
+            Products.Add(product1);
+            Products.Add(product2);
 
-            // Добавляем продукты в коллекцию
-            Products.Add(product1);
-            Products.Add(product2);
-            Products.Add(product1);
-            Products.Add(product2);
-            Products.Add(product1);
-            Products.Add(product2);
-            Products.Add(product1);
-            Products.Add(product2);
 
             // Устанавливаем контекст данных
             ProductsListBox.ItemsSource = Products;
@@ -76,7 +70,7 @@ namespace UI
             if(ProductsListBox.SelectedItem is Product product)
             {
                 ProductsListBox.SelectedItem = null;
-                ProductCard productCard = new ProductCard(product);
+                ProductCard productCard = new ProductCard(sale,product,user);
                 productCard.Show(); 
 
             }

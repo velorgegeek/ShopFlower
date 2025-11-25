@@ -11,7 +11,7 @@ namespace DOMAIN.Statistics
     {
         public required int Year { get; set; }
         public required int Month { get; set; }
-        public required int count { get; set; }
+        public required int Count { get; set; }
         public  string GetMouthName()
         {
             var date = new DateTime(Year, Month, 1);

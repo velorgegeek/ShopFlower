@@ -21,8 +21,10 @@
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <Button Name ="data" Grid.Column="1" Content="DataGrid" Margin="0,149,0,0" Grid.RowSpan="2" Click="data_Click"/>
-        <Button Name="Statistics" Grid.Column="1" Grid.Row="2" Content="Статистика" Margin="0,16,0,0" Grid.RowSpan="2" Click="Statistics_Click"  />
-        <Button Name ="Exit" Grid.Column="1" Content="Выход"  Grid.Row="5" Click="Exit_Click"/>
+        <Button Name ="data" Grid.Column="1" Content="DataGrid" Margin="0,16,266,0" Grid.RowSpan="2" Click="data_Click" Grid.ColumnSpan="2" Grid.Row="2"/>
+        <Button Name="Statistics" Grid.Row="4" Content="Статистика" Margin="266,16,0,0" Grid.RowSpan="2" Click="Statistics_Click" Grid.ColumnSpan="2"  />
+        <Button Name ="Exit" Grid.Column="1" Content="Выход"  Grid.Row="6" Click="Exit_Click" Grid.ColumnSpan="2" Margin="0,19,266,34"/>
+        <Button Grid.Column="1" Content="Юзерская часть" HorizontalAlignment="Center" VerticalAlignment="Center" Height="50" Width="267" Click="Button_Click" Grid.Row="1"/>
+        <Button Grid.Column="1" Content="Добавление" HorizontalAlignment="Center" Margin="0,89,0,0" VerticalAlignment="Top" Height="50" Width="266" Click="Button_Click_1"/>
     </Grid>
 </Window>

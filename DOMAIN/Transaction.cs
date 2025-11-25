@@ -12,7 +12,6 @@ namespace DOMAIN
     enum TypeTransaction
     {
         Deposit,
-        Subscription,
         Purchase
     }
     public class Transaction

@@ -10,9 +10,9 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" MinHeight="31.28"/>
             <!-- 0: Название продукта -->
-            <RowDefinition Height="Auto" MinHeight="270"/>
+            <RowDefinition Height="Auto" MinHeight="227"/>
             <!-- 1: Изображение и варианты -->
-            <RowDefinition Height="Auto" MinHeight="0"/>
+            <RowDefinition Height="Auto" MinHeight="43"/>
             <!-- 2: Кнопки -->
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -32,14 +32,14 @@
 
         <!-- Изображение продукта -->
         <Image x:Name="ImageProduct" Grid.Row="1" Grid.Column="0"
-               HorizontalAlignment="Left" Height="260" Width="270" 
-               Margin="33,10,0,0" VerticalAlignment="Top"
+               HorizontalAlignment="Left" Height="217" Width="260" 
+               Margin="10,10,0,0" VerticalAlignment="Top"
                Source="C:/Users/BEBERISHKA/Downloads/ShopFlower-main/ShopFlower-main/maxresdefault.jpg"/>
 
         <!-- Панель для RadioButton (правая колонка) -->
         <StackPanel x:Name="RadioButtonsPanel" Grid.Column="1"
                     Orientation="Vertical" VerticalAlignment="Top"
-                    Margin="20,31,0,0" Grid.ColumnSpan="2" Height="0">
+                    Margin="10,10,10,0" Height="76" Grid.Row="1">
             <!-- RadioButton будут добавляться сюда -->
         </StackPanel>
 
@@ -52,8 +52,9 @@
         <StackPanel Grid.Row="1" Grid.Column="2" Orientation="Vertical" 
                     HorizontalAlignment="Left" VerticalAlignment="Top"
                     Margin="50,82,0,0" Height="73" Width="130">
-            <Button Content="Добавить в корзину" Height="34" Width="130" Margin="0,0,0,10" Click="BuyClickCart"/>
+            <Button x:Name="InCardButton" Content="Добавить в корзину" Height="34" Width="130" Margin="0,0,0,10" Click="AddInCard"/>
             <Button Content="Купить" Height="29" Width="130" Click="BuyClick"/>
         </StackPanel>
+        <Button x:Name="GoInCard" Grid.Column="2" Content="В корзину" Click="BuyClickCart" HorizontalAlignment="Left" Margin="50,82,0,0" Grid.Row="1" VerticalAlignment="Top" Height="34" Width="130" Visibility="Hidden"/>
     </Grid>
 </Window>

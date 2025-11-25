@@ -11,13 +11,17 @@ namespace Data.InMemory
 {
     public class SaleRepository : ISaleRepository
     {
+        private static readonly Lazy<SaleRepository> _instance =
+            new Lazy<SaleRepository>(() => new SaleRepository());
+        public static SaleRepository Instance = _instance.Value;
         private readonly List<Sale> _saleList = new List<Sale>();
         int countId = 0;
-        public bool AddSale(List<ProductInSale> product)
+        private SaleRepository() { }
+        public bool AddSale(int userId,List<ProductInSale> product)
         {
             if (product == null) return false;
             countId++;
-            _saleList.Add(new Sale(countId, product));
+            _saleList.Add(new Sale(userId,countId, product));
             return true;
         }
         public List<Sale> GetAll(SaleFilter filter)

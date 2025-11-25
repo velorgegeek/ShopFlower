@@ -1,4 +1,5 @@
-﻿using DOMAIN;
+﻿using Data.InMemory;
+using DOMAIN;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using Data.Interfaces;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
@@ -25,10 +27,13 @@ namespace UI
         User user1;
         List<RadioButton> radioButtons = new List<RadioButton>();
         int h = 150;
-        public ProductCard(Product product)
+        ISaleRepository SaleRep;
+        public ProductCard(ISaleRepository SaleRep,Product product,User user)
         {
             InitializeComponent();
             pr = product;
+            this.SaleRep = SaleRep;
+            user1 = user;
             DataContext = product;
             ImageProduct.Source = new BitmapImage(new Uri(product.MainImagePath));
             for (int i = 0; i < product.Variations.Count; i++)
@@ -40,6 +45,7 @@ namespace UI
                     Content = $"{product.Variations[i].Price} руб.",
                     Margin = new Thickness(0, 5, 0, 5)
                 };
+
                 radioButton.Checked += new RoutedEventHandler(RadioButton_Checked);
                 radioButtons.Add(radioButton);
                 RadioButtonsPanel.Children.Add(radioButton);
@@ -54,22 +60,29 @@ namespace UI
             RadioButton radioButton = (RadioButton)sender;
             if (radioButton.IsChecked == true)
             {
+                GoInCard.Visibility = Visibility.Hidden;
+                InCardButton.Visibility = Visibility.Visible;
                 CostTextBlock.Text = radioButton.Content.ToString();
                 int index = radioButtons.IndexOf(radioButton);
                 ImageProduct.Source = new BitmapImage(new Uri(pr.Variations[index].ImagePath));
             }
         }
-        private void BuyClickCart(object sender, RoutedEventArgs e)
+        private void AddInCard(object sender, RoutedEventArgs e)
         {
+            GoInCard.Visibility = Visibility.Visible;
+            InCardButton.Visibility = Visibility.Hidden;
             for (int i = 0; i < radioButtons.Count; i++)
             {
                 if (radioButtons[i].IsChecked == true)
                 {
-                    user1.ShoppingCard.Add(new ProductInSale(pr.Variations[i], 1));
+                    user1.AddInCard(new ProductInSale(pr.Variations[i], 1));
                     break;
                 }
             }
-            ShoppingCart shop = new ShoppingCart(user1.ShoppingCard);
+        }
+        private void BuyClickCart(object sender, RoutedEventArgs e)
+        {
+            ShoppingCart shop = new ShoppingCart(SaleRep,user1);
             shop.Show();
         }
         private void BuyClick(object sender, RoutedEventArgs e)
@@ -85,14 +98,9 @@ namespace UI
             List<ProductInSale> listPr = new List<ProductInSale>()
                     {
                         new ProductInSale(pr.Variations[i], 1),
-                        new ProductInSale(pr.Variations[1], 1),
-                        new ProductInSale(pr.Variations[i], 1),
-                        new ProductInSale(pr.Variations[1], 1),
-                        new ProductInSale(pr.Variations[i], 1),
-                        new ProductInSale(pr.Variations[1], 1),
                     };
-            ShoppingCart shop = new ShoppingCart(listPr);
-            shop.Show();
+            ShoppingCart shop = new ShoppingCart(SaleRep,listPr,user1);
+            shop.Show(); 
         }
     }
 }

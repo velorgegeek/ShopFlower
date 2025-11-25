@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DOMAIN;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,10 +19,23 @@ namespace UI
     /// Логика взаимодействия для PaymentWindow.xaml
     /// </summary>
     public partial class PaymentWindow : Window
-    {
+    {  
         public PaymentWindow()
         {
             InitializeComponent();
+        }
+
+        public static bool PaymentWindowShow()
+        {
+            var app = new PaymentWindow();
+            if (app.ShowDialog() == true) return true;
+            return false;   
+        }
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            DialogResult = true;
+            
+            Close();
         }
     }
 }

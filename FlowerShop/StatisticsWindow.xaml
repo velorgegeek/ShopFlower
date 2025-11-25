@@ -41,8 +41,13 @@
 
         <!-- Контейнер для диаграмм -->
         <TabControl Grid.Row="2">
-            <oxy:PlotView HorizontalAlignment="Left" Margin="371,0,0,0"/>
-            <!-- Вкладки с графиками будут добавлены после настройки OxyPlot -->
+            <TabItem Header="По продуктам">
+                <oxy:PlotView x:Name="Сhart" Model="{Binding SaleModel}"/>
+                <!-- Вкладки с графиками будут добавлены после настройки OxyPlot -->
+            </TabItem>
+            <TabItem Header ="По месяцам">
+                <oxy:PlotView x:Name="Сhart2" Model="{Binding MonthPlotModel}"/>
+            </TabItem>
         </TabControl>
     </Grid>
 </Window>

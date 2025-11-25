@@ -20,7 +20,7 @@ namespace Services
                 {
                     Year = g.Key.Year,
                     Month = g.Key.Month,
-                    count = g.Count()
+                    Count = g.Count()
                 }).OrderBy(m => m.Year)
                 .ThenBy(m=> m.Month).ToList();
         }

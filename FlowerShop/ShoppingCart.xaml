@@ -10,11 +10,11 @@
         <ListBox x:Name="ShopCart" Margin="0,70,280,0">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <Border BorderBrush="#E0E0E0" Margin="5" Padding="10" Background="White">
+                    <Border BorderBrush="#E0E0E0" Margin="5" Padding="10" Background="White" CornerRadius="10,10,10,10" BorderThickness="1,1,1,1">
                         <StackPanel Orientation="Horizontal">
                             <!-- Изображение товара -->
                             <Image Source="{Binding ProductVariation.ImagePath}" 
-                                   Width="100" Height="100" 
+                                   Width="200" Height="100" 
                                    Stretch="Uniform"
                                    Margin="0,0,10,0"/>
 
@@ -48,6 +48,9 @@
                                             Background="White"
                                             BorderBrush="#E0E0E0"
                                             FontWeight="Bold"/>
+                                    <Button Content="X" Background="White"
+                                            BorderBrush="#E0E0E0" 
+                                            FontWeight="Bold" Margin="5,0,0,100" Click="DeleteProductInCard_Click"/>
                                 </StackPanel>
                             </StackPanel>
                         </StackPanel>
@@ -56,7 +59,7 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <Border BorderBrush="#E0E0E0" BorderThickness="2" Margin="556,70,10,130" Padding="10" Background="White">
+        <Border BorderBrush="#E0E0E0" BorderThickness="2" Margin="556,70,10,130" Padding="10" Background="White" CornerRadius="10,10,10,10">
             <StackPanel Margin="-12,-12,-12,-12">
                 <TextBlock x:Name="AmountPaid" Text="Сумма: 0₽" FontWeight="Bold" FontSize="16" Margin="20,130,20,15" Width="163"/>
                 <Button x:Name="Buy" Content="Оплатить" Height="35" FontWeight="Bold" FontSize="20" Margin="20,0,20,0" Click="Paid_Click"/>

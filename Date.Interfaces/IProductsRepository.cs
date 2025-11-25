@@ -5,10 +5,10 @@ namespace Data.Interfaces
 {
     public interface IProductsRepository
     {
-        bool ProductAdd(Product product);
+        bool Add(Product product);
 
-        bool ProductRemove(Product product);
-        bool ProductUpdate(Product product);
+        bool Remove(Product product);
+        bool Update(Product product);
 
         Product GetProductsById(int id);
     }

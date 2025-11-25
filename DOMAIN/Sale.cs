@@ -12,8 +12,9 @@ namespace DOMAIN
         public int UserId { get; set; }
         public DateTime DateCreate { get; set; }
         public List<ProductInSale> Products { get; set; }
-        public Sale(int id,List<ProductInSale> products)
+        public Sale(int userid,int id,List<ProductInSale> products)
         {
+            UserId = userid;    
             Id = id;
             DateCreate = DateTime.Now;
             Products = products;
