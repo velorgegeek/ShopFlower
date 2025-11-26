@@ -75,7 +75,7 @@ namespace UI
             {
                 if (radioButtons[i].IsChecked == true)
                 {
-                    user1.AddInCard(new ProductInSale(pr.Variations[i], 1));
+                    user1.AddInCard(pr.Variations[i]);
                     break;
                 }
             }

@@ -42,18 +42,19 @@ namespace DOMAIN
         //        }
         //    }
         //}
-        public void AddInCard(ProductInSale item)
+        public void AddInCard(ProductVariation item)
         {
-            if (item == null) return;
-            var thisItem = ShoppingCard.FirstOrDefault(
-                pr => pr.ProductVariation.id == item.ProductVariation.id 
-                && pr.ProductVariation.Product.Name == item.ProductVariation.Product.Name);
+            ArgumentNullException.ThrowIfNull(item);
+
+            var thisItem = ShoppingCard.FirstOrDefault(pr => pr.ProductVariation.id == item.id);
             if (thisItem != null)
             {
                 thisItem.Quantity++;
-                return;
             }
-            ShoppingCard.Add(new ProductInShoppingCard(item.ProductVariation,item.Quantity));
+            else
+            {
+                ShoppingCard.Add(new ProductInShoppingCard(item, 1));
+            }
         }
     }
 }

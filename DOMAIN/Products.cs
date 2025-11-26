@@ -3,7 +3,7 @@ namespace DOMAIN
 {
     public class Product
     {
-        public int id { get; set; }
+        public Guid id { get; set; } = Guid.NewGuid();
         public string Name {  get; set; }
         public string category { get; set; }
         public List<ProductVariation> Variations { get; set; }

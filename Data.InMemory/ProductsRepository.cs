@@ -18,7 +18,7 @@ namespace Data.InMemory
         {
             products = new List<Product>();
         }
-        public Product GetProductsById(int ID)
+        public Product GetProductsById(Guid ID)
         {
                 return products.FirstOrDefault(i => i.id == ID);
 
@@ -42,8 +42,6 @@ namespace Data.InMemory
             {
                 return false;
             }
-            Id++;
-            product.id = Id;
             products.Add(product);
             return true;
         } 
