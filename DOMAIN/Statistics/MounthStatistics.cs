@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DOMAIN.Statistics
 {
-    public record MouthStatistics
+    public record MonthStatistics
     {
         public required int Year { get; set; }
         public required int Month { get; set; }

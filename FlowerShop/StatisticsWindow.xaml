@@ -8,9 +8,6 @@
         mc:Ignorable="d"
         Title="StatisticsWindow" Height="450" Width="800">
 
-    <Window.Resources>
-        <local:DateOnlyConverter x:Key="DateOnlyConverter"/>
-    </Window.Resources>
 
     <Grid Margin="10">
         <Grid.RowDefinitions>
@@ -26,11 +23,11 @@
         <!-- Панель фильтрации -->
         <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,0,0,15">
             <TextBlock Text="Период с:" VerticalAlignment="Center" Margin="0,0,5,0"/>
-            <DatePicker x:Name="Datepick" SelectedDate="{Binding StartDate, Converter={StaticResource DateOnlyConverter}, ConverterParameter=DateTime}"
+            <DatePicker x:Name="Datepick"
                         Width="120" Margin="0,0,15,0"/>
 
             <TextBlock Text="по:" VerticalAlignment="Center" Margin="0,0,5,0"/>
-            <DatePicker x:Name="DatePickerEnd" SelectedDate="{Binding EndDate, Converter={StaticResource DateOnlyConverter}, ConverterParameter=DateTime}"
+            <DatePicker x:Name="DatePickerEnd"
                         Width="120" Margin="0,0,15,0"/>
 
             <Button Content="Применить фильтр" Width="130" Height="30"

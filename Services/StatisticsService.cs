@@ -12,11 +12,11 @@ namespace Services
         {
             _saleRepository = saleRep;
         }
-        public List<MouthStatistics> GetSaleByMonths(SaleFilter filter)
+        public List<MonthStatistics> GetSaleByMonths(SaleFilter filter)
         {
             var allSales = _saleRepository.GetAll(filter);
             return allSales.GroupBy(r => new { r.DateCreate.Year, r.DateCreate.Month })
-                .Select(g => new MouthStatistics
+                .Select(g => new MonthStatistics
                 {
                     Year = g.Key.Year,
                     Month = g.Key.Month,

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Data.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +20,20 @@ namespace UI
     /// </summary>
     public partial class DataGridWindow : Window
     {
-        public DataGridWindow()
+        IProductsRepository _productsRepository;
+        ISaleRepository _saleRepository;
+        public DataGridWindow(IProductsRepository _productsRepository,ISaleRepository saleRepository)
         {
             InitializeComponent();
+           this._productsRepository = _productsRepository;
+            this._saleRepository = saleRepository;
+            DataContext = this;
+            UpdateDataGrid();
+        }
+        private void UpdateDataGrid()
+        {
+            SaleDataGrid.ItemsSource = _saleRepository.GetAll(SaleFilter.Empty);
+            ProductsDataGrid.ItemsSource = _productsRepository.GetAll();
         }
     }
 }

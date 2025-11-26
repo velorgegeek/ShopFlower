@@ -11,12 +11,12 @@ namespace Data.InMemory
 {
     public class SaleRepository : ISaleRepository
     {
-        private static readonly Lazy<SaleRepository> _instance =
-            new Lazy<SaleRepository>(() => new SaleRepository());
-        public static SaleRepository Instance = _instance.Value;
         private readonly List<Sale> _saleList = new List<Sale>();
         int countId = 0;
-        private SaleRepository() { }
+        public SaleRepository() {
+            Seed();
+        }
+
         public bool AddSale(int userId,List<ProductInSale> product)
         {
             if (product == null) return false;
@@ -37,6 +37,36 @@ namespace Data.InMemory
                 result = result.Where(r => r.DateCreate <= filter.EndDate.Value);
             }
             return result.ToList();
+        }
+
+        private void Seed()
+        {
+            Product pr = new Product("MOLOKO", "net", "da");
+            Product pr2 = new Product("neMoloko", "net", "da");
+            List<ProductInSale> productInSales = new List<ProductInSale>();
+            List<ProductInSale> productInSales2 = new List<ProductInSale>();
+            pr.AddVariation("dada", "netnet");
+            pr.Variations[0].Price = 100;
+            productInSales.Add(new ProductInSale(pr.Variations[0], 1));
+            pr2.AddVariation("DADA", "netene");
+            pr2.Variations[0].Price = 100;
+            productInSales2.Add(new ProductInSale(pr2.Variations[0], 1));
+            var random = new Random();
+            for (int i = 0; i < 177; i++)
+            {
+
+                if (i % 2 == 0)
+                {
+                    AddSale(1, productInSales);
+                    GetAll(SaleFilter.Empty)[i].DateCreate = DateTime.Now.AddDays(-random.Next(0, 360));
+                }
+                else
+                {
+                    AddSale(1, productInSales2);
+                    GetAll(SaleFilter.Empty)[i].DateCreate = DateTime.Now.AddDays(-random.Next(0, 360));
+                }
+
+            }
         }
     }
 }

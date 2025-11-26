@@ -17,7 +17,7 @@ namespace DOMAIN
         public string? Mail { get; set; }
         public string HashPassword { get; set; }
         public role Role { get; set; } = role.User;
-        public List<ProductInSale> ShoppingCard { get; set; }
+        public List<ProductInShoppingCard> ShoppingCard { get; set; }
         public User(int id, string fio, string phone, string mail, string hashPassword)
         {
             ID = id;
@@ -25,23 +25,23 @@ namespace DOMAIN
             Phone = phone;
             Mail = mail;
             HashPassword = hashPassword;
-            ShoppingCard = new List<ProductInSale>();
+            ShoppingCard = new List<ProductInShoppingCard>();
         }
         public override string ToString()
         {
             return Fio;
         }
-        public void ShopCardDelete(List<ProductInSale> q)
-        {
-            foreach (ProductInSale item in q)
-            {
-                int i = ShoppingCard.IndexOf(item);
-                if (i > -1)
-                {
-                    ShoppingCard.RemoveAt(i);
-                }
-            }
-        }
+        //public void ShopCardDelete(List<ProductInSale> q)
+        //{
+        //    foreach (ProductInSale item in q)
+        //    {
+        //        int i = ShoppingCard.IndexOf(item);
+        //        if (i > -1)
+        //        {
+        //            ShoppingCard.RemoveAt(i);
+        //        }
+        //    }
+        //}
         public void AddInCard(ProductInSale item)
         {
             if (item == null) return;
@@ -53,7 +53,7 @@ namespace DOMAIN
                 thisItem.Quantity++;
                 return;
             }
-            ShoppingCard.Add(item);
+            ShoppingCard.Add(new ProductInShoppingCard(item.ProductVariation,item.Quantity));
         }
     }
 }

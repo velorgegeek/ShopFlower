@@ -6,20 +6,15 @@ using System.Threading.Tasks;
 
 namespace DOMAIN
 {
-    public class ProductInSale
+    public class ProductInShoppingCard
     {
         public ProductVariation ProductVariation { get; set; }
 
         public int Quantity { get; set; }
-        public ProductInSale(ProductVariation productVariation, int Quatitity)
+        public ProductInShoppingCard(ProductVariation productVariation, int Quatitity)
         {
             this.ProductVariation = productVariation;
             this.Quantity = Quatitity;  
-        }
-        public ProductInSale(ProductInShoppingCard productInShoppingCard)
-        {
-            this.ProductVariation = productInShoppingCard.ProductVariation;
-            this.Quantity = productInShoppingCard.Quantity;
         }
         public override string ToString()
         {

@@ -11,5 +11,6 @@ namespace Data.Interfaces
         bool Update(Product product);
 
         Product GetProductsById(int id);
+        List<Product> GetAll();
     }
 }

@@ -11,27 +11,21 @@ namespace Data.InMemory
 {
     public class ProductsRepository : IProductsRepository
     {
-        private static readonly Lazy<ProductsRepository> _products =
-            new Lazy<ProductsRepository>(() => new ProductsRepository());
-        public static ProductsRepository Instance => _products.Value;
         private readonly List<Product> products = new List<Product>();
         public int Id = 0;
-        private readonly object _lock = new object();
-        private ProductsRepository()
+
+        public ProductsRepository()
         {
             products = new List<Product>();
         }
         public Product GetProductsById(int ID)
         {
-            lock (_lock)
-            {
                 return products.FirstOrDefault(i => i.id == ID);
-            }
+
         }
         public bool Update(Product product)
         {
-            lock (_lock)
-            {
+
                 if (product == null) return false;
                 int index = products.IndexOf(product);
                 if (index != -1)
@@ -40,26 +34,22 @@ namespace Data.InMemory
                     return true;
                 }
                 return false;
-            }
         }
         public bool Add(Product product)
         {
-            lock (_lock)
+
+            if (product == null)
             {
-                if (product == null)
-                {
-                    return false;
-                }
-                Id++;
-                product.id = Id;
-                products.Add(product);
-                return true;
+                return false;
             }
-            }
+            Id++;
+            product.id = Id;
+            products.Add(product);
+            return true;
+        } 
         public bool Remove(Product product)
         {
-            lock (_lock)
-            {
+
                 if (product == null) { return false; }
 
                 int index = products.IndexOf(product);
@@ -69,8 +59,11 @@ namespace Data.InMemory
                     return true;
                 }
                 return false;
-            }
 
             }
+        public List<Product> GetAll()
+        {
+            return products;
         }
+    }
 }

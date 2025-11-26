@@ -9,12 +9,12 @@
     <TabControl Margin="0,60,0,0">
         <TabItem Header="Продукты">
             <Grid Background="#FFE5E5E5">
-                <DataGrid d:ItemsSource="{d:SampleData ItemCount=5}"/>
+                <DataGrid x:Name="ProductsDataGrid" d:ItemsSource="{Binding ProductsRepository}"/>
             </Grid>
         </TabItem>
         <TabItem Header="Покупки">
             <Grid Background="#FFE5E5E5">
-                <DataGrid d:ItemsSource="{d:SampleData ItemCount=5}"/>
+                <DataGrid x:Name="SaleDataGrid" d:ItemsSource="{Binding SaleRepository}"/>
             </Grid>
         </TabItem>
     </TabControl>

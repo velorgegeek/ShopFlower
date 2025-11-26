@@ -37,6 +37,10 @@ namespace DOMAIN
         //    Variations = new List<ProductVariation>();
         //    Attributes = new List<ProductAttribute>();
         //}
+        public override string ToString()
+        {
+            return Name;
+        }
         public Product(string name, string category, string Description)
         {
             this.Name = name;

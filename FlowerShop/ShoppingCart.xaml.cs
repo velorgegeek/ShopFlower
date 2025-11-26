@@ -51,7 +51,11 @@ namespace UI
             inCard = true;
             this.user1 = user;
             sale = SaleRep;
-            ShopCartList = new List<ProductInSale>(user1.ShoppingCard);
+            ShopCartList = new List<ProductInSale>() { };
+            for(int i = 0; i < user.ShoppingCard.Count; i++)
+            {
+                ShopCartList.Add(new ProductInSale(user.ShoppingCard[i]));  
+            }
             Init();
         }
         public String CalculateCost()
@@ -77,7 +81,7 @@ namespace UI
                 MessageBox.Show($"Вы оплатили заказ на {CalculateCost()}","Оплата", MessageBoxButton.OK);
                 if (inCard == true)
                 {
-                    sale.AddSale(user1.ID, user1.ShoppingCard);
+                    sale.AddSale(user1.ID, ShopCartList);
                     //user1.ShopCardDelete(ShopCartList); При удалении удаляется в sale решил закомментировать 
                     //ShopCartList = user1.ShoppingCard; 
                     sale.ToString();
@@ -120,10 +124,6 @@ namespace UI
             if(sender is Button button && button.DataContext is ProductInSale productInSale)
             {
                 ShopCartList.Remove(productInSale);
-                if (inCard)
-                {
-                    user1.ShoppingCard = ShopCartList;
-                }
                 ShopCart.Items.Refresh();
                 AmountPaid.Text = ($"Итого: {CalculateCost()}");
                 ListSize.Text = ShopCartList.Count.ToString() + " Товара";
