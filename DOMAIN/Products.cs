@@ -7,7 +7,6 @@ namespace DOMAIN
         public string Name {  get; set; }
         public string category { get; set; }
         public List<ProductVariation> Variations { get; set; }
-        public List<ProductAttribute> Attributes { get; set; }
         public string Description
         {
             get
@@ -46,7 +45,6 @@ namespace DOMAIN
             this.Name = name;
             this.category = category;
             Variations = new List<ProductVariation>();
-            Attributes = new List<ProductAttribute>();
         }
 
 

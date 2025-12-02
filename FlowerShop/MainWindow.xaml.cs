@@ -6,6 +6,7 @@ using Data.Interfaces;
 using UI;
 using DOMAIN;
 using Date.Interfaces;
+using System.Windows.Media;
 
 namespace FlowerShop
 {
@@ -45,8 +46,10 @@ namespace FlowerShop
 
         private void data_Click(object sender, RoutedEventArgs e)
         {
-            DataGridWindow dataGrid = new DataGridWindow(_productsRepository, _saleRepository);
-            dataGrid.Show();
+            AuthWindow auth = new AuthWindow();
+            auth.Show();
+            //DataGridWindow dataGrid = new DataGridWindow(_productsRepository, _saleRepository);
+            //dataGrid.Show();
 
 
         }

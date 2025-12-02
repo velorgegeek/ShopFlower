@@ -70,7 +70,7 @@ namespace UI
             if(ProductsListBox.SelectedItem is Product product)
             {
                 ProductsListBox.SelectedItem = null;
-                ProductCard productCard = new ProductCard(sale,product,user);
+                ProductCart productCard = new ProductCart(sale,product,user);
                 productCard.Show(); 
 
             }

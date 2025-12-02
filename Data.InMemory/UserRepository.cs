@@ -10,11 +10,11 @@ namespace Data.InMemory
     {
 
         List<User> Users { get; set; } = new List<User>() { 
-            new User(0,"da","+7905","da","da"),
-            new User(1,"da","+7905","daq","dadd"),
+            new User(1,"da","+79050944341","da",CreateSHA256("da")),
+            new User(2,"da","7905","daq",CreateSHA256("dadd")),
         };
         
-        int count = 0;
+        int count = 2;
         public List<User> GetUsers(role rol) {
             return Users.Where(u=> u.Role == rol).ToList();
         }
@@ -25,17 +25,17 @@ namespace Data.InMemory
             User us = new User(count, Fio, Phone, email, hashPassword);
             return true;
         }
-        public string CreateSHA256(string input)
+        public static string CreateSHA256(string input)
         {
             using SHA256 hash = SHA256.Create();
             return Convert.ToHexString(hash.ComputeHash(Encoding.ASCII.GetBytes(input)));
         }
-        public bool GetByLogin(string login,string pass)
+        public User GetByLogin(string login,string pass)
         {
-            User tmp = Users.FirstOrDefault(u => u.Mail == login);
-            if(tmp == null) return false;
-            if (tmp.HashPassword == CreateSHA256(pass)) return true;
-            return false;
+            User tmp = Users.FirstOrDefault(u => u.Phone == login);
+            if(tmp == null) return null;
+            if (tmp.HashPassword == CreateSHA256(pass)) return tmp;
+            return null;
         }
          public void UpdateRole(User user, role role)
         {

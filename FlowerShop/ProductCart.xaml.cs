@@ -21,14 +21,14 @@ namespace UI
     /// <summary>
     /// Логика взаимодействия для ProductCard.xaml
     /// </summary>
-    public partial class ProductCard : Window
+    public partial class ProductCart : Window
     {
         Product pr;
         User user1;
         List<RadioButton> radioButtons = new List<RadioButton>();
         int h = 150;
         ISaleRepository SaleRep;
-        public ProductCard(ISaleRepository SaleRep,Product product,User user)
+        public ProductCart(ISaleRepository SaleRep,Product product,User user)
         {
             InitializeComponent();
             pr = product;
