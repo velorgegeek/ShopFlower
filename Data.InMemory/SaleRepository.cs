@@ -41,15 +41,13 @@ namespace Data.InMemory
 
         private void Seed()
         {
-            Product pr = new Product("MOLOKO", "net", "da");
-            Product pr2 = new Product("neMoloko", "net", "da");
+            Product pr = new Product("MOLOKO", "da");
+            Product pr2 = new Product("neMoloko", "net");
             List<ProductInSale> productInSales = new List<ProductInSale>();
             List<ProductInSale> productInSales2 = new List<ProductInSale>();
-            pr.AddVariation("dada", "netnet");
-            pr.Variations[0].Price = 100;
+            pr.AddVariation("dada", "netnet",100);
             productInSales.Add(new ProductInSale(pr.Variations[0], 1));
-            pr2.AddVariation("DADA", "netene");
-            pr2.Variations[0].Price = 100;
+            pr2.AddVariation("DADA", "netene", 100);
             productInSales2.Add(new ProductInSale(pr2.Variations[0], 1));
             var random = new Random();
             for (int i = 0; i < 177; i++)

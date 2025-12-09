@@ -17,23 +17,25 @@ namespace FlowerShop
     {
         IUserRepository _userRepository = new UserRepository();
         ISaleRepository _saleRepository = new SaleRepository();
+        IPaymentsRepository _paymentsRepository = new PaymentsRepository();
         IProductsRepository _productsRepository = new ProductsRepository();
-
-        User user = new User(0,"da","+7905","mail","hash");
-
+        ICategoryRepository _categoryRepository = new CategoryRepository();
+        User user;
         public MainWindow()
         {
             InitializeComponent();
         }
-        public MainWindow(IUserRepository us,ISaleRepository Is, IProductsRepository ip)
+        public MainWindow(User user,ISaleRepository Is, IProductsRepository ip, IPaymentsRepository paymentsRepository,ICategoryRepository category )
         {
             InitializeComponent();
-            _userRepository = us;
+            this.user = user;   
             _saleRepository = Is;
             _productsRepository = ip;
+            _paymentsRepository = paymentsRepository;
+            _categoryRepository = category;
         }
 
-    private void Exit_Click(object sender, RoutedEventArgs e)
+        private void Exit_Click(object sender, RoutedEventArgs e)
         {
             Close();
         }
@@ -46,24 +48,24 @@ namespace FlowerShop
 
         private void data_Click(object sender, RoutedEventArgs e)
         {
-            AuthWindow auth = new AuthWindow();
-            auth.Show();
-            //DataGridWindow dataGrid = new DataGridWindow(_productsRepository, _saleRepository);
-            //dataGrid.Show();
+            //AuthWindow auth = new AuthWindow();
+            //auth.Show();
+            DataGridWindow dataGrid = new DataGridWindow(_productsRepository, _saleRepository,_paymentsRepository, _categoryRepository);
+            dataGrid.Show();
 
 
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            ProductCatalogWindow productCatalogWindow = new ProductCatalogWindow(_saleRepository, user);
+            ProductCatalogWindow productCatalogWindow = new ProductCatalogWindow(_saleRepository, user, _productsRepository);
             productCatalogWindow.Show();
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            ProductAddWindow productAddWindow = new ProductAddWindow(_productsRepository);
-            productAddWindow.Show();
+            //ProductAddWindow productAddWindow = new ProductAddWindow(_productsRepository);
+            //productAddWindow.Show();
         }
     }
 }

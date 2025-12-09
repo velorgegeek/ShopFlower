@@ -28,19 +28,18 @@ namespace DOMAIN
                 return Variations?.FirstOrDefault()?.ImagePath;
             }
         }
-        //public Product(string name, CategoryProduct category,string Description)
+        //public Product(string name, CategoryProduct category, string Description)
         //{
         //    this.Description = Description;
         //    this.Name = name;
         //    this.category = category;
         //    Variations = new List<ProductVariation>();
-        //    Attributes = new List<ProductAttribute>();
         //}
         public override string ToString()
         {
             return Name;
         }
-        public Product(string name, string category, string Description)
+        public Product(string name, string category)
         {
             this.Name = name;
             this.category = category;
@@ -48,11 +47,9 @@ namespace DOMAIN
         }
 
 
-        public void AddVariation(string description, string ImagePath)
+        public void AddVariation(string description, string ImagePath, int price)
         {
-            int VarId= Variations.Count;
-            VarId++;
-            var variation = new ProductVariation(this, description, ImagePath,VarId);
+            var variation = new ProductVariation(this, description, ImagePath,price);
 
             Variations.Add(variation);
         }

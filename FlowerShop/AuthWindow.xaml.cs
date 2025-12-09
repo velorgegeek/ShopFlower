@@ -28,12 +28,15 @@ namespace UI
         IUserRepository _userRepository = new UserRepository();
         ISaleRepository _sale = new SaleRepository();
         IProductsRepository _products = new ProductsRepository();
-        ITransactionRepository _transactionRepository = new TransactionRepository();
+        IPaymentsRepository PaymentsRepository = new PaymentsRepository();
         ICategoryRepository _categoryRepository = new CategoryRepository();
         const string regex = @"^\+?[1-9][0-9]{7,14}$";
+        BitmapImage close = new BitmapImage(new Uri(System.IO.Path.GetFullPath("Images/PasswordClose.png")));
+        BitmapImage show = new BitmapImage(new Uri(System.IO.Path.GetFullPath("Images/PasswordClose.png")));
         public AuthWindow()
         {
             InitializeComponent();
+            PassImage.Source = close;
         }
 
         private void PasswordChecker(object sender, RoutedEventArgs e)
@@ -44,14 +47,14 @@ namespace UI
                 PassTextBox.Text = PassBox.Password;
                 PassTextBox.Visibility = Visibility.Visible;
                 PassBox.Visibility = Visibility.Hidden;
-                PassImage.Source = new BitmapImage(new Uri(System.IO.Path.GetFullPath("Images/passwordShow.png")));
+                PassImage.Source = show;
             }
             else
             {
                 PassBox.Password = PassTextBox.Text;
                 PassTextBox.Visibility = Visibility.Hidden;
                 PassBox.Visibility = Visibility.Visible;
-                PassImage.Source = new BitmapImage(new Uri(System.IO.Path.GetFullPath("Images/PasswordClose.png")));
+                PassImage.Source = close;
             }
 
         }
@@ -76,7 +79,7 @@ namespace UI
             switch (user.Role)
             {
                 case role.User:
-                    ProductCatalogWindow pr = new ProductCatalogWindow(_sale,user);
+                    ProductCatalogWindow pr = new ProductCatalogWindow(_sale,user,_products);
                     pr.Show();
                     break;
                 case role.Admin:

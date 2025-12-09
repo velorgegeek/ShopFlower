@@ -6,15 +6,35 @@
         xmlns:local="clr-namespace:UI"
         mc:Ignorable="d"
         Title="DataGridWindow" Height="450" Width="800">
-    <TabControl Margin="0,60,0,0">
+    <TabControl>
         <TabItem Header="Продукты">
+
             <Grid Background="#FFE5E5E5">
-                <DataGrid x:Name="ProductsDataGrid" d:ItemsSource="{Binding ProductsRepository}"/>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="112*"/>
+                    <ColumnDefinition Width="135*"/>
+                    <ColumnDefinition Width="145*"/>
+                    <ColumnDefinition Width="402*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="17*"/>
+                    <RowDefinition Height="186*"/>
+                </Grid.RowDefinitions>
+                <Button x:Name="AddProduct" Content="Добавить продукт" Grid.RowSpan="1" Grid.Column ="0" Click="AddProduct_Click" />
+                <Button x:Name="EditProduct" Content="Редактировать продукт" Grid.RowSpan="1" Grid.Column ="2" Click="EditProduct_Click"/>
+                <Button x:Name="AddVariation" Content="Добавить вариацию" Grid.RowSpan="1" Grid.Column ="1" />
+                <DataGrid x:Name="ProductsDataGrid" d:ItemsSource="{Binding ProductsRepository}" Margin="0,34,0,0" Grid.RowSpan="2" Grid.ColumnSpan="4" />
             </Grid>
         </TabItem>
         <TabItem Header="Покупки">
             <Grid Background="#FFE5E5E5">
-                <DataGrid x:Name="SaleDataGrid" d:ItemsSource="{Binding SaleRepository}"/>
+                <DataGrid x:Name="SaleDataGrid" d:ItemsSource="{Binding SaleRepository}" Margin="0,34,0,0"/>
+            </Grid>
+        </TabItem>
+        <TabItem Header="Транзакции">
+            <Grid Background="#FFE5E5E5">
+
+                <DataGrid x:Name="PaymentsDataGrid" d:ItemsSource="{Binding _paymentsRepository}" Margin="0,34,0,0"/>
             </Grid>
         </TabItem>
     </TabControl>

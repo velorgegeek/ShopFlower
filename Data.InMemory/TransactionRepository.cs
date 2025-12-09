@@ -7,19 +7,19 @@ using DOMAIN;
 using Data.Interfaces;
 namespace Data.InMemory
 {
-    public class TransactionRepository  : ITransactionRepository
+    public class PaymentsRepository : IPaymentsRepository
     {
-        private List<Transaction> _transactions = new List<Transaction>();
+        private List<Payments> _transactions = new List<Payments>();
         int counter = 0;
 
-        public bool Add(Transaction transaction)
+        public bool Add(Payments transaction)
         {
             ArgumentNullException.ThrowIfNull(transaction);
             transaction.Id = counter++;
             _transactions.Add(transaction);
             return true;
         }
-        public List<Transaction> GetAll()
+        public List<Payments> GetAll()
         {
             return _transactions;
         }

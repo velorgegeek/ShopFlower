@@ -12,28 +12,44 @@ namespace Data.InMemory
     public class ProductsRepository : IProductsRepository
     {
         private readonly List<Product> products = new List<Product>();
-        public int Id = 0;
 
+        private void seed()
+        {
+            Product product1 = new Product("Молоко", "Свежее молоко");
+            Product product2 = new Product("Хлеб", "Свежий хлеб");
+
+            product1.AddVariation("Молоко 2.5%", System.IO.Path.GetFullPath("Images/maxresdefault (1).jpg"),500);
+            product1.AddVariation("Молоко 3.2%", System.IO.Path.GetFullPath("Images/maxresdefault.jpg"), 550);
+            product1.Variations[0].Price = 500;
+            product1.Variations[1].Price = 550;
+            product2.AddVariation("Хлеб черный", System.IO.Path.GetFullPath("Images/maxresdefault (1).jpg"),400);
+            product2.AddVariation("Хлеб бели", System.IO.Path.GetFullPath("Images/maxresdefault.jpg"),5054);
+            product2.Variations[0].Price = 400;
+            product2.Variations[1].Price = 5054;
+
+            products.Add(product1);
+            products.Add(product2);
+
+        }
         public ProductsRepository()
         {
-            products = new List<Product>();
+            seed();
         }
         public Product GetProductsById(Guid ID)
         {
-                return products.FirstOrDefault(i => i.id == ID);
-
+             return products.FirstOrDefault(i => i.id == ID);
         }
         public bool Update(Product product)
         {
 
-                if (product == null) return false;
-                int index = products.IndexOf(product);
-                if (index != -1)
-                {
-                    products[index] = product;
-                    return true;
-                }
-                return false;
+            if (product == null) return false;
+            int index = products.IndexOf(product);
+            if (index != -1)
+            {
+                products[index] = product;
+                return true;
+            }
+            return false;
         }
         public bool Add(Product product)
         {
@@ -48,17 +64,17 @@ namespace Data.InMemory
         public bool Remove(Product product)
         {
 
-                if (product == null) { return false; }
+            if (product == null) { return false; }
 
-                int index = products.IndexOf(product);
-                if (index != -1)
-                {
-                    products.RemoveAt(index);
-                    return true;
-                }
-                return false;
-
+            int index = products.IndexOf(product);
+            if (index != -1)
+            {
+                products.RemoveAt(index);
+                return true;
             }
+            return false;
+
+        }
         public List<Product> GetAll()
         {
             return products;

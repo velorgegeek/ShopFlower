@@ -24,42 +24,21 @@ namespace UI
     /// </summary>
     public partial class ProductCatalogWindow : Window
     {
-        User user = new User(0,"da","da","da","hash");
-        List<Product> Products;
+        User user;
+        IProductsRepository Products;
         ISaleRepository sale;
-        public ProductCatalogWindow(ISaleRepository sale,User user)
+        public ProductCatalogWindow(ISaleRepository sale,User user, IProductsRepository productsrep)
         {
             
             InitializeComponent();
+            this.user = user;
             this.sale = sale;
             DataContext = Products;
-            Products = new List<Product>();
-
-            // Создаем продукты
-            Product product1 = new Product("Молоко", "Свежее молоко","da");
-            Product product2 = new Product("Хлеб", "Свежий хлеб", "da");
-
-            product1.AddVariation("Молоко 2.5%", System.IO.Path.GetFullPath("Images/maxresdefault (1).jpg"));
-            product1.AddVariation("Молоко 3.2%", System.IO.Path.GetFullPath("Images/maxresdefault.jpg"));
-            product1.Variations[0].Price = 500;
-            product1.Variations[1].Price = 550;
-            product2.AddVariation("Хлеб черный", System.IO.Path.GetFullPath("Images/maxresdefault (1).jpg"));
-            product2.AddVariation("Хлеб бели", System.IO.Path.GetFullPath("Images/maxresdefault.jpg"));
-            product2.Variations[0].Price = 400;
-            product2.Variations[1].Price = 5054;
-
-            Products.Add(product1);
-            Products.Add(product2);
-            Products.Add(product1);
-            Products.Add(product2);
-            Products.Add(product1);
-            Products.Add(product2);
-            Products.Add(product1);
-            Products.Add(product2);
+            Products = productsrep;
 
 
             // Устанавливаем контекст данных
-            ProductsListBox.ItemsSource = Products;
+            ProductsListBox.ItemsSource = Products.GetAll();
             DataContext = this;
           
 

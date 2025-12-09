@@ -21,13 +21,22 @@ namespace UI
     /// </summary>
     public partial class ProductAddWindow : Window
     {
-        IProductsRepository productsRepository;
-        ICategoryRepository categoryRepository = new CategoryRepository();
-        public ProductAddWindow(IProductsRepository pr)
+        ICategoryRepository categoryRepository;
+        Product product;
+        public ProductAddWindow(ICategoryRepository category)
         {
             InitializeComponent();
-            productsRepository = pr;
+            categoryRepository = category;
             CategoryComboBox.ItemsSource = categoryRepository.GetAll();
+        }
+        bool valid()
+        {
+            if (NameProduct.Text == string.Empty) return false;
+            if(CategoryComboBox.SelectedItem == null) return false;
+            if(PathTextBox.Text == string.Empty) return false;
+            if(DesriptionVar.Text == string.Empty) return false;
+            if(CostVariation.Text == string.Empty) return false;
+            return true;
         }
         private void path_Click(object sender, RoutedEventArgs e)
         {
@@ -42,8 +51,24 @@ namespace UI
         }
         private void CreateButton_Click(object sender, RoutedEventArgs e)
         {
-            //Product product = new Product()
-            //productsRepository.Add()
+            if (!valid())
+            {
+                MessageBox.Show("Данные не валидные", "Ошибка добавления", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            if (CategoryComboBox.SelectedItem is CategoryProduct catproduct)
+            {
+                product = new Product(NameProduct.Text, catproduct.ToString());
+                product.AddVariation(DesriptionVar.Text, PathTextBox.Text ,Convert.ToUInt16(CostVariation.Text));
+                DialogResult = true;
+                Close();
+            }
+        }
+        public static Product ProductAddWindowShow(ICategoryRepository category)
+        {
+            var app = new ProductAddWindow(category);
+            if (app.ShowDialog() == true) return app.product;
+            return null;
         }
 
 

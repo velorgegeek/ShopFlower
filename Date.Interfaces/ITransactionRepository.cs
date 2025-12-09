@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace Data.Interfaces
 {
-    public interface ITransactionRepository
+    public interface IPaymentsRepository
     {
-        bool Add(Transaction trans);
-        List<Transaction> GetAll();
+        bool Add(Payments trans);
+        List<Payments> GetAll();
 
     }
 }
