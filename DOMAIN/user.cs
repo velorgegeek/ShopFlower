@@ -18,7 +18,7 @@ namespace DOMAIN
         public string HashPassword { get; set; }
         public role Role { get; set; } = role.User;
         public List<ProductInShoppingCard> ShoppingCard { get; set; }
-        public User(int id, string fio, string phone, string mail, string hashPassword)
+        public User(int id, string fio, string phone, string mail, string hashPassword,role Role)
         {
             ID = id;
             Fio = fio;
@@ -26,6 +26,7 @@ namespace DOMAIN
             Mail = mail;
             HashPassword = hashPassword;
             ShoppingCard = new List<ProductInShoppingCard>();
+            this.Role = Role;
         }
         public override string ToString()
         {

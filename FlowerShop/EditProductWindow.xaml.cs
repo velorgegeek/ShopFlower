@@ -35,6 +35,7 @@ namespace UI
             CostVariation.Text = product.Variations[0].Price.ToString();
             CategoryComboBox.SelectedItem = product.category;
         }
+        
         private void path_Click(object sender, RoutedEventArgs e)
         {
             var dialog = new Microsoft.Win32.OpenFileDialog();
@@ -62,6 +63,18 @@ namespace UI
             else
             {
                 return null;
+            }
+        }
+        private void var_changed(ProductVariation pf) {
+            DesriptionVar.Text = pf.Description;
+            PathTextBox.Text = pf.ImagePath;
+            CostVariation.Text = pf.Price.ToString();
+        }
+        private void VariationCombobox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if(VariationCombobox.SelectedItem is ProductVariation pr)
+            {
+                var_changed(pr);
             }
         }
     }

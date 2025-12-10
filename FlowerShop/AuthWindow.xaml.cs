@@ -28,11 +28,10 @@ namespace UI
         IUserRepository _userRepository = new UserRepository();
         ISaleRepository _sale = new SaleRepository();
         IProductsRepository _products = new ProductsRepository();
-        IPaymentsRepository PaymentsRepository = new PaymentsRepository();
         ICategoryRepository _categoryRepository = new CategoryRepository();
         const string regex = @"^\+?[1-9][0-9]{7,14}$";
         BitmapImage close = new BitmapImage(new Uri(System.IO.Path.GetFullPath("Images/PasswordClose.png")));
-        BitmapImage show = new BitmapImage(new Uri(System.IO.Path.GetFullPath("Images/PasswordClose.png")));
+        BitmapImage show = new BitmapImage(new Uri(System.IO.Path.GetFullPath("Images/PasswordShow.png")));
         public AuthWindow()
         {
             InitializeComponent();
@@ -93,7 +92,10 @@ namespace UI
             string q = valid();
             if (q != string.Empty)
             {
-                OpenWindow(_userRepository.GetByLogin(q, PassBox.Password));
+                var user = _userRepository.GetByLogin(q, PassBox.Password);
+                if (user != null) {
+                    OpenWindow(user);
+                }
             }
         }
     }

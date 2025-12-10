@@ -15,6 +15,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Data.InMemory\Data.InMemory.csproj" />
     <ProjectReference Include="..\Date.Interfaces\Data.Interfaces.csproj" />
+    <ProjectReference Include="..\FlowerShopDB.Data.SqlServer\FlowerShopDB.Data.SqlServer.csproj" />
     <ProjectReference Include="..\Services\Services.csproj" />
   </ItemGroup>
 

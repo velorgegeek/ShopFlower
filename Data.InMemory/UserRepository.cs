@@ -10,8 +10,8 @@ namespace Data.InMemory
     {
 
         List<User> Users { get; set; } = new List<User>() { 
-            new User(1,"da","+79050944341","da",CreateSHA256("da")),
-            new User(2,"da","7905","daq",CreateSHA256("dadd")),
+            new User(1,"da","+79050944341","da",CreateSHA256("da"),role.User),
+            new User(2,"da","+79040944341","daq",CreateSHA256("dadd"),role.Admin),
         };
         
         int count = 2;
@@ -22,7 +22,7 @@ namespace Data.InMemory
         {
             string hashPassword = CreateSHA256(password);
             count++;
-            User us = new User(count, Fio, Phone, email, hashPassword);
+            User us = new User(count, Fio, Phone, email, hashPassword,Role);
             return true;
         }
         public static string CreateSHA256(string input)

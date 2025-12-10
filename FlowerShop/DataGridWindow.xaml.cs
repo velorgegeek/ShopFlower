@@ -23,14 +23,14 @@ namespace UI
     {
         IProductsRepository _productsRepository;
         ISaleRepository _saleRepository;
-        IPaymentsRepository _paymentsRepository;
+
         ICategoryRepository _categoryRepository;
-        public DataGridWindow(IProductsRepository _productsRepository, ISaleRepository saleRepository, IPaymentsRepository payments,ICategoryRepository _categoryRepository)
+        public DataGridWindow(IProductsRepository _productsRepository, ISaleRepository saleRepository,ICategoryRepository _categoryRepository)
         {
             InitializeComponent();
             this._productsRepository = _productsRepository;
             this._saleRepository = saleRepository;
-            _paymentsRepository = payments;
+
             this._categoryRepository = _categoryRepository;
             DataContext = this;
             UpdateDataGrid();

@@ -17,5 +17,6 @@
         <Button x:Name="CreateButton" Content="Создать" HorizontalAlignment="Left" Margin="542,229,0,0" VerticalAlignment="Top" Click="EditProduct_Click"/>
         <Button Content="Отмена" HorizontalAlignment="Left" Margin="481,229,0,0" VerticalAlignment="Top" Width="48"/>
         <ComboBox x:Name="CategoryComboBox" Width="100" Height="40" Margin="15,160,485,84" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+        <ComboBox x:Name ="VariationCombobox" HorizontalAlignment="Left" Margin="355,45,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="VariationCombobox_SelectionChanged"/>
     </Grid>
 </Window>

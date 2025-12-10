@@ -23,5 +23,18 @@ namespace UI
         {
             InitializeComponent();
         }
+        private void path_Click(object sender, RoutedEventArgs e)
+        {
+            var dialog = new Microsoft.Win32.OpenFileDialog();
+            dialog.DefaultExt = ".png";
+            dialog.Filter = "JPEG Files (*.jpeg)|*.jpeg|PNG Files (*.png)|*.png|JPG Files (*.jpg)|*.jpg";
+            bool? result = dialog.ShowDialog();
+            if (result != null)
+            {
+                PathTextBox.Text = dialog.FileName;
+
+            }
+        }
+
     }
 }
