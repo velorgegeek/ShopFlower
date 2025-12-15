@@ -16,7 +16,6 @@
         <TextBox x:Name="CostVariation" HorizontalAlignment="Left" Margin="193,284,0,0" TextWrapping="Wrap" Text="Цена" VerticalAlignment="Top" Width="113" />
         <Button x:Name="CreateButton" Content="Создать" HorizontalAlignment="Left" Margin="542,229,0,0" VerticalAlignment="Top" Click="EditProduct_Click"/>
         <Button Content="Отмена" HorizontalAlignment="Left" Margin="481,229,0,0" VerticalAlignment="Top" Width="48"/>
-<<<<<<< HEAD
         <ComboBox x:Name="CategoryComboBox" Width="92" Height="40" Margin="15,186,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
         <ListBox x:Name="ListBoxVariation" Margin="400,30,10,225" ItemsSource="{Binding ProductVariation}">
             <ListBox.ItemTemplate>
@@ -39,9 +38,5 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-=======
-        <ComboBox x:Name="CategoryComboBox" Width="100" Height="40" Margin="15,160,485,84" VerticalAlignment="Top" HorizontalAlignment="Left"/>
-        <ComboBox x:Name ="VariationCombobox" HorizontalAlignment="Left" Margin="355,45,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="VariationCombobox_SelectionChanged"/>
->>>>>>> 3118d1bdf8e06b28217d69c0fb0afea32fdc8018
     </Grid>
 </Window>
