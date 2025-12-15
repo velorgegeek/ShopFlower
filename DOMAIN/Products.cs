@@ -5,7 +5,7 @@ namespace DOMAIN
     {
         public Guid id { get; set; } = Guid.NewGuid();
         public string Name {  get; set; }
-        public string category { get; set; }
+        public CategoryProduct category { get; set; }
         public List<ProductVariation> Variations { get; set; }
         public string Description
         {
@@ -39,7 +39,7 @@ namespace DOMAIN
         {
             return Name;
         }
-        public Product(string name, string category)
+        public Product(string name, CategoryProduct category)
         {
             this.Name = name;
             this.category = category;

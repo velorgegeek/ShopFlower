@@ -15,8 +15,8 @@ namespace Data.InMemory
 
         private void seed()
         {
-            Product product1 = new Product("Молоко", "Свежее молоко");
-            Product product2 = new Product("Хлеб", "Свежий хлеб");
+            Product product1 = new Product("Молоко", new CategoryProduct(1,"Молоко"));
+            Product product2 = new Product("Хлеб", new CategoryProduct(2, "хлеб"));
 
             product1.AddVariation("Молоко 2.5%", System.IO.Path.GetFullPath("Images/maxresdefault (1).jpg"),500);
             product1.AddVariation("Молоко 3.2%", System.IO.Path.GetFullPath("Images/maxresdefault.jpg"), 550);

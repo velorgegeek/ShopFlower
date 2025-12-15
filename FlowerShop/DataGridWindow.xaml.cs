@@ -37,6 +37,8 @@ namespace UI
         }
         private void UpdateDataGrid()
         {
+            SaleDataGrid.Items.Clear();
+            ProductsDataGrid.Items.Clear();
             SaleDataGrid.ItemsSource = _saleRepository.GetAll(SaleFilter.Empty);
             ProductsDataGrid.ItemsSource = _productsRepository.GetAll();
         }

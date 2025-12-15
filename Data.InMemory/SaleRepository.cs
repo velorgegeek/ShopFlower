@@ -41,8 +41,8 @@ namespace Data.InMemory
 
         private void Seed()
         {
-            Product pr = new Product("MOLOKO", "da");
-            Product pr2 = new Product("neMoloko", "net");
+            Product pr = new Product("MOLOKO", new CategoryProduct(1, "Молоко"));
+            Product pr2 = new Product("neMoloko", new CategoryProduct(1, "немолоко"));
             List<ProductInSale> productInSales = new List<ProductInSale>();
             List<ProductInSale> productInSales2 = new List<ProductInSale>();
             pr.AddVariation("dada", "netnet",100);

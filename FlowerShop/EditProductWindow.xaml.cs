@@ -25,7 +25,9 @@ namespace UI
         public EditProductWindow(Product product)
         {
             InitializeComponent();
+
             this.product = product;
+            ListBoxVariation.ItemsSource = product.Variations ;
             inits();
         }
         private void inits() {
@@ -34,6 +36,7 @@ namespace UI
             PathTextBox.Text = product.MainImagePath;
             CostVariation.Text = product.Variations[0].Price.ToString();
             CategoryComboBox.SelectedItem = product.category;
+
         }
         private void path_Click(object sender, RoutedEventArgs e)
         {

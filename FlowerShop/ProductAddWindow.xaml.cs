@@ -58,7 +58,7 @@ namespace UI
             }
             if (CategoryComboBox.SelectedItem is CategoryProduct catproduct)
             {
-                product = new Product(NameProduct.Text, catproduct.ToString());
+                product = new Product(NameProduct.Text, catproduct);
                 product.AddVariation(DesriptionVar.Text, PathTextBox.Text ,Convert.ToUInt16(CostVariation.Text));
                 DialogResult = true;
                 Close();
@@ -70,7 +70,5 @@ namespace UI
             if (app.ShowDialog() == true) return app.product;
             return null;
         }
-
-
     }
 }
