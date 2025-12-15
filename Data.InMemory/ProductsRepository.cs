@@ -77,7 +77,7 @@ namespace Data.InMemory
         }
         public List<Product> GetAll()
         {
-            return products;
+            return products.ToList();
         }
     }
 }

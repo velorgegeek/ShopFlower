@@ -17,7 +17,6 @@ namespace FlowerShop
     {
         IUserRepository _userRepository = new UserRepository();
         ISaleRepository _saleRepository = new SaleRepository();
-        IPaymentsRepository _paymentsRepository = new PaymentsRepository();
         IProductsRepository _productsRepository = new ProductsRepository();
         ICategoryRepository _categoryRepository = new CategoryRepository();
         User user;
@@ -25,13 +24,12 @@ namespace FlowerShop
         {
             InitializeComponent();
         }
-        public MainWindow(User user,ISaleRepository Is, IProductsRepository ip, IPaymentsRepository paymentsRepository,ICategoryRepository category )
+        public MainWindow(User user,ISaleRepository Is, IProductsRepository ip,ICategoryRepository category )
         {
             InitializeComponent();
             this.user = user;   
             _saleRepository = Is;
             _productsRepository = ip;
-            _paymentsRepository = paymentsRepository;
             _categoryRepository = category;
         }
 
@@ -50,7 +48,7 @@ namespace FlowerShop
         {
             //AuthWindow auth = new AuthWindow();
             //auth.Show();
-            DataGridWindow dataGrid = new DataGridWindow(_productsRepository, _saleRepository,_paymentsRepository, _categoryRepository);
+            DataGridWindow dataGrid = new DataGridWindow(_productsRepository, _saleRepository, _categoryRepository);
             dataGrid.Show();
 
 
@@ -64,8 +62,8 @@ namespace FlowerShop
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            //ProductAddWindow productAddWindow = new ProductAddWindow(_productsRepository);
-            //productAddWindow.Show();
+            AuthWindow auth = new AuthWindow();
+            auth.Show();
         }
     }
 }
