@@ -70,7 +70,5 @@ namespace UI
             if (app.ShowDialog() == true) return app.product;
             return null;
         }
-
-
     }
 }

@@ -27,6 +27,7 @@ namespace UI
         public EditProductWindow(Product product, ICategoryRepository _categoryRepository)
         {
             InitializeComponent();
+
             this.product = product;
             this.categoryRepository = _categoryRepository;
             VariationList.ItemsSource = product.Variations;
@@ -40,6 +41,7 @@ namespace UI
             CostVariation.Text = product.Variations[0].Price.ToString();
             VariationList.SelectedItem = product.Variations[0];
             CategoryComboBox.SelectedItem = product.category;
+
         }
         
         private void path_Click(object sender, RoutedEventArgs e)
