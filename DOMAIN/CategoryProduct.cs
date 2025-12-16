@@ -8,16 +8,17 @@ namespace DOMAIN
 {
     public class CategoryProduct
     {
-        public int IdCategory { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
         public CategoryProduct(int idCategory, string name)
         {
-            IdCategory = idCategory;
+            Id = idCategory;
             Name = name;
         }
         public override string ToString()
         {
             return Name;
         }
+        public CategoryProduct() { }
     }
 }

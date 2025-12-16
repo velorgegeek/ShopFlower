@@ -98,5 +98,11 @@ namespace UI
                 }
             }
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            var reg = new RegWindow(_userRepository);
+            reg.Show();
+        }
     }
 }

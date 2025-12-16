@@ -11,6 +11,8 @@
         <TextBox x:Name="UserMail" HorizontalAlignment="Left" Margin="3,142,0,0" TextWrapping="Wrap" Text="Почта" VerticalAlignment="Top" Width="222" Height="35"/>
         <TextBox x:Name="UserPassword" HorizontalAlignment="Left" Margin="3,204,0,0" TextWrapping="Wrap" Text="Пароль" VerticalAlignment="Top" Width="222" Height="35"/>
         <TextBox x:Name="FIO" HorizontalAlignment="Left" Margin="3,24,0,0" TextWrapping="Wrap" Text="Имя фамилия" VerticalAlignment="Top" Width="222" Height="35"/>
+        <Button x:Name="CreateAcc" Content="Создать" HorizontalAlignment="Left" Margin="390,234,0,0" VerticalAlignment="Top" Click="CreateAcc_Click"/>
+        <Button Content="Закрыть" HorizontalAlignment="Left" Margin="305,234,0,0" VerticalAlignment="Top" Click="Button_Click"/>
 
     </Grid>
 </Window>

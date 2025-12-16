@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DOMAIN;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +20,11 @@ namespace UI
     /// </summary>
     public partial class AddProductVariationWindow : Window
     {
-        public AddProductVariationWindow()
+        public Product product;
+        public AddProductVariationWindow(Product p)
         {
             InitializeComponent();
+            product = p;
         }
         private void path_Click(object sender, RoutedEventArgs e)
         {
@@ -35,6 +38,34 @@ namespace UI
 
             }
         }
-
+        private bool valid()
+        {
+            if (PathTextBox.Text == null) return false;
+            if (CostVariation.Text == null) return false;
+            if (DesriptionVar.Text == null) return false;
+            return true;
+        }
+        public static Product AddVarShow(Product p)
+        {
+            var Add = new AddProductVariationWindow(p);
+            if(Add.ShowDialog() == true)
+            {
+                return Add.product;
+            }
+            return null;
+        }
+        private void CreateButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (valid())
+            {
+                product.AddVariation(DesriptionVar.Text,PathTextBox.Text,Convert.ToInt32(CostVariation.Text));
+                DialogResult = true;
+                Close();
+            }
+            else
+            {
+                MessageBox.Show("Валидация не пройдена","Добавление вариации",MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
     }
 }

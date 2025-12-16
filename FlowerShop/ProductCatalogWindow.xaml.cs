@@ -49,9 +49,9 @@ namespace UI
             if(ProductsListBox.SelectedItem is Product product)
             {
                 ProductsListBox.SelectedItem = null;
-                ProductCart productCard = new ProductCart(sale,product,user);
-                productCard.Show(); 
-
+                ProductCart productCard = new ProductCart(sale,product,user, Products);
+                productCard.Show();
+                Close();
             }
         }
     } 

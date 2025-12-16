@@ -8,15 +8,36 @@
         Title="EditProductWindow" Height="450" Width="800">
     <Grid>
         <TextBox x:Name="NameProduct" Text ="Название Продукта" HorizontalAlignment="Left" Margin="10,108,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="DesriptionVar" Text ="Описание вариации" HorizontalAlignment="Left" Margin="214,167,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBlock HorizontalAlignment="Left" Margin="212,45,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="28" Width="138"><Run Language="ru-ru" Text="Добавление вариации"/></TextBlock>
+        <TextBox x:Name="DesriptionVar" Text ="Описание вариации" HorizontalAlignment="Left" Margin="190,199,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBlock HorizontalAlignment="Left" Margin="187,45,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="28" Width="138"><Run Language="ru-ru" Text="Добавление вариации"/></TextBlock>
         <TextBlock HorizontalAlignment="Left" Margin="21,43,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="31" Width="94"><Run Language="ru-ru" Text="Добавления продукта"/></TextBlock>
-        <TextBlock x:Name="PathTextBox" HorizontalAlignment="Left" Margin="212,84,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="218" Height="33" RenderTransformOrigin="0.5,0.244"><Run Text="Path Фотографии"/><Run Language="ru-ru"/></TextBlock>
-        <Button x:Name="Path" Content="Фотография" HorizontalAlignment="Left" Margin="213,117,0,0" VerticalAlignment="Top" Width="120" Click="path_Click"/>
-        <TextBox x:Name="CostVariation" HorizontalAlignment="Left" Margin="212,200,0,0" TextWrapping="Wrap" Text="Цена" VerticalAlignment="Top" Width="122"/>
+        <TextBlock x:Name="PathTextBox" HorizontalAlignment="Left" Margin="172,73,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="193" Height="87" RenderTransformOrigin="0.5,0.244"><Run Text="Path Фотографии"/><Run Language="ru-ru"/></TextBlock>
+        <Button x:Name="Path" Content="Фотография" HorizontalAlignment="Left" Margin="189,165,0,0" VerticalAlignment="Top" Width="120" Click="path_Click"/>
+        <TextBox x:Name="CostVariation" HorizontalAlignment="Left" Margin="188,231,0,0" TextWrapping="Wrap" Text="Цена" VerticalAlignment="Top" Width="122"/>
         <Button x:Name="CreateButton" Content="Создать" HorizontalAlignment="Left" Margin="542,229,0,0" VerticalAlignment="Top" Click="EditProduct_Click"/>
         <Button Content="Отмена" HorizontalAlignment="Left" Margin="481,229,0,0" VerticalAlignment="Top" Width="48"/>
         <ComboBox x:Name="CategoryComboBox" Width="100" Height="40" Margin="15,160,485,84" VerticalAlignment="Top" HorizontalAlignment="Left"/>
-        <ComboBox x:Name ="VariationCombobox" HorizontalAlignment="Left" Margin="355,45,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="VariationCombobox_SelectionChanged"/>
+        <ListBox x:Name="VariationList" Margin="400,26,20,234" SelectionChanged="ListVariation_SelectionChanged">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Border BorderBrush="#E0E0E0" Margin="5" Padding="10" Background="White" CornerRadius="10,10,10,10" BorderThickness="1,1,1,1">
+                        <StackPanel Orientation="Horizontal">
+                            <!-- Изображение товара -->
+                            <Image Source="{Binding ImagePath}" 
+                            Width="100" Height="50" 
+                            Stretch="Uniform"
+                            Margin="0,0,10,0"/>
+
+                            <StackPanel>
+                                <TextBlock Text="{Binding Product.Name}" FontWeight="Bold"/>
+                                <TextBlock Text="{Binding Description, StringFormat='Описание товара: {0}'}" FontWeight="Bold"/>
+                                <TextBlock Text="{Binding Price, StringFormat={}Общая стоимость: {0}₽}"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
     </Grid>
 </Window>

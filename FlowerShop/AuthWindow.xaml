@@ -9,7 +9,7 @@
     <Grid>
         <TextBox x:Name="log" HorizontalAlignment="Left"  TextWrapping="Wrap" Text="Login" VerticalAlignment="Top" Width="222" Height="35" Margin="50,69,0,0"/>
         <Button x:Name="logButton" Content="Войти" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="232,209,0,0" Click="logButton_Click"/>
-        <Button Content="Button" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="161,209,0,0"/>
+        <Button Content="Зарегестрироваться" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="90,209,0,0" Click="Button_Click"/>
         <PasswordBox x:Name="PassBox" HorizontalAlignment="Left" VerticalAlignment="Top" Width="222" Height="34" Margin="50,142,0,0"/>
         <TextBox x:Name="PassTextBox" HorizontalAlignment="Left" VerticalAlignment="Top" Width="222" Height="34" Margin="50,142,0,0" Visibility="Hidden"/>
         <Button x:Name="PassShow" HorizontalAlignment="Left" Margin="245,149,0,0" VerticalAlignment="Top" Click="PasswordChecker" BorderBrush="White" Foreground="White" Background="White">

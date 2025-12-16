@@ -37,6 +37,12 @@ namespace UI
         }
         private void UpdateDataGrid()
         {
+            SaleDataGrid.ItemsSource = null;
+            ProductsDataGrid.ItemsSource = null;
+
+            // Затем очистить Items (теперь это разрешено)
+            SaleDataGrid.Items.Clear();
+            ProductsDataGrid.Items.Clear();
             SaleDataGrid.ItemsSource = _saleRepository.GetAll(SaleFilter.Empty);
             ProductsDataGrid.ItemsSource = _productsRepository.GetAll();
         }
@@ -44,11 +50,12 @@ namespace UI
         {
             if (ProductsDataGrid.SelectedItem is Product pr)
             {
-                var edit = EditProductWindow.EditProductShow(pr);
+                var edit = EditProductWindow.EditProductShow(pr, _categoryRepository);
                 if (edit != null)
                 {
                     _productsRepository.Update(edit);
                     MessageBox.Show("Продукт отредактирован", "Редактирование продукта", MessageBoxButton.OK);
+                    UpdateDataGrid();
                     return;
                 }
                 MessageBox.Show("Продукт вернул null", "Редактирование продукта", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -71,5 +78,17 @@ namespace UI
                     MessageBox.Show("Ошибка,вернулся null ", "Добавление продукта", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
+
+        private void AddVariation_Click(object sender, RoutedEventArgs e)
+        {
+            if (ProductsDataGrid.SelectedItem is Product pr )
+            {
+                var add = AddProductVariationWindow.AddVarShow(pr);
+                if(add != null)
+                {
+                    MessageBox.Show("Вариация добавлена", "Добавление вариации");
+                }
+            }
         }
     }
+}

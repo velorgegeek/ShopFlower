@@ -23,6 +23,7 @@ namespace Data.InMemory
             string hashPassword = CreateSHA256(password);
             count++;
             User us = new User(count, Fio, Phone, email, hashPassword,Role);
+            Users.Add(us);
             return true;
         }
         public static string CreateSHA256(string input)
@@ -37,10 +38,12 @@ namespace Data.InMemory
             if (tmp.HashPassword == CreateSHA256(pass)) return tmp;
             return null;
         }
-         public void UpdateRole(User user, role role)
+         public void UpdateRole(string login, role role)
         {
-
-        }
+            User tmp = Users.FirstOrDefault(u => u.Phone == login);
+            if(tmp == null) return;
+            if (tmp.Role == role) return;
+            tmp.Role = role;
+         }
     }
-
 }

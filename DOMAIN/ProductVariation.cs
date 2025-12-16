@@ -27,5 +27,6 @@ namespace DOMAIN
             this.ImagePath = ImagePath;
             this.Price = price;
         }
+        public ProductVariation() { }
     }
 }

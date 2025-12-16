@@ -28,12 +28,14 @@ namespace UI
         List<RadioButton> radioButtons = new List<RadioButton>();
         int h = 150;
         ISaleRepository SaleRep;
-        public ProductCart(ISaleRepository SaleRep,Product product,User user)
+        IProductsRepository Products;
+        public ProductCart(ISaleRepository SaleRep,Product product,User user, IProductsRepository Products)
         {
             InitializeComponent();
             pr = product;
             this.SaleRep = SaleRep;
             user1 = user;
+            this.Products = Products;
             DataContext = product;
             ImageProduct.Source = new BitmapImage(new Uri(product.MainImagePath));
             for (int i = 0; i < product.Variations.Count; i++)
@@ -82,8 +84,9 @@ namespace UI
         }
         private void BuyClickCart(object sender, RoutedEventArgs e)
         {
-            ShoppingCart shop = new ShoppingCart(SaleRep,user1);
+            ShoppingCart shop = new ShoppingCart(SaleRep,user1,Products);
             shop.Show();
+            Close();
         }
         private void BuyClick(object sender, RoutedEventArgs e)
         {
@@ -95,12 +98,20 @@ namespace UI
                     break;
                 }
             }
-            List<ProductInSale> listPr = new List<ProductInSale>()
+            List<ProductInShoppingCard> listPr = new List<ProductInShoppingCard>()
                     {
-                        new ProductInSale(pr.Variations[i], 1),
+                        new ProductInShoppingCard(pr.Variations[i], 1),
                     };
-            ShoppingCart shop = new ShoppingCart(SaleRep,listPr,user1);
-            shop.Show(); 
+            ShoppingCart shop = new ShoppingCart(SaleRep,listPr,user1,Products);
+            shop.Show();
+            Close();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            var productCatalog = new ProductCatalogWindow(SaleRep,user1, Products);
+            productCatalog.Show();
+            Close();
         }
     }
 }

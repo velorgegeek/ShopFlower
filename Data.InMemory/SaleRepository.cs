@@ -12,7 +12,7 @@ namespace Data.InMemory
     public class SaleRepository : ISaleRepository
     {
         private readonly List<Sale> _saleList = new List<Sale>();
-        int countId = 0;
+        int countId = 2;
         public SaleRepository() {
             Seed();
         }
@@ -41,15 +41,17 @@ namespace Data.InMemory
 
         private void Seed()
         {
-            Product pr = new Product("MOLOKO", "da");
-            Product pr2 = new Product("neMoloko", "net");
+            Product pr = new Product("MOLOKO", new CategoryProduct(1,"молоко"));
+            Product pr2 = new Product("neMoloko", new CategoryProduct(1, "молоко"));
             List<ProductInSale> productInSales = new List<ProductInSale>();
             List<ProductInSale> productInSales2 = new List<ProductInSale>();
-            pr.AddVariation("dada", "netnet",100);
-            productInSales.Add(new ProductInSale(pr.Variations[0], 1));
-            pr2.AddVariation("DADA", "netene", 100);
+            pr2.AddVariation("DADA", System.IO.Path.GetFullPath("Images/maxresdefault.jpg"), 100);
+            pr.AddVariation("dada", System.IO.Path.GetFullPath("Images/maxresdefault (1).jpg"), 100);
+            productInSales.Add(new ProductInSale(pr.Variations[0], 3));
+            productInSales.Add(new ProductInSale(pr2.Variations[0], 3));
             productInSales2.Add(new ProductInSale(pr2.Variations[0], 1));
             var random = new Random();
+
             for (int i = 0; i < 177; i++)
             {
 

@@ -1,4 +1,5 @@
-﻿using DOMAIN;
+﻿using Data.Interfaces;
+using DOMAIN;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,10 +23,14 @@ namespace UI
     public partial class EditProductWindow : Window
     {
         Product product;
-        public EditProductWindow(Product product)
+        ICategoryRepository categoryRepository;
+        public EditProductWindow(Product product, ICategoryRepository _categoryRepository)
         {
             InitializeComponent();
             this.product = product;
+            this.categoryRepository = _categoryRepository;
+            VariationList.ItemsSource = product.Variations;
+            CategoryComboBox.ItemsSource = categoryRepository.GetAll();
             inits();
         }
         private void inits() {
@@ -33,6 +38,7 @@ namespace UI
             DesriptionVar.Text = product.Description;
             PathTextBox.Text = product.MainImagePath;
             CostVariation.Text = product.Variations[0].Price.ToString();
+            VariationList.SelectedItem = product.Variations[0];
             CategoryComboBox.SelectedItem = product.category;
         }
         
@@ -48,14 +54,36 @@ namespace UI
          
             }
         }
-        private void EditProduct_Click(object sender, RoutedEventArgs e)
+        private bool valid()
         {
+            if (VariationList.SelectedItem == null) return false;
+            if(CategoryComboBox.SelectedItem == null) return false;
+            if (PathTextBox.Text == null) return false;
+            if (CostVariation.Text == null)return false;
+            if (NameProduct.Text == null) return false;
+            if (DesriptionVar.Text == null) return false;
+            return true;
+        }
+        private void EditProduct_Click(object sender, RoutedEventArgs e)
+
+        {
+            if (!valid()) return;
+
+            product.Name = NameProduct.Text;
+            if (CategoryComboBox.SelectedItem is CategoryProduct c)
+            {
+                product.category = c;
+            }
+            product.Variations[VariationList.SelectedIndex].ImagePath = PathTextBox.Text;
+
+            product.Variations[VariationList.SelectedIndex].Description = DesriptionVar.Text;
+            product.Variations[VariationList.SelectedIndex].Price = Convert.ToInt32(CostVariation.Text);
             DialogResult = true;
             Close();
         }
-        public static Product EditProductShow(Product product)
+        public static Product EditProductShow(Product product,ICategoryRepository _categoryRepository)
         {
-            var show = new EditProductWindow(product);
+            var show = new EditProductWindow(product, _categoryRepository);
             if(show.ShowDialog() == true)
             {
                 return show.product;
@@ -70,9 +98,9 @@ namespace UI
             PathTextBox.Text = pf.ImagePath;
             CostVariation.Text = pf.Price.ToString();
         }
-        private void VariationCombobox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void ListVariation_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if(VariationCombobox.SelectedItem is ProductVariation pr)
+            if(VariationList.SelectedItem is ProductVariation pr)
             {
                 var_changed(pr);
             }

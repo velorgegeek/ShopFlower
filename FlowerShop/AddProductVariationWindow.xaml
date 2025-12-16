@@ -11,7 +11,7 @@
         <Button x:Name="Path" Content="Фотография" HorizontalAlignment="Left" Margin="12,60,0,0" VerticalAlignment="Top" Width="120" Click="path_Click"/>
         <TextBox x:Name="DesriptionVar" Text ="Описание вариации" HorizontalAlignment="Left" Margin="13,110,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <TextBox x:Name="CostVariation" HorizontalAlignment="Left" Margin="11,143,0,0" TextWrapping="Wrap" Text="Цена" VerticalAlignment="Top" Width="122"/>
-        <Button x:Name="CreateButton" Content="Создать" HorizontalAlignment="Left" Margin="341,172,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="CreateButton" Content="Создать" HorizontalAlignment="Left" Margin="341,172,0,0" VerticalAlignment="Top" Click="CreateButton_Click"/>
         <Button Content="Отмена" HorizontalAlignment="Left" Margin="280,172,0,0" VerticalAlignment="Top" Width="48"/>
     </Grid>
 </Window>

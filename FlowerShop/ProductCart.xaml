@@ -23,7 +23,8 @@
             <!-- Правая колонка для информации -->
         </Grid.ColumnDefinitions>
 
-        <!-- Название продукта -->
+        <Button Content="Вернуться в каталог" Grid.Row="0" Grid.Column ="0" Margin="10,10,173,10" Click="Button_Click" MaxHeight="20"/>
+        <Button Content="перейти в корзину" Grid.Row="0" Grid.Column ="2" Margin="163,10,10,10" MaxHeight="20" />
         <TextBlock x:Name="NameProduct" Text="{Binding Name}" Grid.Row="0" Grid.Column="0"
                    HorizontalAlignment="Left" Margin="87,10,0,0" 
                    TextWrapping="Wrap" 

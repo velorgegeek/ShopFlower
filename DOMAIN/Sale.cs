@@ -10,8 +10,34 @@ namespace DOMAIN
     {
         public int Id { get; set; }
         public int UserId { get; set; }
+        public User User { get; set; }
         public DateTime DateCreate { get; set; }
         public List<ProductInSale> Products { get; set; }
+        public int amount
+        {
+            get
+            {
+                int i = 0;
+                foreach (var q in Products)
+                {
+                    i += q.ProductVariation.Price * q.Quantity;
+                }
+                return i;
+            }
+        }
+        public int CountProducts
+        {
+            get
+            {
+                int i = 0;
+                foreach (var q in Products)
+                {
+                    i += q.Quantity;
+                }
+                return i;
+            }
+        }
+
         public Sale(int userid,int id,List<ProductInSale> products)
         {
             UserId = userid;    
@@ -19,5 +45,6 @@ namespace DOMAIN
             DateCreate = DateTime.Now;
             Products = products;
         }
+        public Sale() { }
     }
 }

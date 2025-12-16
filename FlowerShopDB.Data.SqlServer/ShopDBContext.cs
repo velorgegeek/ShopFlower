@@ -1,10 +1,11 @@
 using DOMAIN;
 using Microsoft.EntityFrameworkCore;
+using System;
 namespace FlowerShopDB.Data.SqlServer
 {
     public class ShopDBContext : DbContext  
     {
-        public ShopDBContext(DbContextOptions options) : base(options)
+        public ShopDBContext(DbContextOptions<ShopDBContext> options) : base(options)
         {
         }
 

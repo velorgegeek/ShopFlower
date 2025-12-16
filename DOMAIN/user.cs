@@ -32,17 +32,16 @@ namespace DOMAIN
         {
             return Fio;
         }
-        //public void ShopCardDelete(List<ProductInSale> q)
-        //{
-        //    foreach (ProductInSale item in q)
-        //    {
-        //        int i = ShoppingCard.IndexOf(item);
-        //        if (i > -1)
-        //        {
-        //            ShoppingCard.RemoveAt(i);
-        //        }
-        //    }
-        //}
+        public void ShopCardDelete(List<ProductInShoppingCard> q)
+        {
+            var itemsToDelete = new List<ProductInShoppingCard>(q);
+            foreach (ProductInShoppingCard Purchaseditem in itemsToDelete)
+            {
+
+                ShoppingCard.RemoveAll(item =>
+            item.ProductVariation.id == Purchaseditem.ProductVariation.id);
+            }
+        }
         public void AddInCard(ProductVariation item)
         {
             ArgumentNullException.ThrowIfNull(item);
@@ -57,5 +56,6 @@ namespace DOMAIN
                 ShoppingCard.Add(new ProductInShoppingCard(item, 1));
             }
         }
+        public User() { }
     }
 }

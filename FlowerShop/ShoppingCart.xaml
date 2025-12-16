@@ -67,5 +67,6 @@
         </Border>
         <TextBlock x:Name="Cart" Margin="10,47,0,0" TextWrapping="Wrap" Text="Корзина" Height="22" Width="77" FontSize="18" FontWeight="Bold" VerticalAlignment="Top" HorizontalAlignment="Left"/>
         <TextBlock x:Name="ListSize" HorizontalAlignment="Left" Margin="87,56,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="#FF6D7777" Width="68" Height="13" FontSize="10"><Run Language="ru-ru" Text="0 Товаров"/></TextBlock>
+        <Button Content="В каталог" HorizontalAlignment="Left" Margin="10,22,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.64,-0.9" Width="58" Click="Button_Click"/>
     </Grid>
 </Window>

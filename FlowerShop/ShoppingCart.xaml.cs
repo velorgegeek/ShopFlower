@@ -24,10 +24,11 @@ namespace UI
     public partial class ShoppingCart : Window
     {
         public ISaleRepository sale;
-        private List<ProductInSale> ShopCartList;
+        private List<ProductInShoppingCard> ShopCartList;
         User user1;
         int i = 0;
         bool inCard;
+        IProductsRepository products;
         public void Init()
         {
             ShopCart.ItemsSource = ShopCartList;
@@ -35,33 +36,31 @@ namespace UI
             DataContext = ShopCartList;
             AmountPaid.Text = ($"Итого: {CalculateCost()}");
         }
-        public ShoppingCart(ISaleRepository SaleRep,List<ProductInSale> product,User user)
+        public ShoppingCart(ISaleRepository SaleRep,List<ProductInShoppingCard> product,User user,IProductsRepository products)
         {
             InitializeComponent();
             inCard = false;
             this.user1 = user;
             sale = SaleRep;
             ShopCartList = product;
+            this.products = products;
             Init();
 
         }
-        public ShoppingCart(ISaleRepository SaleRep,User user)
+        public ShoppingCart(ISaleRepository SaleRep,User user, IProductsRepository products)
         {
             InitializeComponent();
             inCard = true;
             this.user1 = user;
             sale = SaleRep;
-            ShopCartList = new List<ProductInSale>() { };
-            for(int i = 0; i < user.ShoppingCard.Count; i++)
-            {
-                ShopCartList.Add(new ProductInSale(user.ShoppingCard[i]));  
-            }
+            this.products = products;
+            ShopCartList =user.ShoppingCard;
             Init();
         }
         public String CalculateCost()
         {
             i= 0;
-            foreach (ProductInSale product in ShopCartList)
+            foreach (ProductInShoppingCard product in ShopCartList)
             {
                 i += product.ProductVariation.Price * product.Quantity;
             }
@@ -81,16 +80,22 @@ namespace UI
                 MessageBox.Show($"Вы оплатили заказ на {CalculateCost()}","Оплата", MessageBoxButton.OK);
                 if (inCard == true)
                 {
-                    sale.AddSale(user1.ID, ShopCartList);
-                    //user1.ShopCardDelete(ShopCartList); При удалении удаляется в sale решил закомментировать 
-                    //ShopCartList = user1.ShoppingCard; 
-                    sale.ToString();
+                    sale.AddSale(user1.ID, ShopCartList.Select(
+                        item => new ProductInSale(item.ProductVariation, item.Quantity)).ToList());
+                    user1.ShopCardDelete(ShopCartList);
+                    ShopCartList = user1.ShoppingCard;
                     ShopCart.Items.Refresh();
                     AmountPaid.Text = ($"Итого: {CalculateCost()}");
                 }
                 else
                 {
-                    sale.AddSale(user1.ID, ShopCartList);
+
+                    sale.AddSale(user1.ID, ShopCartList.Select(
+                    item => new ProductInSale(item.ProductVariation, item.Quantity)).ToList());
+                    ShopCartList.Clear();
+                    AmountPaid.Text = ($"Итого: {CalculateCost()}");
+                    ListSize.Text = ShopCartList.Count.ToString() + " Товара";
+                    ShopCart.Items.Refresh();
                 }
             }
             else
@@ -100,7 +105,7 @@ namespace UI
         }
         public void IncreaseQuantity_Click(object sender, RoutedEventArgs e)
         {
-            if (sender is Button button && button.DataContext is ProductInSale productInSale)
+            if (sender is Button button && button.DataContext is ProductInShoppingCard productInSale)
             {
                 productInSale.Quantity++;
                 ShopCart.Items.Refresh();
@@ -109,7 +114,7 @@ namespace UI
         }
         public void DecreaseQuantity_Click(Object sender, RoutedEventArgs e)
         {
-            if (sender is Button button && button.DataContext is ProductInSale productInSale)
+            if (sender is Button button && button.DataContext is ProductInShoppingCard productInSale)
             {
                 if (productInSale.Quantity > 1)
                 {
@@ -121,13 +126,20 @@ namespace UI
         }
         public void DeleteProductInCard_Click(object sender,RoutedEventArgs e)
         {
-            if(sender is Button button && button.DataContext is ProductInSale productInSale)
+            if(sender is Button button && button.DataContext is ProductInShoppingCard productInShoppingCart)
             {
-                ShopCartList.Remove(productInSale);
+                ShopCartList.Remove(productInShoppingCart);
                 ShopCart.Items.Refresh();
                 AmountPaid.Text = ($"Итого: {CalculateCost()}");
                 ListSize.Text = ShopCartList.Count.ToString() + " Товара";
             }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            var productcatalog = new ProductCatalogWindow(sale, user1, products);
+            productcatalog.Show();
+            Close();
         }
     }
 }

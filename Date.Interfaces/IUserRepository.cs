@@ -7,7 +7,7 @@ namespace Date.Interfaces
     {
         List<User> GetUsers(role rol);
         bool AddUsers(string email, string Fio, string password,string Phone,role Role);
-        void UpdateRole(User user, role role);
+        void UpdateRole(string login, role role);
         User GetByLogin(string login, string pass);
     }
 
