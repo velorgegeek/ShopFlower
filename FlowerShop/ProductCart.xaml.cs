@@ -26,7 +26,6 @@ namespace UI
         Product pr;
         User user1;
         List<RadioButton> radioButtons = new List<RadioButton>();
-        int h = 150;
         ISaleRepository SaleRep;
         IProductsRepository Products;
         public ProductCart(ISaleRepository SaleRep,Product product,User user, IProductsRepository Products)
@@ -44,7 +43,7 @@ namespace UI
                 {
                     IsChecked = false,
                     GroupName = "variations",
-                    Content = $"{product.Variations[i].Price} руб.",
+                    Content = $"{product.Variations[i].Price} ₽.",
                     Margin = new Thickness(0, 5, 0, 5)
                 };
 

@@ -9,7 +9,7 @@ namespace DOMAIN
     public class ProductInShoppingCard
     {
         public int Id { get; set; }
-        public int UserId { get; set; }  // Внешний ключ на заказ
+        public int UserId { get; set; } 
         public User User { get; set; }
         public ProductVariation ProductVariation { get; set; }
 

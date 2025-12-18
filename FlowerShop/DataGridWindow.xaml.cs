@@ -13,6 +13,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Model;
 
 namespace UI
 {
@@ -25,7 +26,7 @@ namespace UI
         ISaleRepository _saleRepository;
 
         ICategoryRepository _categoryRepository;
-        public DataGridWindow(IProductsRepository _productsRepository, ISaleRepository saleRepository,ICategoryRepository _categoryRepository)
+        public DataGridWindow(IProductsRepository _productsRepository, ISaleRepository saleRepository, ICategoryRepository _categoryRepository)
         {
             InitializeComponent();
             this._productsRepository = _productsRepository;
@@ -35,6 +36,7 @@ namespace UI
             DataContext = this;
             UpdateDataGrid();
         }
+
         private void UpdateDataGrid()
         {
             SaleDataGrid.ItemsSource = null;
@@ -45,6 +47,8 @@ namespace UI
             ProductsDataGrid.Items.Clear();
             SaleDataGrid.ItemsSource = _saleRepository.GetAll(SaleFilter.Empty);
             ProductsDataGrid.ItemsSource = _productsRepository.GetAll();
+
+
         }
         private void EditProduct_Click(object sender, RoutedEventArgs e)
         {
@@ -68,27 +72,66 @@ namespace UI
         private void AddProduct_Click(object sender, RoutedEventArgs e)
         {
             var add = ProductAddWindow.ProductAddWindowShow(_categoryRepository);
-                if(add != null)
-                {
-                    _productsRepository.Add(add);
-                    UpdateDataGrid();
-                }
-                else
-                {
-                    MessageBox.Show("Ошибка,вернулся null ", "Добавление продукта", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
+            if (add != null)
+            {
+                _productsRepository.Add(add);
+                UpdateDataGrid();
             }
+            else
+            {
+                MessageBox.Show("Ошибка,вернулся null ", "Добавление продукта", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
 
         private void AddVariation_Click(object sender, RoutedEventArgs e)
         {
-            if (ProductsDataGrid.SelectedItem is Product pr )
+            if (ProductsDataGrid.SelectedItem is Product pr)
             {
                 var add = AddProductVariationWindow.AddVarShow(pr);
-                if(add != null)
+                if (add != null)
                 {
                     MessageBox.Show("Вариация добавлена", "Добавление вариации");
                 }
             }
         }
+
+        private void DeleteProduct_Click(object sender, RoutedEventArgs e)
+        {
+            if (ProductsDataGrid.SelectedItem is Product pr)
+            {
+                if (_productsRepository.Remove(pr))
+                {
+                    MessageBox.Show("Удаление завершено успешно", "Удаление");
+                }
+                else
+                {
+                    MessageBox.Show("Удаление завершено с ошибкой", "Удаление", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Продукт не выбран", "Удаление", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+
+        }
+
+        private void DeleteVariation_Click(object sender, RoutedEventArgs e)
+        {
+            if (ProductsDataGrid.SelectedItem is Product pr)
+            {
+                var app = DeleteVariation.DeleteVariationShow(pr);
+                if (app != null)
+                {
+                    pr.DeleteVariation(app);
+                    MessageBox.Show("Вариация удалена", "Удаление вариации");
+                    UpdateDataGrid();
+                }
+                else
+                {
+                    MessageBox.Show("Вариация не удалена","Удаление вариации",MessageBoxButton.OK,MessageBoxImage.Error);
+                }
+            }
+        }
+
     }
 }

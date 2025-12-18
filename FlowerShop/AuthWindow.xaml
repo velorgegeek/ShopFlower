@@ -5,15 +5,56 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UI"
         mc:Ignorable="d"
-        Title="AuthWindow" Height="300" Width="450">
-    <Grid>
-        <TextBox x:Name="log" HorizontalAlignment="Left"  TextWrapping="Wrap" Text="Login" VerticalAlignment="Top" Width="222" Height="35" Margin="50,69,0,0"/>
-        <Button x:Name="logButton" Content="Войти" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="232,209,0,0" Click="logButton_Click"/>
-        <Button Content="Зарегестрироваться" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="90,209,0,0" Click="Button_Click"/>
-        <PasswordBox x:Name="PassBox" HorizontalAlignment="Left" VerticalAlignment="Top" Width="222" Height="34" Margin="50,142,0,0"/>
-        <TextBox x:Name="PassTextBox" HorizontalAlignment="Left" VerticalAlignment="Top" Width="222" Height="34" Margin="50,142,0,0" Visibility="Hidden"/>
-        <Button x:Name="PassShow" HorizontalAlignment="Left" Margin="245,149,0,0" VerticalAlignment="Top" Click="PasswordChecker" BorderBrush="White" Foreground="White" Background="White">
-            <Image x:Name="PassImage" Source ="Images/passwordShow.png" Height="17" Width="18"/>
-        </Button>
+        Title="AuthWindow" Height="263" Width="433">
+    <Grid Margin="0,52,0,0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="28*"/>
+            <ColumnDefinition Width="372"/>
+            <ColumnDefinition Width="33*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Логин -->
+        <TextBox x:Name="log" Grid.Row="0"
+                 TextWrapping="Wrap" Text="Login" Margin="0,0,0,10" Grid.Column ="1" Height="30"/>
+
+        <!-- Пароль и кнопка показа пароля -->
+        <Grid Grid.Row="1" Margin="0,0,0,10" Grid.Column ="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <PasswordBox x:Name="PassBox" Grid.Column="0"
+                         Height="34" Grid.ColumnSpan="2"/>
+
+            <Button x:Name="PassShow" Grid.Column="1"
+                    Click="PasswordChecker" 
+                    Background="Transparent"
+                    BorderThickness="0"
+                    Margin="5,0,0,0">
+                <Image x:Name="PassImage" Source="Images/passwordShow.png" 
+                       Height="17" Width="18"/>
+            </Button>
+
+            <!-- Скрытый TextBox для пароля -->
+            <TextBox x:Name="PassTextBox"
+                     Grid.Column ="1"
+                     Height="34" Visibility="Hidden"/>
+        </Grid>
+
+        <!-- Кнопки -->
+        <StackPanel Grid.Row="2"
+                    Orientation="Horizontal" HorizontalAlignment="Right"
+                    Margin="0,10,0,0" Grid.Column="1" Width="183" >
+            <Button Content="Зарегистрироваться" Click="Button_Click" 
+                    Width="122" Height="27"/>
+            <Button x:Name="logButton" Content="Войти" 
+                    Click="logButton_Click" Width="56" Height="27" Margin="5,0,0,0"/>
+        </StackPanel>
     </Grid>
 </Window>

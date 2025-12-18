@@ -18,8 +18,8 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
             <!-- Левая колонка для изображения -->
-            <ColumnDefinition Width="3*"/>
-            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="300"/>
             <!-- Правая колонка для информации -->
         </Grid.ColumnDefinitions>
 
@@ -45,14 +45,12 @@
         </StackPanel>
 
         <!-- Кнопки -->
-        <StackPanel Grid.Row="1" Grid.Column="2" Orientation="Vertical" 
-                    HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50,32,0,0" Height="34" Width="130">
-            <TextBlock x:Name="CostTextBlock" Text="100" Height="34" Width="130" FontSize="16" 
-                        TextAlignment="Center"/>
-        </StackPanel>
+
         <StackPanel Grid.Row="1" Grid.Column="2" Orientation="Vertical" 
                     HorizontalAlignment="Left" VerticalAlignment="Top"
-                    Margin="50,82,0,0" Height="73" Width="130">
+                    Margin="50,43,0,0" Height="111" Width="130">
+            <TextBlock x:Name="CostTextBlock" Text="100 ₽" Height="34" Width="130" FontSize="16" 
+                        TextAlignment="Center"/>
             <Button x:Name="InCardButton" Content="Добавить в корзину" Height="34" Width="130" Margin="0,0,0,10" Click="AddInCard"/>
             <Button Content="Купить" Height="29" Width="130" Click="BuyClick"/>
         </StackPanel>
