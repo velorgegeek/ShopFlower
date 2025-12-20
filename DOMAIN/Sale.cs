@@ -45,6 +45,8 @@ namespace DOMAIN
             DateCreate = DateTime.Now;
             Products = products;
         }
-        public Sale() { }
+        public Sale() {
+            Products = new List<ProductInSale>();
+        }
     }
 }

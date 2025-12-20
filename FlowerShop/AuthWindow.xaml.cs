@@ -1,8 +1,10 @@
-﻿using Data.InMemory;
+﻿
 using Data.Interfaces;
 using Date.Interfaces;
 using DOMAIN;
 using FlowerShop;
+using FlowerShopDB.Data.SqlServer;
+using Services;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -25,17 +27,28 @@ namespace UI
     /// </summary>
     public partial class AuthWindow : Window
     {
-        IUserRepository _userRepository = new UserRepository();
-        ISaleRepository _sale = new SaleRepository();
-        IProductsRepository _products = new ProductsRepository();
-        ICategoryRepository _categoryRepository = new CategoryRepository();
+        IUserRepository _userRepository;
+        ISaleRepository _sale;
+        IProductsRepository _products;
+        ICategoryRepository _categoryRepository;
+        IProductInShoppingCartRepository _productInShoppingCartRepository;
         const string regex = @"^\+?[1-9][0-9]{7,14}$";
         BitmapImage close = new BitmapImage(new Uri(System.IO.Path.GetFullPath("Images/PasswordClose.png")));
         BitmapImage show = new BitmapImage(new Uri(System.IO.Path.GetFullPath("Images/PasswordShow.png")));
-        public AuthWindow()
+        public AuthWindow() { }
+        public AuthWindow(IUserRepository _user, ISaleRepository _sale, IProductsRepository _products, ICategoryRepository _category,IProductInShoppingCartRepository _productInShoppingCartRepository)
         {
             InitializeComponent();
             PassImage.Source = close;
+            _userRepository = _user;
+            this._productInShoppingCartRepository = _productInShoppingCartRepository;
+            this._sale = _sale;
+            this._products = _products;
+            this._categoryRepository = _category;
+            this._categoryRepository.GetAll();
+            this._products.GetAll();
+
+            this._sale.GetAll(SaleFilter.Empty);
         }
 
         private void PasswordChecker(object sender, RoutedEventArgs e)
@@ -78,11 +91,11 @@ namespace UI
             switch (user.Role)
             {
                 case role.User:
-                    ProductCatalogWindow pr = new ProductCatalogWindow(_sale,user,_products);
+                    ProductCatalogWindow pr = new ProductCatalogWindow(_sale,user,_products,_productInShoppingCartRepository);
                     pr.Show();
                     break;
                 case role.Admin:
-                    MainWindow mainWindow = new MainWindow();
+                    MainWindow mainWindow = new MainWindow(_sale,_products,_categoryRepository);
                     mainWindow.Show();
                     break;
             }
@@ -103,6 +116,27 @@ namespace UI
         {
             var reg = new RegWindow(_userRepository);
             reg.Show();
+        }
+        private void TextBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+
+            if (string.IsNullOrEmpty(textBox.Text))
+            {
+                textBox.Text = textBox.Tag as string;
+                textBox.Foreground = Brushes.Gray;
+            }
+        }
+
+        private void TextBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+
+            if (textBox.Text == textBox.Tag as string)
+            {
+                textBox.Text = string.Empty;
+                textBox.Foreground = Brushes.Black;
+            }
         }
     }
 }

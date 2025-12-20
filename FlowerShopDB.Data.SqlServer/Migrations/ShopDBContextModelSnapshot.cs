@@ -85,7 +85,7 @@ namespace FlowerShopDB.Data.SqlServer.Migrations
                     b.ToTable("productInSales");
                 });
 
-            modelBuilder.Entity("DOMAIN.ProductInShoppingCard", b =>
+            modelBuilder.Entity("DOMAIN.ProductInShoppingCart", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -124,9 +124,6 @@ namespace FlowerShopDB.Data.SqlServer.Migrations
                     b.Property<string>("ImagePath")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Index")
-                        .HasColumnType("int");
 
                     b.Property<int>("Price")
                         .HasColumnType("int");
@@ -223,7 +220,7 @@ namespace FlowerShopDB.Data.SqlServer.Migrations
                     b.Navigation("Sale");
                 });
 
-            modelBuilder.Entity("DOMAIN.ProductInShoppingCard", b =>
+            modelBuilder.Entity("DOMAIN.ProductInShoppingCart", b =>
                 {
                     b.HasOne("DOMAIN.ProductVariation", "ProductVariation")
                         .WithMany()

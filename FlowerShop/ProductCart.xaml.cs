@@ -1,4 +1,4 @@
-﻿using Data.InMemory;
+﻿using FlowerShopDB.Data.SqlServer;
 using DOMAIN;
 using System;
 using System.Collections.Generic;
@@ -26,16 +26,17 @@ namespace UI
         Product pr;
         User user1;
         List<RadioButton> radioButtons = new List<RadioButton>();
-        int h = 150;
         ISaleRepository SaleRep;
         IProductsRepository Products;
-        public ProductCart(ISaleRepository SaleRep,Product product,User user, IProductsRepository Products)
+        IProductInShoppingCartRepository _productInShoppingCartRepository;
+        public ProductCart(ISaleRepository SaleRep,Product product,User user, IProductsRepository Products, IProductInShoppingCartRepository _productInShoppingCartRepository)
         {
             InitializeComponent();
             pr = product;
             this.SaleRep = SaleRep;
             user1 = user;
             this.Products = Products;
+            this._productInShoppingCartRepository = _productInShoppingCartRepository;   
             DataContext = product;
             ImageProduct.Source = new BitmapImage(new Uri(product.MainImagePath));
             for (int i = 0; i < product.Variations.Count; i++)
@@ -44,7 +45,7 @@ namespace UI
                 {
                     IsChecked = false,
                     GroupName = "variations",
-                    Content = $"{product.Variations[i].Price} руб.",
+                    Content = $"{product.Variations[i].Price} ₽.",
                     Margin = new Thickness(0, 5, 0, 5)
                 };
 
@@ -77,14 +78,14 @@ namespace UI
             {
                 if (radioButtons[i].IsChecked == true)
                 {
-                    user1.AddInCard(pr.Variations[i]);
+                    _productInShoppingCartRepository.Add(user1,pr.Variations[i]);
                     break;
                 }
             }
         }
         private void BuyClickCart(object sender, RoutedEventArgs e)
         {
-            ShoppingCart shop = new ShoppingCart(SaleRep,user1,Products);
+            ShoppingCart shop = new ShoppingCart(SaleRep,user1,Products, _productInShoppingCartRepository);
             shop.Show();
             Close();
         }
@@ -98,9 +99,9 @@ namespace UI
                     break;
                 }
             }
-            List<ProductInShoppingCard> listPr = new List<ProductInShoppingCard>()
+            List<ProductInShoppingCart> listPr = new List<ProductInShoppingCart>()
                     {
-                        new ProductInShoppingCard(pr.Variations[i], 1),
+                        new ProductInShoppingCart(pr.Variations[i], 1),
                     };
             ShoppingCart shop = new ShoppingCart(SaleRep,listPr,user1,Products);
             shop.Show();
@@ -109,8 +110,15 @@ namespace UI
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            var productCatalog = new ProductCatalogWindow(SaleRep,user1, Products);
+            var productCatalog = new ProductCatalogWindow(SaleRep,user1, Products, _productInShoppingCartRepository);
             productCatalog.Show();
+            Close();
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            var productvar = new ShoppingCart(SaleRep, user1, Products, _productInShoppingCartRepository);
+            productvar.Show(); 
             Close();
         }
     }

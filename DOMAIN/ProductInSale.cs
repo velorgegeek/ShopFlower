@@ -21,7 +21,7 @@ namespace DOMAIN
             this.ProductVariation = productVariation;
             this.Quantity = Quatitity;  
         }
-        public ProductInSale(ProductInShoppingCard productInShoppingCard)
+        public ProductInSale(ProductInShoppingCart productInShoppingCard)
         {
             this.ProductVariation = productInShoppingCard.ProductVariation;
             this.Quantity = productInShoppingCard.Quantity;

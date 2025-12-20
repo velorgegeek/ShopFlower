@@ -7,37 +7,98 @@
         mc:Ignorable="d"
         Title="EditProductWindow" Height="450" Width="800">
     <Grid>
-        <TextBox x:Name="NameProduct" Text ="Название Продукта" HorizontalAlignment="Left" Margin="10,108,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="DesriptionVar" Text ="Описание вариации" HorizontalAlignment="Left" Margin="190,199,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBlock HorizontalAlignment="Left" Margin="187,45,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="28" Width="138"><Run Language="ru-ru" Text="Добавление вариации"/></TextBlock>
-        <TextBlock HorizontalAlignment="Left" Margin="21,43,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="31" Width="94"><Run Language="ru-ru" Text="Добавления продукта"/></TextBlock>
-        <TextBlock x:Name="PathTextBox" HorizontalAlignment="Left" Margin="172,73,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="193" Height="87" RenderTransformOrigin="0.5,0.244"><Run Text="Path Фотографии"/><Run Language="ru-ru"/></TextBlock>
-        <Button x:Name="Path" Content="Фотография" HorizontalAlignment="Left" Margin="189,165,0,0" VerticalAlignment="Top" Width="120" Click="path_Click"/>
-        <TextBox x:Name="CostVariation" HorizontalAlignment="Left" Margin="188,231,0,0" TextWrapping="Wrap" Text="Цена" VerticalAlignment="Top" Width="122"/>
-        <Button x:Name="CreateButton" Content="Создать" HorizontalAlignment="Left" Margin="542,229,0,0" VerticalAlignment="Top" Click="EditProduct_Click"/>
-        <Button Content="Отмена" HorizontalAlignment="Left" Margin="481,229,0,0" VerticalAlignment="Top" Width="48"/>
-        <ComboBox x:Name="CategoryComboBox" Width="100" Height="40" Margin="15,160,485,84" VerticalAlignment="Top" HorizontalAlignment="Left"/>
-        <ListBox x:Name="VariationList" Margin="400,26,20,234" SelectionChanged="ListVariation_SelectionChanged">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <Border BorderBrush="#E0E0E0" Margin="5" Padding="10" Background="White" CornerRadius="10,10,10,10" BorderThickness="1,1,1,1">
-                        <StackPanel Orientation="Horizontal">
-                            <!-- Изображение товара -->
-                            <Image Source="{Binding ImagePath}" 
-                            Width="100" Height="50" 
-                            Stretch="Uniform"
-                            Margin="0,0,10,0"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="143"/>
+            <ColumnDefinition Width="225"/>
+            <ColumnDefinition Width="430"/>
+            <!-- Изменено на * чтобы растягивалось -->
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
 
-                            <StackPanel>
-                                <TextBlock Text="{Binding Product.Name}" FontWeight="Bold"/>
-                                <TextBlock Text="{Binding Description, StringFormat='Описание товара: {0}'}" FontWeight="Bold"/>
-                                <TextBlock Text="{Binding Price, StringFormat={}Общая стоимость: {0}₽}"/>
+            <!-- Добавлены строки -->
+        </Grid.RowDefinitions>
+
+        <!-- Левая панель -->
+        <Border Grid.Column="0" BorderBrush="LightGray" BorderThickness="0,0,1,0" Grid.RowSpan="2">
+            <StackPanel Margin="10">
+                <TextBlock HorizontalAlignment="Left" Margin="0,10,0,20" TextWrapping="Wrap" 
+                           VerticalAlignment="Top" Height="31" Width="120">
+                    <Run Language="ru-ru" Text="Добавление продукта"/>
+                </TextBlock>
+                <TextBox x:Name="NameProduct" Text="Название Продукта" 
+                         Margin="0,0,0,10" HorizontalAlignment="Stretch" 
+                         TextWrapping="Wrap" VerticalAlignment="Top" Height="25"/>
+                <ComboBox x:Name="CategoryComboBox" Height="25" Margin="0,0,0,20" 
+                          VerticalAlignment="Top" HorizontalAlignment="Stretch"/>
+            </StackPanel>
+        </Border>
+
+        <!-- Центральная панель -->
+        <Border Grid.Column="1" BorderBrush="LightGray" BorderThickness="0,0,1,0" Grid.RowSpan="2">
+            <StackPanel Margin="10">
+                <TextBlock HorizontalAlignment="Center" Margin="0,10,0,20" 
+                           TextWrapping="Wrap" VerticalAlignment="Top" 
+                           Height="28" Width="138">
+                    <Run Language="ru-ru" Text="Добавление вариации"/>
+                </TextBlock>
+                <TextBox x:Name="DesriptionVar" Text="Описание вариации" 
+                         HorizontalAlignment="Stretch" TextWrapping="Wrap" 
+                         Margin="0,0,0,10" VerticalAlignment="Top" Height="25"/>
+
+                <TextBlock x:Name="PathTextBox" HorizontalAlignment="Left" 
+                           Margin="0,0,0,10" TextWrapping="Wrap" Width="207" Height="91">
+                    <Run Text="Path Фотографии"/>
+                    <Run Language="ru-ru"/>
+                </TextBlock>
+
+                <Button x:Name="Path" Content="Фотография" HorizontalAlignment="Stretch" 
+                        Margin="0,0,0,10" Height="25" Click="path_Click"/>
+                <TextBox x:Name="CostVariation"  
+                         TextWrapping="Wrap" Text="Цена" 
+                         Height="25"/>
+            </StackPanel>
+        </Border>
+
+        <!-- Правая панель (ListBox) -->
+        <Grid Grid.Column="2" Grid.RowSpan="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="169*"/>
+                <RowDefinition Height="30*"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0" Text="Вариации продукта" 
+                       HorizontalAlignment="Center" Margin="0,10,0,10" FontWeight="Bold" Width="116"/>
+
+            <ListBox x:Name="VariationList" Grid.Row="1" 
+                     SelectionChanged="ListVariation_SelectionChanged"
+                     Margin="10,10,10,40" Background="White" BorderBrush="LightGray" BorderThickness="1">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Border BorderBrush="#E0E0E0" Margin="5" Padding="10" 
+                                Background="White" CornerRadius="10" BorderThickness="1">
+                            <StackPanel Orientation="Horizontal">
+                                <!-- Изображение товара -->
+                                <Image Source="{Binding ImagePath}" 
+                                       Width="100" Height="50" 
+                                       Stretch="Uniform"
+                                       Margin="0,0,10,0"/>
+
+                                <StackPanel>
+                                    <TextBlock Text="{Binding Product.Name}" FontWeight="Bold"/>
+                                    <TextBlock Text="{Binding Description, StringFormat='Описание: {0}'}"/>
+                                    <TextBlock Text="{Binding Price, StringFormat='Стоимость: {0}₽'}"/>
+                                </StackPanel>
                             </StackPanel>
-                        </StackPanel>
-                    </Border>
+                        </Border>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="242,338,0,0" Grid.RowSpan="2">
+                <Button Content="Закрыть" Width="68" Margin="10,0,0,0" Height="20"/>
+                <Button Content="Сохранить" Height="20" Margin="10,0,0,0"/>
+            </StackPanel>
 
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
+        </Grid>
     </Grid>
 </Window>

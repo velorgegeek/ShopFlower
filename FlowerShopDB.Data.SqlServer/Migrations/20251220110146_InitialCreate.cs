@@ -86,7 +86,6 @@ namespace FlowerShopDB.Data.SqlServer.Migrations
                 {
                     id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Productid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Index = table.Column<int>(type: "int", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Price = table.Column<int>(type: "int", nullable: false),
                     ImagePath = table.Column<string>(type: "nvarchar(max)", nullable: false)

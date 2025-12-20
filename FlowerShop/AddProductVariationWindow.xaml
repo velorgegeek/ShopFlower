@@ -5,13 +5,19 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UI"
         mc:Ignorable="d"
-        Title="AddProductVariationWindow" Height="300" Width="600">
+        Title="AddProductVariationWindow" Height="300" Width="300">
     <Grid>
-        <TextBlock x:Name="PathTextBox" HorizontalAlignment="Left" Margin="11,27,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="218" Height="33" RenderTransformOrigin="0.5,0.244"><Run Text="Path Фотографии"/><Run Language="ru-ru"/></TextBlock>
-        <Button x:Name="Path" Content="Фотография" HorizontalAlignment="Left" Margin="12,60,0,0" VerticalAlignment="Top" Width="120" Click="path_Click"/>
-        <TextBox x:Name="DesriptionVar" Text ="Описание вариации" HorizontalAlignment="Left" Margin="13,110,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="CostVariation" HorizontalAlignment="Left" Margin="11,143,0,0" TextWrapping="Wrap" Text="Цена" VerticalAlignment="Top" Width="122"/>
-        <Button x:Name="CreateButton" Content="Создать" HorizontalAlignment="Left" Margin="341,172,0,0" VerticalAlignment="Top" Click="CreateButton_Click"/>
-        <Button Content="Отмена" HorizontalAlignment="Left" Margin="280,172,0,0" VerticalAlignment="Top" Width="48"/>
+
+        <StackPanel>
+            <TextBlock x:Name="PathTextBox" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="10,10,10,10" VerticalAlignment="Top" Width="218" Height="33" RenderTransformOrigin="0.5,0.244"><Run Text="Path Фотографии"/><Run Language="ru-ru"/></TextBlock>
+            <Button x:Name="Path" Content="Фотография" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,10,10" Width="120" Click="path_Click"/>
+            <TextBox x:Name="DesriptionVar" Text ="Описание вариации" HorizontalAlignment="Left" TextWrapping="Wrap" Margin="10,10,10,10" VerticalAlignment="Top" Width="120"/>
+            <TextBox x:Name="CostVariation" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Цена" VerticalAlignment="Top" Margin="10,10,10,10" Width="122"/>
+        </StackPanel>
+        <StackPanel Margin="160,224,0,40" Orientation="Horizontal">
+            <Button Content="Отмена" Height="20" Margin="0,0,10,0"/>
+            <Button x:Name="CreateButton" Content="Создать" HorizontalAlignment="Left"  VerticalAlignment="Top" Click="CreateButton_Click" Height="20"/>
+        </StackPanel>
+
     </Grid>
 </Window>

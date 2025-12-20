@@ -12,8 +12,6 @@ namespace Data.InMemory
     {
         List<CategoryProduct> Category { get; set; } = new List<CategoryProduct>()
         {
-            new CategoryProduct(1,"Молоко"),
-            new CategoryProduct(2,"Хлеб"),
         };
         int Count = 0;
 
@@ -21,6 +19,12 @@ namespace Data.InMemory
         {
 
             Category.Add(new CategoryProduct(Count++,category));
+            return true;
+        }
+        public bool Add(CategoryProduct product)
+        {
+        if(product== null) return false;
+        Category.Add(product);
             return true;
         }
         public List<CategoryProduct> GetAll()

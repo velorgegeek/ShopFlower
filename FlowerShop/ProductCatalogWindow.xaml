@@ -4,12 +4,12 @@
         Title="Каталог товаров" Height="600" Width="900">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="8*"/>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="800"/>
+            <ColumnDefinition Width="100"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="49*"/>
-            <RowDefinition Height="535*"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="535"/>
         </Grid.RowDefinitions>
         <Button Content="В корзину" Grid.Row="0" Grid.Column ="1" Margin="10,10,10,10"/>
         <ListBox x:Name="ProductsListBox" 

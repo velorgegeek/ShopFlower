@@ -33,7 +33,6 @@ namespace Data.InMemory
         }
         public ProductsRepository()
         {
-            seed();
         }
         public Product GetProductsById(Guid ID)
         {

@@ -12,12 +12,11 @@ namespace Data.InMemory
     public class SaleRepository : ISaleRepository
     {
         private readonly List<Sale> _saleList = new List<Sale>();
-        int countId = 2;
+        int countId = 0;
         public SaleRepository() {
-            Seed();
         }
 
-        public bool AddSale(int userId,List<ProductInSale> product)
+        public bool Add(int userId,List<ProductInSale> product)
         {
             if (product == null) return false;
             countId++;
@@ -57,12 +56,12 @@ namespace Data.InMemory
 
                 if (i % 2 == 0)
                 {
-                    AddSale(1, productInSales);
+                    Add(1, productInSales);
                     GetAll(SaleFilter.Empty)[i].DateCreate = DateTime.Now.AddDays(-random.Next(0, 360));
                 }
                 else
                 {
-                    AddSale(1, productInSales2);
+                    Add(1, productInSales2);
                     GetAll(SaleFilter.Empty)[i].DateCreate = DateTime.Now.AddDays(-random.Next(0, 360));
                 }
 

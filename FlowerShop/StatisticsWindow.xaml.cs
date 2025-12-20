@@ -1,5 +1,5 @@
 ﻿
-using Data.InMemory;
+using FlowerShopDB.Data.SqlServer;
 using Data.Interfaces;
 using DOMAIN;
 using DOMAIN.Statistics;
@@ -22,7 +22,6 @@ namespace UI
     public partial class StatisticsWindow : Window, INotifyPropertyChanged
     {
         SaleFilter filter = new SaleFilter();
-        private readonly IProductsRepository products;
         private readonly ISaleRepository _saleRepository;
         private readonly StatisticsService _statistics;
 

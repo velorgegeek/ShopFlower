@@ -1,5 +1,7 @@
 ﻿
 
+using System.Reflection.Metadata.Ecma335;
+using System.Security.Cryptography.X509Certificates;
 using System.Xml.Linq;
 
 namespace DOMAIN
@@ -17,7 +19,7 @@ namespace DOMAIN
         public string? Mail { get; set; }
         public string HashPassword { get; set; }
         public role Role { get; set; } = role.User;
-        public List<ProductInShoppingCard> ShoppingCard { get; set; }
+        public List<ProductInShoppingCart> ShoppingCard { get; set; }
         public User(int id, string fio, string phone, string mail, string hashPassword,role Role)
         {
             ID = id;
@@ -25,37 +27,36 @@ namespace DOMAIN
             Phone = phone;
             Mail = mail;
             HashPassword = hashPassword;
-            ShoppingCard = new List<ProductInShoppingCard>();
+            ShoppingCard = new List<ProductInShoppingCart>();
             this.Role = Role;
         }
         public override string ToString()
         {
             return Fio;
         }
-        public void ShopCardDelete(List<ProductInShoppingCard> q)
+        public void ShopCardDelete(List<ProductInShoppingCart> q)
         {
-            var itemsToDelete = new List<ProductInShoppingCard>(q);
-            foreach (ProductInShoppingCard Purchaseditem in itemsToDelete)
+            var itemsToDelete = new List<ProductInShoppingCart>(q);
+            foreach (ProductInShoppingCart Purchaseditem in itemsToDelete)
             {
 
                 ShoppingCard.RemoveAll(item =>
             item.ProductVariation.id == Purchaseditem.ProductVariation.id);
             }
         }
-        public void AddInCard(ProductVariation item)
+        public bool AddInCard(ProductVariation item)
         {
             ArgumentNullException.ThrowIfNull(item);
-
-            var thisItem = ShoppingCard.FirstOrDefault(pr => pr.ProductVariation.id == item.id);
-            if (thisItem != null)
-            {
-                thisItem.Quantity++;
-            }
-            else
-            {
-                ShoppingCard.Add(new ProductInShoppingCard(item, 1));
-            }
+            ShoppingCard.Add(new ProductInShoppingCart(item, 1));
+            return true;
         }
-        public User() { }
+        public void QuantityAdd(ProductInShoppingCart item)
+        {
+            ArgumentNullException.ThrowIfNull(item);
+            item.Quantity++;
+        }
+        public User() {
+            ShoppingCard = new List<ProductInShoppingCart>();
+        }
     }
 }

@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FlowerShopDB.Data.SqlServer.Migrations
 {
     [DbContext(typeof(ShopDBContext))]
-    [Migration("20251216145930_InitialCreate")]
+    [Migration("20251220110146_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -88,7 +88,7 @@ namespace FlowerShopDB.Data.SqlServer.Migrations
                     b.ToTable("productInSales");
                 });
 
-            modelBuilder.Entity("DOMAIN.ProductInShoppingCard", b =>
+            modelBuilder.Entity("DOMAIN.ProductInShoppingCart", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -127,9 +127,6 @@ namespace FlowerShopDB.Data.SqlServer.Migrations
                     b.Property<string>("ImagePath")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Index")
-                        .HasColumnType("int");
 
                     b.Property<int>("Price")
                         .HasColumnType("int");
@@ -226,7 +223,7 @@ namespace FlowerShopDB.Data.SqlServer.Migrations
                     b.Navigation("Sale");
                 });
 
-            modelBuilder.Entity("DOMAIN.ProductInShoppingCard", b =>
+            modelBuilder.Entity("DOMAIN.ProductInShoppingCart", b =>
                 {
                     b.HasOne("DOMAIN.ProductVariation", "ProductVariation")
                         .WithMany()

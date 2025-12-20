@@ -1,12 +1,14 @@
 ﻿using DOMAIN.Statistics;
 using System.Text;
 using System.Windows;
-using Data.InMemory;
 using Data.Interfaces;
 using UI;
 using DOMAIN;
 using Date.Interfaces;
+using FlowerShopDB.Data.SqlServer;
 using System.Windows.Media;
+using Services;
+using System.Windows.Media.Animation;
 
 namespace FlowerShop
 {
@@ -15,19 +17,19 @@ namespace FlowerShop
     /// </summary>
     public partial class MainWindow : Window
     {
-        IUserRepository _userRepository = new UserRepository();
-        ISaleRepository _saleRepository = new SaleRepository();
-        IProductsRepository _productsRepository = new ProductsRepository();
-        ICategoryRepository _categoryRepository = new CategoryRepository();
+        IUserRepository _userRepository;
+        ISaleRepository _saleRepository;
+        IProductsRepository _productsRepository;
+        ICategoryRepository _categoryRepository;
+
         User user;
         public MainWindow()
         {
             InitializeComponent();
         }
-        public MainWindow(User user,ISaleRepository Is, IProductsRepository ip,ICategoryRepository category )
+        public MainWindow(ISaleRepository Is, IProductsRepository ip,ICategoryRepository category)
         {
             InitializeComponent();
-            this.user = user;   
             _saleRepository = Is;
             _productsRepository = ip;
             _categoryRepository = category;
@@ -46,24 +48,11 @@ namespace FlowerShop
 
         private void data_Click(object sender, RoutedEventArgs e)
         {
-            //AuthWindow auth = new AuthWindow();
-            //auth.Show();
             DataGridWindow dataGrid = new DataGridWindow(_productsRepository, _saleRepository, _categoryRepository);
             dataGrid.Show();
 
 
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            ProductCatalogWindow productCatalogWindow = new ProductCatalogWindow(_saleRepository, user, _productsRepository);
-            productCatalogWindow.Show();
-        }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            AuthWindow auth = new AuthWindow();
-            auth.Show();
-        }
     }
 }
