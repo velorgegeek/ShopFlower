@@ -5,23 +5,31 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UI"
         mc:Ignorable="d"
-        Title="ShoppingCart" Height="450" Width="800">
+        Title="ShoppingCart" Height="450" Width="825">
     <Grid>
-        <ListBox x:Name="ShopCart" Margin="0,70,280,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="13"/>
+            <RowDefinition Height="421"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="518"/>
+            <ColumnDefinition Width="282"/>
+        </Grid.ColumnDefinitions>
+        <ListBox x:Name="ShopCart" Margin="0,57,10,10" Grid.Column="0" Grid.Row="1">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Border BorderBrush="#E0E0E0" Margin="5" Padding="10" Background="White" CornerRadius="10,10,10,10" BorderThickness="1,1,1,1">
                         <StackPanel Orientation="Horizontal">
                             <!-- Изображение товара -->
                             <Image Source="{Binding ProductVariation.ImagePath}" 
-                                   Width="200" Height="100" 
+                                   Width="150" Height="100" 
                                    Stretch="Uniform"
-                                   Margin="0,0,10,0"/>
+                                   Margin="0,0,5,0"/>
 
                             <StackPanel>
                                 <TextBlock Text="{Binding ProductVariation.Product.Name}" FontWeight="Bold"/>
                                 <TextBlock Text="{Binding Quantity, StringFormat={}Количество: {0}}"/>
-                                <TextBlock Text="{Binding ProductVariation.Price, StringFormat={}Общая стоимость: {0}₽}"/>
+                                <TextBlock Text="{Binding TotalPrice, StringFormat={}Общая стоимость: {0:N0}₽}"/>
                             </StackPanel>
                             <StackPanel Margin="20,0,0,0" VerticalAlignment="Center">
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
@@ -59,14 +67,14 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <Border BorderBrush="#E0E0E0" BorderThickness="2" Margin="556,70,10,130" Padding="10" Background="White" CornerRadius="10,10,10,10">
-            <StackPanel Margin="-12,-12,-12,-12">
+        <Border BorderBrush="#E0E0E0" BorderThickness="2" Margin="21,57,10,130" Padding="10" Background="White" CornerRadius="10,10,10,10" Grid.Column="1" Grid.Row="1">
+            <StackPanel>
                 <TextBlock x:Name="AmountPaid" Text="Сумма: 0₽" FontWeight="Bold" FontSize="16" Margin="20,130,20,15" Width="163"/>
                 <Button x:Name="Buy" Content="Оплатить" Height="35" FontWeight="Bold" FontSize="20" Margin="20,0,20,0" Click="Paid_Click"/>
             </StackPanel>
         </Border>
-        <TextBlock x:Name="Cart" Margin="10,47,0,0" TextWrapping="Wrap" Text="Корзина" Height="22" Width="77" FontSize="18" FontWeight="Bold" VerticalAlignment="Top" HorizontalAlignment="Left"/>
-        <TextBlock x:Name="ListSize" HorizontalAlignment="Left" Margin="87,56,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="#FF6D7777" Width="68" Height="13" FontSize="10"><Run Language="ru-ru" Text="0 Товаров"/></TextBlock>
-        <Button Content="В каталог" HorizontalAlignment="Left" Margin="10,22,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.64,-0.9" Width="58" Click="Button_Click"/>
+        <TextBlock x:Name="Cart" Margin="10,34,0,0" TextWrapping="Wrap" Text="Корзина" Height="22" Width="77" FontSize="18" FontWeight="Bold" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Row="1"/>
+        <TextBlock x:Name="ListSize" HorizontalAlignment="Left" Margin="87,43,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="#FF6D7777" Width="68" Height="13" FontSize="10" Grid.Row="1"><Run Language="ru-ru" Text="0 Товаров"/></TextBlock>
+        <Button Content="В каталог" HorizontalAlignment="Left" Margin="10,9,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.64,-0.9" Width="58" Click="Button_Click" Grid.Row="1" Height="20"/>
     </Grid>
 </Window>

@@ -1,10 +1,11 @@
 ﻿
-using Data.InMemory;
 using Date.Interfaces;
+using FlowerShopDB.Data.SqlServer;
 using Microsoft.EntityFrameworkCore.Query;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using static System.Net.Mime.MediaTypeNames;
 namespace UI
 {
@@ -14,6 +15,7 @@ namespace UI
     public partial class RegWindow : Window
     {
         IUserRepository repository;
+        const string regexMail = @"^([a-z0-9_.-]+)@([\da-z.-]+).([a-z.]{2,6})$";
         const string regex = @"^\+?[1-9][0-9]{7,14}$";
         public RegWindow(IUserRepository us)
         {
@@ -24,9 +26,13 @@ namespace UI
         {
             if (UserPhone.Text == String.Empty && ValidNum()) return false;
             if(UserPassword.Text == String.Empty|| UserPassword.Text.Length <6) return false;
-            if(UserMail.Text == String.Empty) return false;
             if(FIO.Text == String.Empty) return false;
             return true;
+        }
+        bool ValidMail()
+        {
+            if(Regex.IsMatch(UserMail.Text, regexMail)) return true;
+            return false;
         }
         bool ValidNum()
         {
@@ -49,8 +55,22 @@ namespace UI
             if (!valid())
             {
                 MessageBox.Show("Валидация не пройдена","Регистрация",MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
             }
-            repository.AddUsers(UserMail.Text, FIO.Text, UserPassword.Text, UserPhone.Text, DOMAIN.role.User);
+            if (ValidMail())
+            {
+                repository.Add(UserMail.Text, FIO.Text, UserPassword.Text, UserPhone.Text, DOMAIN.role.User);
+            }
+            else
+            {
+                repository.Add(new DOMAIN.User
+                {
+                    Fio = FIO.Text,
+                    HashPassword = UserPassword.Text,
+                    Phone = UserPhone.Text,
+                    Role = DOMAIN.role.User,
+                });
+            }
             MessageBox.Show("Регистрация выполнена", "Регистрация");
             Close();
         }
@@ -62,6 +82,27 @@ namespace UI
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Close();
+        }
+        private void TextBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+
+            if (string.IsNullOrEmpty(textBox.Text))
+            {
+                textBox.Text = textBox.Tag as string;
+                textBox.Foreground = Brushes.Gray;
+            }
+        }
+
+        private void TextBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+
+            if (textBox.Text == textBox.Tag as string)
+            {
+                textBox.Text = string.Empty;
+                textBox.Foreground = Brushes.DarkGray;
+            }
         }
     }
 }

@@ -8,34 +8,36 @@
         Title="ProductCart" Height="450" Width="800">
     <Grid x:Name="GridPanel">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" MinHeight="31.28"/>
+            <RowDefinition Height="40" MinHeight="31.28"/>
             <!-- 0: Название продукта -->
-            <RowDefinition Height="Auto" MinHeight="227"/>
+            <RowDefinition Height="229" MinHeight="227"/>
             <!-- 1: Изображение и варианты -->
-            <RowDefinition Height="Auto" MinHeight="43"/>
+            <RowDefinition Height="43" MinHeight="43"/>
             <!-- 2: Кнопки -->
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
             <!-- Левая колонка для изображения -->
-            <ColumnDefinition Width="3*"/>
-            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="300"/>
             <!-- Правая колонка для информации -->
         </Grid.ColumnDefinitions>
 
         <Button Content="Вернуться в каталог" Grid.Row="0" Grid.Column ="0" Margin="10,10,173,10" Click="Button_Click" MaxHeight="20"/>
-        <Button Content="перейти в корзину" Grid.Row="0" Grid.Column ="2" Margin="163,10,10,10" MaxHeight="20" />
-        <TextBlock x:Name="NameProduct" Text="{Binding Name}" Grid.Row="0" Grid.Column="0"
-                   HorizontalAlignment="Left" Margin="87,10,0,0" 
+        <Button Content="перейти в корзину" Grid.Row="0" Grid.Column ="2" Margin="105,10,68,10" MaxHeight="20" Click="Button_Click_1" />
+        <TextBlock x:Name="NameProduct" Text="{Binding Name}" Grid.Row="1" Grid.Column="0"
+                   HorizontalAlignment="Left" Margin="10,5,0,194" 
                    TextWrapping="Wrap" 
-                   FontSize="16" FontWeight="Bold" Width="0"/>
+                   FontSize="16" FontWeight="Bold" Width="180"/>
+
 
 
         <!-- Изображение продукта -->
-        <Image x:Name="ImageProduct" Grid.Row="1" Grid.Column="0"
-               HorizontalAlignment="Left" Height="217" Width="260" 
-               Margin="10,10,0,0" VerticalAlignment="Top"
-               Source="C:/Users/BEBERISHKA/Downloads/ShopFlower-main/ShopFlower-main/maxresdefault.jpg"/>
+        <Border Grid.Row="1" Margin="0,35,36,10" CornerRadius="20">
+            <Image x:Name="ImageProduct"
+               HorizontalAlignment="Left" Height="186" Width="260" VerticalAlignment="Top"
+               Source="C:/Users/BEBERISHKA/Downloads/ShopFlower-main/ShopFlower-main/maxresdefault.jpg" Margin="10,0,0,0"/>
+        </Border>
 
         <!-- Панель для RadioButton (правая колонка) -->
         <StackPanel x:Name="RadioButtonsPanel" Grid.Column="1"
@@ -45,17 +47,17 @@
         </StackPanel>
 
         <!-- Кнопки -->
-        <StackPanel Grid.Row="1" Grid.Column="2" Orientation="Vertical" 
-                    HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50,32,0,0" Height="34" Width="130">
-            <TextBlock x:Name="CostTextBlock" Text="100" Height="34" Width="130" FontSize="16" 
-                        TextAlignment="Center"/>
-        </StackPanel>
+        <TextBlock Grid.Row="1" Margin="10,86,25,119" Grid.Column="1" Text="Описание товара:" FontWeight="Bold" FontSize="18" />
+        <TextBlock x:Name="DescriptionVariation"  Grid.Column="1" HorizontalAlignment="Left" Margin="8,112,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Height="53" Width="170" FontSize="14"/>
         <StackPanel Grid.Row="1" Grid.Column="2" Orientation="Vertical" 
                     HorizontalAlignment="Left" VerticalAlignment="Top"
-                    Margin="50,82,0,0" Height="73" Width="130">
+                    Margin="105,45,0,0" Height="111" Width="130">
+            <TextBlock x:Name="CostTextBlock" Text="100 ₽" Height="34" Width="130" FontSize="16" 
+                        TextAlignment="Center"/>
             <Button x:Name="InCardButton" Content="Добавить в корзину" Height="34" Width="130" Margin="0,0,0,10" Click="AddInCard"/>
             <Button Content="Купить" Height="29" Width="130" Click="BuyClick"/>
         </StackPanel>
-        <Button x:Name="GoInCard" Grid.Column="2" Content="В корзину" Click="BuyClickCart" HorizontalAlignment="Left" Margin="50,82,0,0" Grid.Row="1" VerticalAlignment="Top" Height="34" Width="130" Visibility="Hidden"/>
+        <Button x:Name="GoInCard" Grid.Column="2" Content="В корзину" Click="BuyClickCart" HorizontalAlignment="Left" Margin="105,79,0,0" Grid.Row="1" VerticalAlignment="Top" Height="34" Width="130" Visibility="Hidden"/>
+
     </Grid>
 </Window>

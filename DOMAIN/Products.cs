@@ -3,7 +3,7 @@ namespace DOMAIN
 {
     public class Product
     {
-        public Guid id { get; set; } = Guid.NewGuid();
+        public int Id { get; set; } 
         public string Name {  get; set; }
         public CategoryProduct category { get; set; }
         public List<ProductVariation> Variations { get; set; }
@@ -28,13 +28,6 @@ namespace DOMAIN
                 return Variations?.FirstOrDefault()?.ImagePath;
             }
         }
-        //public Product(string name, CategoryProduct category, string Description)
-        //{
-        //    this.Description = Description;
-        //    this.Name = name;
-        //    this.category = category;
-        //    Variations = new List<ProductVariation>();
-        //}
         public override string ToString()
         {
             return Name;
@@ -44,6 +37,16 @@ namespace DOMAIN
             this.Name = name;
             this.category = category;
             Variations = new List<ProductVariation>();
+        }
+        public bool DeleteVariation(ProductVariation pr)
+        {
+            int i = Variations.IndexOf(pr);
+            if (i > -1)
+            {
+                Variations.RemoveAt(i);
+                return true;    
+            }
+            return false;
         }
 
 

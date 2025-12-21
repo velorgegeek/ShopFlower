@@ -1,4 +1,4 @@
-﻿using Data.InMemory;
+﻿using FlowerShopDB.Data.SqlServer;
 using Data.Interfaces;
 using DOMAIN;
 using System;
@@ -27,7 +27,8 @@ namespace UI
         User user;
         IProductsRepository Products;
         ISaleRepository sale;
-        public ProductCatalogWindow(ISaleRepository sale,User user, IProductsRepository productsrep)
+        IProductInShoppingCartRepository _productInShoppingCartRepository;
+        public ProductCatalogWindow(ISaleRepository sale,User user, IProductsRepository productsrep, IProductInShoppingCartRepository _productInShoppingCartRepository)
         {
             
             InitializeComponent();
@@ -35,7 +36,7 @@ namespace UI
             this.sale = sale;
             DataContext = Products;
             Products = productsrep;
-
+            this._productInShoppingCartRepository = _productInShoppingCartRepository;
 
             // Устанавливаем контекст данных
             ProductsListBox.ItemsSource = Products.GetAll();
@@ -49,7 +50,7 @@ namespace UI
             if(ProductsListBox.SelectedItem is Product product)
             {
                 ProductsListBox.SelectedItem = null;
-                ProductCart productCard = new ProductCart(sale,product,user, Products);
+                ProductCart productCard = new ProductCart(sale,product,user, Products, _productInShoppingCartRepository);
                 productCard.Show();
                 Close();
             }

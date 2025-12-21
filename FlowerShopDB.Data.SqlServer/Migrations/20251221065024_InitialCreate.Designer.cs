@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FlowerShopDB.Data.SqlServer.Migrations
 {
     [DbContext(typeof(ShopDBContext))]
-    [Migration("20251216145930_InitialCreate")]
+    [Migration("20251221065024_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -44,9 +44,11 @@ namespace FlowerShopDB.Data.SqlServer.Migrations
 
             modelBuilder.Entity("DOMAIN.Product", b =>
                 {
-                    b.Property<Guid>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -55,7 +57,7 @@ namespace FlowerShopDB.Data.SqlServer.Migrations
                     b.Property<int>("categoryId")
                         .HasColumnType("int");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.HasIndex("categoryId");
 
@@ -70,8 +72,8 @@ namespace FlowerShopDB.Data.SqlServer.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<Guid>("ProductVariationid")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("ProductVariationId")
+                        .HasColumnType("int");
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
@@ -81,14 +83,14 @@ namespace FlowerShopDB.Data.SqlServer.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ProductVariationid");
+                    b.HasIndex("ProductVariationId");
 
                     b.HasIndex("SaleId");
 
                     b.ToTable("productInSales");
                 });
 
-            modelBuilder.Entity("DOMAIN.ProductInShoppingCard", b =>
+            modelBuilder.Entity("DOMAIN.ProductInShoppingCart", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -96,8 +98,8 @@ namespace FlowerShopDB.Data.SqlServer.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<Guid>("ProductVariationid")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("ProductVariationId")
+                        .HasColumnType("int");
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
@@ -107,7 +109,7 @@ namespace FlowerShopDB.Data.SqlServer.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ProductVariationid");
+                    b.HasIndex("ProductVariationId");
 
                     b.HasIndex("UserId");
 
@@ -116,9 +118,11 @@ namespace FlowerShopDB.Data.SqlServer.Migrations
 
             modelBuilder.Entity("DOMAIN.ProductVariation", b =>
                 {
-                    b.Property<Guid>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -128,18 +132,15 @@ namespace FlowerShopDB.Data.SqlServer.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Index")
-                        .HasColumnType("int");
-
                     b.Property<int>("Price")
                         .HasColumnType("int");
 
-                    b.Property<Guid>("Productid")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
-                    b.HasIndex("Productid");
+                    b.HasIndex("ProductId");
 
                     b.ToTable("ProductVariation");
                 });
@@ -211,7 +212,7 @@ namespace FlowerShopDB.Data.SqlServer.Migrations
                 {
                     b.HasOne("DOMAIN.ProductVariation", "ProductVariation")
                         .WithMany()
-                        .HasForeignKey("ProductVariationid")
+                        .HasForeignKey("ProductVariationId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -226,11 +227,11 @@ namespace FlowerShopDB.Data.SqlServer.Migrations
                     b.Navigation("Sale");
                 });
 
-            modelBuilder.Entity("DOMAIN.ProductInShoppingCard", b =>
+            modelBuilder.Entity("DOMAIN.ProductInShoppingCart", b =>
                 {
                     b.HasOne("DOMAIN.ProductVariation", "ProductVariation")
                         .WithMany()
-                        .HasForeignKey("ProductVariationid")
+                        .HasForeignKey("ProductVariationId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -249,7 +250,7 @@ namespace FlowerShopDB.Data.SqlServer.Migrations
                 {
                     b.HasOne("DOMAIN.Product", "Product")
                         .WithMany("Variations")
-                        .HasForeignKey("Productid")
+                        .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

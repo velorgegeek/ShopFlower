@@ -40,9 +40,9 @@ namespace UI
         }
         private bool valid()
         {
-            if (PathTextBox.Text == null) return false;
-            if (CostVariation.Text == null) return false;
-            if (DesriptionVar.Text == null) return false;
+            if (PathTextBox.Text == null || PathTextBox.Tag == PathTextBox.Text) return false;
+            if (CostVariation.Text == null|| CostVariation.Tag == CostVariation.Text) return false;
+            if (DesriptionVar.Text == null || DesriptionVar.Tag == DesriptionVar.Text) return false;
             return true;
         }
         public static Product AddVarShow(Product p)
@@ -65,6 +65,43 @@ namespace UI
             else
             {
                 MessageBox.Show("Валидация не пройдена","Добавление вариации",MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+        private void TextBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+
+            if (string.IsNullOrEmpty(textBox.Text))
+            {
+                textBox.Text = textBox.Tag as string;
+                textBox.Foreground = Brushes.Gray;
+            }
+        }
+
+        private void TextBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+
+            if (textBox.Text == textBox.Tag as string)
+            {
+                textBox.Text = string.Empty;
+                textBox.Foreground = Brushes.DarkGray;
+            }
+        }
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (valid())
+            {
+                MessageBoxResult result = MessageBox.Show("Вы точно уверены,что хотите закрыть, данные не сохранятся"
+                , "Добавление вариации", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (result == MessageBoxResult.Yes)
+                {
+                    Close();
+                }
+            }
+            else
+            {
+                Close();
             }
         }
     }

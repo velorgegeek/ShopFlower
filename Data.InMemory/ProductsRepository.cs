@@ -33,11 +33,10 @@ namespace Data.InMemory
         }
         public ProductsRepository()
         {
-            seed();
         }
-        public Product GetProductsById(Guid ID)
+        public Product GetProductsById(int ID)
         {
-             return products.FirstOrDefault(i => i.id == ID);
+             return products.FirstOrDefault(i => i.Id == ID);
         }
         public bool Update(Product product)
         {

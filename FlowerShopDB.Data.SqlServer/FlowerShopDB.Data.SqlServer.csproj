@@ -21,4 +21,10 @@
     <ProjectReference Include="..\Date.Interfaces\Data.Interfaces.csproj" />
   </ItemGroup>
 
+	<ItemGroup>
+		<None Update="appsettings.database.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
+
 </Project>

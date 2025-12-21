@@ -6,28 +6,29 @@ using System.Threading.Tasks;
 
 namespace DOMAIN
 {
-    public class ProductInShoppingCard
+    public class ProductInShoppingCart
     {
         public int Id { get; set; }
-        public int UserId { get; set; }  // Внешний ключ на заказ
+        public int UserId { get; set; } 
         public User User { get; set; }
         public ProductVariation ProductVariation { get; set; }
 
         public int Quantity { get; set; }
-        public ProductInShoppingCard(ProductVariation productVariation, int Quatitity)
+        public ProductInShoppingCart(ProductVariation productVariation, int Quatitity)
         {
             this.ProductVariation = productVariation;
             this.Quantity = Quatitity;  
         }
-        public ProductInShoppingCard(ProductInSale pr)
+        public ProductInShoppingCart(ProductInSale pr)
         {
             this.ProductVariation = pr.ProductVariation;
             this.Quantity = pr.Quantity;
         }
+        public int TotalPrice => ProductVariation?.Price * Quantity ?? 0;
         public override string ToString()
         {
             return $"{ProductVariation.Product.Name}";
         }
-        public ProductInShoppingCard() { }
+        public ProductInShoppingCart() { }
     }
 }

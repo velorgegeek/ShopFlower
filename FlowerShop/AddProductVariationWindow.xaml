@@ -5,13 +5,38 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UI"
         mc:Ignorable="d"
-        Title="AddProductVariationWindow" Height="300" Width="600">
-    <Grid>
-        <TextBlock x:Name="PathTextBox" HorizontalAlignment="Left" Margin="11,27,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="218" Height="33" RenderTransformOrigin="0.5,0.244"><Run Text="Path Фотографии"/><Run Language="ru-ru"/></TextBlock>
-        <Button x:Name="Path" Content="Фотография" HorizontalAlignment="Left" Margin="12,60,0,0" VerticalAlignment="Top" Width="120" Click="path_Click"/>
-        <TextBox x:Name="DesriptionVar" Text ="Описание вариации" HorizontalAlignment="Left" Margin="13,110,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="CostVariation" HorizontalAlignment="Left" Margin="11,143,0,0" TextWrapping="Wrap" Text="Цена" VerticalAlignment="Top" Width="122"/>
-        <Button x:Name="CreateButton" Content="Создать" HorizontalAlignment="Left" Margin="341,172,0,0" VerticalAlignment="Top" Click="CreateButton_Click"/>
-        <Button Content="Отмена" HorizontalAlignment="Left" Margin="280,172,0,0" VerticalAlignment="Top" Width="48"/>
+        Title="AddProductVariationWindow" Height="300" Width="400" MinWidth="200">
+    <Grid Margin="10,10,10,13">
+        <!-- Определяем строки Grid -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <!-- Для кнопки выбора фото -->
+            <RowDefinition Height="Auto"/>
+            <!-- Для TextBox'ов -->
+            <RowDefinition/>
+            <!-- Пустое пространство -->
+            <RowDefinition Height="55.04"/>
+            <!-- Для панели кнопок -->
+        </Grid.RowDefinitions>
+
+        <!-- Кнопка выбора фотографии -->
+
+        <!-- Поля ввода, расположенные в столбец -->
+        <StackPanel Grid.Row="2" Height="177" VerticalAlignment="Top" Margin="0,19,0,0">
+            <TextBlock  Tag ="Путь к фотографии:" x:Name="PathTextBox" Text="Путь к фотографии:" Height="40" Width="369" Margin="5"/>
+            <Button x:Name="Path" Content="Выбрать..." 
+                    Width="100" Click="path_Click" Margin="5"/>
+            <TextBox x:Name="DesriptionVar" Text="Описание вариации" 
+                     Margin="0,0,0,10" Height="39" Tag="Описание вариации"/>
+            <TextBox Tag="Цена" x:Name="CostVariation" Text="Цена"  Height="23"/>
+        </StackPanel>
+
+        <!-- Панель кнопок внизу окна -->
+        <StackPanel Grid.Row="3" Orientation="Horizontal" 
+                    HorizontalAlignment="Right" Margin="0,16,18,20" Width="170">
+            <Button Content="Отмена" Width="80" Margin="0,0,10,0" Click="Button_Click"/>
+            <Button x:Name="CreateButton" Content="Создать" 
+                    Width="80" Click="CreateButton_Click"/>
+        </StackPanel>
     </Grid>
 </Window>

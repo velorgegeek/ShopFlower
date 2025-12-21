@@ -11,6 +11,6 @@ namespace Data.Interfaces
     {
         bool Add(string category);
         List<CategoryProduct> GetAll();
-
+        bool Add(CategoryProduct product);
     }
 }

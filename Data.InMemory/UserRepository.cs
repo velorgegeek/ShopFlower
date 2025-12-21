@@ -4,21 +4,30 @@ using DOMAIN;
 using System.Text;
 using System.Security.Cryptography;
 using System.Configuration;
+using System.Runtime.CompilerServices;
 namespace Data.InMemory
 {
     public class UserRepository : IUserRepository
     {
 
         List<User> Users { get; set; } = new List<User>() { 
-            new User(1,"da","+79050944341","da",CreateSHA256("da"),role.User),
-            new User(2,"da","+79040944341","daq",CreateSHA256("dadd"),role.Admin),
         };
         
-        int count = 2;
+        int count = 0;
         public List<User> GetUsers(role rol) {
             return Users.Where(u=> u.Role == rol).ToList();
         }
-        public bool AddUsers(string email, string Fio, string password, string Phone,role Role)
+        public List<User> GetAll()
+        {
+            return Users.ToList();
+        }
+        public bool Add(User user)
+        {
+            if(user == null)  return false;
+            Users.Add(user);
+            return true;    
+        }
+        public bool Add(string email, string Fio, string password, string Phone,role Role)
         {
             string hashPassword = CreateSHA256(password);
             count++;
@@ -33,10 +42,18 @@ namespace Data.InMemory
         }
         public User GetByLogin(string login,string pass)
         {
-            User tmp = Users.FirstOrDefault(u => u.Phone == login);
+            User tmp = Users.FirstOrDefault(u => u.Phone == login); 
             if(tmp == null) return null;
             if (tmp.HashPassword == CreateSHA256(pass)) return tmp;
             return null;
+        }
+        public bool Remove(User user)
+        {
+            return false;
+        }
+        public bool Update(User user)
+        {
+            return false;
         }
          public void UpdateRole(string login, role role)
         {

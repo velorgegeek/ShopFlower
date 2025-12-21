@@ -45,13 +45,14 @@ namespace FlowerShopDB.Data.SqlServer.Migrations
                 name: "Products",
                 columns: table => new
                 {
-                    id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     categoryId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Products", x => x.id);
+                    table.PrimaryKey("PK_Products", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Products_categories_categoryId",
                         column: x => x.categoryId,
@@ -84,21 +85,21 @@ namespace FlowerShopDB.Data.SqlServer.Migrations
                 name: "ProductVariation",
                 columns: table => new
                 {
-                    id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Productid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Index = table.Column<int>(type: "int", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ProductId = table.Column<int>(type: "int", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Price = table.Column<int>(type: "int", nullable: false),
                     ImagePath = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ProductVariation", x => x.id);
+                    table.PrimaryKey("PK_ProductVariation", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ProductVariation_Products_Productid",
-                        column: x => x.Productid,
+                        name: "FK_ProductVariation_Products_ProductId",
+                        column: x => x.ProductId,
                         principalTable: "Products",
-                        principalColumn: "id",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -109,17 +110,17 @@ namespace FlowerShopDB.Data.SqlServer.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     SaleId = table.Column<int>(type: "int", nullable: false),
-                    ProductVariationid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ProductVariationId = table.Column<int>(type: "int", nullable: false),
                     Quantity = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_productInSales", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_productInSales_ProductVariation_ProductVariationid",
-                        column: x => x.ProductVariationid,
+                        name: "FK_productInSales_ProductVariation_ProductVariationId",
+                        column: x => x.ProductVariationId,
                         principalTable: "ProductVariation",
-                        principalColumn: "id",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_productInSales_sale_SaleId",
@@ -136,17 +137,17 @@ namespace FlowerShopDB.Data.SqlServer.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserId = table.Column<int>(type: "int", nullable: false),
-                    ProductVariationid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ProductVariationId = table.Column<int>(type: "int", nullable: false),
                     Quantity = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_productInShoppingCards", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_productInShoppingCards_ProductVariation_ProductVariationid",
-                        column: x => x.ProductVariationid,
+                        name: "FK_productInShoppingCards_ProductVariation_ProductVariationId",
+                        column: x => x.ProductVariationId,
                         principalTable: "ProductVariation",
-                        principalColumn: "id",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_productInShoppingCards_users_UserId",
@@ -157,9 +158,9 @@ namespace FlowerShopDB.Data.SqlServer.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_productInSales_ProductVariationid",
+                name: "IX_productInSales_ProductVariationId",
                 table: "productInSales",
-                column: "ProductVariationid");
+                column: "ProductVariationId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_productInSales_SaleId",
@@ -167,9 +168,9 @@ namespace FlowerShopDB.Data.SqlServer.Migrations
                 column: "SaleId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_productInShoppingCards_ProductVariationid",
+                name: "IX_productInShoppingCards_ProductVariationId",
                 table: "productInShoppingCards",
-                column: "ProductVariationid");
+                column: "ProductVariationId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_productInShoppingCards_UserId",
@@ -182,9 +183,9 @@ namespace FlowerShopDB.Data.SqlServer.Migrations
                 column: "categoryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ProductVariation_Productid",
+                name: "IX_ProductVariation_ProductId",
                 table: "ProductVariation",
-                column: "Productid");
+                column: "ProductId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_sale_UserId",

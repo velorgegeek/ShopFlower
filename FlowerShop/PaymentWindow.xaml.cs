@@ -32,12 +32,10 @@ namespace UI
             if(YearTextBox.Text.Length != 2)return false;
             if(CvcTextBox.Text.Length != 3) return false;
             if(NumCardTextBox.Text.Length != 16) return false;
+            if (Convert.ToInt16(MonthTextBox.Text) > 12 || Convert.ToInt16(MonthTextBox.Text) < 0) return false;
             return true;
 
-            //< TextBox x: Name = "MonthTextBox" Text = "ММ" Foreground = "#FF928383" Grid.Column = "1" VerticalContentAlignment = "Center" TextAlignment = "Center" Margin = "0,21,117,5" />
-            //       < TextBlock Text = "/" Grid.Column = "1" VerticalAlignment = "Top" Margin = "33,28,112,0" Height = "16" />
-            //       < TextBox x: Name = "YearTextBox" Text = "ГГ" Foreground = "#FF928383" Grid.Column = "1" VerticalContentAlignment = "Center" TextAlignment = "Center" Margin = "38,21,79,5" />
-            //       < TextBox x: Name = "CvcTextBox" Text = "CVC" Foreground = "#FF928383" Grid.Column = "2" VerticalContentAlignment = "Center" TextAlignment = "Center" Margin = "43,21,0,5" />
+          
         }
         public static bool PaymentWindowShow()
         {
@@ -47,9 +45,35 @@ namespace UI
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            if (!valid()) return;
-            DialogResult = true;
+            if (!valid())
+            {
+                MessageBox.Show("Валидация не пройдена", "Оплата заказа", MessageBoxButton.OK, MessageBoxImage.Error); 
+                return;
+            }
+                DialogResult = true;
             Close();
+        }
+
+        private void TextBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+
+            if (string.IsNullOrEmpty(textBox.Text))
+            {
+                textBox.Text = textBox.Tag as string;
+                textBox.Foreground = Brushes.Gray;
+            }
+        }
+
+        private void TextBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+
+            if (textBox.Text == textBox.Tag as string)
+            {
+                textBox.Text = string.Empty;
+                textBox.Foreground = Brushes.DarkGray;
+            }
         }
     }
 }

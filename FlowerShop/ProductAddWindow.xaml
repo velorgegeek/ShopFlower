@@ -5,17 +5,120 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UI"
         mc:Ignorable="d"
-        Title="ProductAddWindow" Height="400" Width="700">
-    <Grid>
-        <TextBox x:Name="NameProduct" Text ="Название Продукта" HorizontalAlignment="Left" Margin="10,108,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="DesriptionVar" Text ="Описание вариации" HorizontalAlignment="Left" Margin="214,167,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBlock HorizontalAlignment="Left" Margin="212,45,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="28" Width="138"><Run Language="ru-ru" Text="Добавление вариации"/></TextBlock>
-        <TextBlock HorizontalAlignment="Left" Margin="21,43,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="31" Width="94"><Run Language="ru-ru" Text="Добавления продукта"/></TextBlock>
-        <TextBlock x:Name="PathTextBox" HorizontalAlignment="Left" Margin="212,84,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="218" Height="33" RenderTransformOrigin="0.5,0.244"><Run Text="Path Фотографии"/><Run Language="ru-ru"/></TextBlock>
-        <Button x:Name="Path" Content="Фотография" HorizontalAlignment="Left" Margin="213,117,0,0" VerticalAlignment="Top" Width="120" Click="path_Click"/>
-        <TextBox x:Name="CostVariation" HorizontalAlignment="Left" Margin="212,200,0,0" TextWrapping="Wrap" Text="Цена" VerticalAlignment="Top" Width="122"/>
-        <Button x:Name="CreateButton" Content="Создать" HorizontalAlignment="Left" Margin="542,229,0,0" VerticalAlignment="Top" Click="CreateButton_Click"/>
-        <Button Content="Отмена" HorizontalAlignment="Left" Margin="481,229,0,0" VerticalAlignment="Top" Width="48"/>
-        <ComboBox x:Name="CategoryComboBox" Width="100" Height="40" Margin="15,160,485,84" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+        Title="ProductAddWindow" Height="400" Width="500">
+
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <!-- Заголовок/информация -->
+            <RowDefinition Height="*"/>
+            <!-- Основное содержимое -->
+            <RowDefinition Height="Auto"/>
+            <!-- Кнопки -->
+        </Grid.RowDefinitions>
+
+        <!-- Основной контент в двух колонках -->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <!-- Левая колонка -->
+                <ColumnDefinition Width="10"/>
+                <!-- Разделитель -->
+                <ColumnDefinition Width="*"/>
+                <!-- Правая колонка -->
+            </Grid.ColumnDefinitions>
+
+            <!-- Левая колонка: Добавление продукта -->
+            <Border Grid.Column="0" 
+                    BorderBrush="#E0E0E0" 
+                    BorderThickness="1" 
+                    Padding="15" 
+                    CornerRadius="5">
+                <StackPanel>
+                    <TextBlock Text="Добавление продукта" 
+                               FontWeight="Bold" 
+                               FontSize="16" 
+                               Margin="0,0,0,15"/>
+
+                    <StackPanel Margin="0,0,0,10">
+                        <TextBlock Text="Название продукта:" 
+                                   Margin="0,0,0,5"/>
+                        <TextBox x:Name="NameProduct" 
+
+                                 Height="25"
+                                 GotFocus="TextBox_GotFocus"
+                                 LostFocus="TextBox_LostFocus"/>
+                    </StackPanel>
+
+                    <StackPanel>
+                        <TextBlock Text="Категория:" 
+                                   Margin="0,0,0,5"/>
+                        <ComboBox x:Name="CategoryComboBox" 
+                                  Height="25"/>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+
+            <!-- Правая колонка: Добавление вариации -->
+            <Border Grid.Column="2" 
+                    BorderBrush="#E0E0E0" 
+                    BorderThickness="1" 
+                    Padding="15" 
+                    CornerRadius="5">
+                <StackPanel>
+                    <TextBlock Text="Добавление вариации" 
+                               FontWeight="Bold" 
+                               FontSize="16" 
+                               Margin="0,0,0,15"/>
+
+                    <StackPanel Margin="0,0,0,10">
+                        <TextBlock Text="Описание вариации:" 
+                                   Margin="0,0,0,5"/>
+                        <TextBox x:Name="DesriptionVar" 
+                                 Height="60" 
+                                 TextWrapping="Wrap"
+                                 AcceptsReturn="True"
+                                 GotFocus="TextBox_GotFocus"
+                                 LostFocus="TextBox_LostFocus"/>
+                    </StackPanel>
+
+                    <StackPanel Margin="0,0,0,10">
+                        <TextBlock Text="Цена:" 
+                                   Margin="0,0,0,5"/>
+                        <TextBox x:Name="CostVariation" 
+  
+                                 Height="25"
+                                 GotFocus="TextBox_GotFocus"
+                                 LostFocus="TextBox_LostFocus"/>
+                    </StackPanel>
+
+                    <StackPanel Margin="0,0,0,10">
+                        <TextBlock x:Name="PathTextBox" 
+                                   Text="Путь к фотографии:" 
+                                   Margin="0,0,0,5" Height="55" TextWrapping="Wrap"/>
+                        <Button x:Name="Path" 
+                                Content="Выбрать фотографию..." 
+                                Height="30" 
+                                Click="path_Click"/>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+        </Grid>
+
+        <!-- Кнопки внизу -->
+        <StackPanel Grid.Row="2" 
+                    Orientation="Horizontal" 
+                    HorizontalAlignment="Right" 
+                    Margin="0,15,0,0">
+            <Button Content="Отмена" 
+                    Width="80" 
+                    Height="30" 
+                    Margin="0,0,10,0"/>
+            <Button x:Name="CreateButton" 
+                    Content="Добавить" 
+                    Width="80" 
+                    Height="30" 
+                    Click="CreateButton_Click"/>
+        </StackPanel>
     </Grid>
 </Window>

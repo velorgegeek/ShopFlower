@@ -10,27 +10,23 @@
     <TabControl>
         <TabItem Header="Продукты">
             <Grid Background="#FFE5E5E5">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="122*"/>
-                    <ColumnDefinition Width="135*"/>
-                    <ColumnDefinition Width="170*"/>
-                    <ColumnDefinition Width="367*"/>
-                </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
-                    <!-- Изменил: Auto вместо 17* -->
+                    <!-- Для StackPanel с кнопками -->
                     <RowDefinition Height="*"/>
-                    <!-- Изменил: * вместо 186* -->
+                    <!-- Для DataGrid, займет всё оставшееся пространство -->
                 </Grid.RowDefinitions>
-
-                <Button x:Name="AddProduct" Content="Добавить продукт" Grid.Row="0" Grid.Column="0" Click="AddProduct_Click" Margin="5,5,5,5"/>
-                <Button x:Name="EditProduct" Content="Редактировать продукт" Grid.Row="0" Grid.Column="2" Click="EditProduct_Click" Margin="0,5,0,5" HorizontalAlignment="Center" Width="164"/>
-                <Button x:Name="AddVariation" Content="Добавить вариацию" Grid.Row="0" Grid.Column="1" Margin="5,5,5,5" Click="AddVariation_Click"/>
-
+                <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="5">
+                    <Button x:Name="AddProduct" Content="Добавить продукт" Click="AddProduct_Click" Margin="5,5,5,5"/>
+                    <Button x:Name="EditProduct" Content="Редактировать продукт"  Click="EditProduct_Click" Margin="0,5,0,5" Width="140"/>
+                    <Button x:Name="AddVariation" Content="Добавить вариацию"  Margin="5,5,5,5" Click="AddVariation_Click"/>
+                    <Button x:Name="DeleteProduct" Content="Удалить продукт" Margin="5,5,5,5" Height="34" Click="DeleteProduct_Click"/>
+                    <Button x:Name="DeleteVariationButton" Content="Удаление вариации" Height="35" Click="DeleteVariation_Click"></Button>
+                </StackPanel>
                 <!-- DataGrid с разворачиваемым ListBox -->
-                <DataGrid IsReadOnly="True" x:Name="ProductsDataGrid" Margin="0,4,0,0" Grid.ColumnSpan="4" Grid.Row="1" AutoGenerateColumns="False">
+                <DataGrid IsReadOnly="True" Margin="5" x:Name="ProductsDataGrid" Grid.Row="1" AutoGenerateColumns="False">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="id" Binding="{Binding id}"/>
+                        <DataGridTextColumn Header="id" Binding="{Binding Id}"/>
                         <DataGridTextColumn Header="Название" Binding="{Binding Name}"/>
                         <DataGridTextColumn Header="Категория" Binding="{Binding category}"/>
                     </DataGrid.Columns>
@@ -63,14 +59,14 @@
                                              ItemsSource="{Binding Variations}"
                                              Background="Transparent"
                                              Grid.Row="1"
-                                             ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                                             ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                                             ScrollViewer.VerticalScrollBarVisibility="Disabled">
+
 
                                         <!-- Панель для горизонтального расположения карточек -->
                                         <ListBox.ItemsPanel>
                                             <ItemsPanelTemplate>
-                                                <WrapPanel Orientation="Horizontal" 
-                                                           ItemWidth="180" 
-                                                           ItemHeight="200"/>
+                                                <StackPanel Orientation="Horizontal"/>
                                             </ItemsPanelTemplate>
                                         </ListBox.ItemsPanel>
 
@@ -124,9 +120,9 @@
                                                                        MaxHeight="20"/>
 
                                                             <StackPanel Margin="0,5,0,0">
-                                                                <TextBlock Text="{Binding Description, StringFormat='Описание: {0}'}"
-                                                                           FontSize="11"/>
-                                                                <TextBlock Text="{Binding Price, StringFormat='Цена: {0}₽'}"
+                                                                <TextBlock Text="{Binding Description, StringFormat='Описание: {0}'}" 
+                                                                           FontSize="11" TextWrapping="Wrap"/>
+                                                                <TextBlock Text="{Binding Price, StringFormat='Цена: {0:N0}₽'}"
                                                                            FontSize="11"
                                                                            Margin="0,2,0,0"/>
                                                             </StackPanel>
@@ -160,7 +156,7 @@
                             BorderBrush="#FFCCCCCC" 
                             BorderThickness="0,1,0,0"
                             Padding="10"
-                            Height="250">
+                            Height="300">
                                 <!-- Фиксированная высота -->
 
                                 <Grid>
@@ -179,14 +175,13 @@
                                      ItemsSource="{Binding Products}"
                                      Background="Transparent"
                                      Grid.Row="1"
-                                     ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                                     ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                                     ScrollViewer.VerticalScrollBarVisibility="Disabled">
 
                                         <!-- Панель для горизонтального расположения карточек -->
                                         <ListBox.ItemsPanel>
                                             <ItemsPanelTemplate>
-                                                <WrapPanel Orientation="Horizontal" 
-                                                   ItemWidth="180" 
-                                                   ItemHeight="200"/>
+                                                <StackPanel Orientation="Horizontal"/>
                                             </ItemsPanelTemplate>
                                         </ListBox.ItemsPanel>
 
@@ -210,7 +205,7 @@
                                                     Background="White"
                                                     Margin="5"
                                                     Width="170" 
-                                                    Height="190">
+                                                    Height="auto" MaxHeight="225">
                                                     <Grid>
                                                         <Grid.RowDefinitions>
                                                             <RowDefinition Height="100"/>
@@ -238,8 +233,8 @@
                                                                         MaxHeight="20"/>
                                                             <StackPanel Margin="0,5,0,0">
                                                                 <TextBlock Text="{Binding  ProductVariation.Description, StringFormat='Описание: {0}'}"
-                                                            FontSize="11"/>
-                                                                <TextBlock Text="{Binding  ProductVariation.Price, StringFormat='Цена: {0}₽'}"
+                                                            FontSize="11" TextWrapping="Wrap"/>
+                                                                <TextBlock Text="{Binding  ProductVariation.Price, StringFormat='Цена: {0:N0}₽'}"
                                                             FontSize="11"
                                                             Margin="0,2,0,0"/>
                                                             </StackPanel>

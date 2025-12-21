@@ -13,7 +13,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using Data.InMemory;
+using FlowerShopDB.Data.SqlServer;
 namespace UI
 {
     /// <summary>
@@ -49,6 +49,16 @@ namespace UI
                 PathTextBox.Text = dialog.FileName;
             }
         }
+        private void close_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult result = MessageBox.Show("Вы точно уверены,что хотите закрыть, данные не сохранятся"
+                , "Добавление продукта", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
+            {
+                Close();
+            }
+
+        }
         private void CreateButton_Click(object sender, RoutedEventArgs e)
         {
             if (!valid())
@@ -69,6 +79,27 @@ namespace UI
             var app = new ProductAddWindow(category);
             if (app.ShowDialog() == true) return app.product;
             return null;
+        }
+        private void TextBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+
+            if (string.IsNullOrEmpty(textBox.Text))
+            {
+                textBox.Text = textBox.Tag as string;
+                textBox.Foreground = Brushes.Gray;
+            }
+        }
+
+        private void TextBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+
+            if (textBox.Text == textBox.Tag as string)
+            {
+                textBox.Text = string.Empty;
+                textBox.Foreground = Brushes.DarkGray;
+            }
         }
     }
 }

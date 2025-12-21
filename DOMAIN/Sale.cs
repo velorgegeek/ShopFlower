@@ -12,7 +12,7 @@ namespace DOMAIN
         public int UserId { get; set; }
         public User User { get; set; }
         public DateTime DateCreate { get; set; }
-        public List<ProductInSale> Products { get; set; }
+        public List<ProductInSale> Products { get; set; } = new List<ProductInSale>();
         public int amount
         {
             get
@@ -45,6 +45,7 @@ namespace DOMAIN
             DateCreate = DateTime.Now;
             Products = products;
         }
-        public Sale() { }
+        public Sale() {
+        }
     }
 }

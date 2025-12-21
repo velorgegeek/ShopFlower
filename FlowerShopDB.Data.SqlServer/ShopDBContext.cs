@@ -15,7 +15,7 @@ namespace FlowerShopDB.Data.SqlServer
 
         public DbSet<Product> Products { get; set; }
         public DbSet<ProductInSale> productInSales { get; set; }
-        public DbSet<ProductInShoppingCard> productInShoppingCards { get; set; }
+        public DbSet<ProductInShoppingCart> productInShoppingCards { get; set; }
         public DbSet<User> users { get; set; }
         public DbSet<Sale > sale { get; set; }
         public DbSet<CategoryProduct> categories { get; set; }

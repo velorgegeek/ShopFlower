@@ -83,6 +83,15 @@ namespace UI
             DialogResult = true;
             Close();
         }
+        private void close_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult result = MessageBox.Show("Вы точно уверены,что хотите закрыть, данные не сохранятся"
+                ,"Редактирование товар",MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
+            {
+                Close();
+            }
+        }
         public static Product EditProductShow(Product product,ICategoryRepository _categoryRepository)
         {
             var show = new EditProductWindow(product, _categoryRepository);
