@@ -50,8 +50,8 @@ namespace FlowerShop
 
             _categoryRepository = new FlowerShopDB.Data.SqlServer.CategoryRepository(_shopDBContext);
             _userRepository = new FlowerShopDB.Data.SqlServer.UserRepository(_shopDBContext);
-            _productInShoppingCartRepository = new FlowerShopDB.Data.SqlServer.ProductInShoppingCartRepository(_shopDBContext);
             _products = new FlowerShopDB.Data.SqlServer.ProductsRepository(_shopDBContext);
+            _productInShoppingCartRepository = new FlowerShopDB.Data.SqlServer.ProductInShoppingCartRepository(_shopDBContext);
             _sale = new FlowerShopDB.Data.SqlServer.SaleRepository(_shopDBContext);
             _statistics = new StatisticsService(_sale);
             Inits();
@@ -82,7 +82,7 @@ namespace FlowerShop
                 HashPassword = CreateSHA256("da")
                 ,
                 Role = role.User,
-                ShoppingCard = new List<ProductInShoppingCart>()
+                ShoppingCart = new List<ProductInShoppingCart>()
             };
             var user2 = new User
             {
@@ -90,7 +90,7 @@ namespace FlowerShop
                 Phone = "+79040944341",
                 HashPassword = CreateSHA256("yakirill"),
                 Role = role.Admin,
-                ShoppingCard = new List<ProductInShoppingCart>()
+                ShoppingCart = new List<ProductInShoppingCart>()
             };
 
             _userRepository.Add(user2);

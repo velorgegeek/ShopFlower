@@ -13,6 +13,7 @@ namespace Date.Interfaces
         bool Update(User user);
         bool Remove(User user);
         List <User> GetAll();
+        public User CheckNumber(string num);
     }
 
 }

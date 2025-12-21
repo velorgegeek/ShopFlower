@@ -24,6 +24,10 @@ namespace FlowerShopDB.Data.SqlServer
             using SHA256 hash = SHA256.Create();
             return Convert.ToHexString(hash.ComputeHash(Encoding.ASCII.GetBytes(input)));
         }
+        public User CheckNumber(string num)
+        {
+            return _dbContext.users.FirstOrDefault(i => i.Phone == num);
+        }
         public List<User> GetUsers(role rol)
         {
             return _dbContext.users.Where(r=> r.Role == rol).ToList();

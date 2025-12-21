@@ -1,5 +1,6 @@
 ﻿using Data.Interfaces;
 using DOMAIN;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -64,7 +65,10 @@ namespace FlowerShopDB.Data.SqlServer
         public List<ProductInShoppingCart> GetByUser(User user)
         {
             ArgumentNullException.ThrowIfNull(user);
-            return _dbContext.productInShoppingCards.Where(u => u.UserId == user.ID).ToList();
+            return _dbContext.productInShoppingCards
+                .Include(pisc => pisc.ProductVariation)
+                .Where(u => u.UserId == user.ID)
+                .ToList();
         }
     }
 }

@@ -46,9 +46,6 @@ namespace UI
             this._products = _products;
             this._categoryRepository = _category;
             this._categoryRepository.GetAll();
-            this._products.GetAll();
-
-            this._sale.GetAll(SaleFilter.Empty);
         }
 
         private void PasswordChecker(object sender, RoutedEventArgs e)
@@ -106,9 +103,20 @@ namespace UI
             if (q != string.Empty)
             {
                 var user = _userRepository.GetByLogin(q, PassBox.Password);
-                if (user != null) {
+                if (user != null)
+                {
+                    user.ShoppingCart = _productInShoppingCartRepository.GetByUser(user);
                     OpenWindow(user);
                 }
+                else
+                {
+                    MessageBox.Show("Юзер не найден", " Вход в аккаунт", MessageBoxButton.OK, MessageBoxImage.Warning);
+
+                }
+            }
+            else
+            {
+                MessageBox.Show("Неправильный номер", "Вход в аккаунт", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
 

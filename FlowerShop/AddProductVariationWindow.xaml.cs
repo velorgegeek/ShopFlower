@@ -43,6 +43,8 @@ namespace UI
             if (PathTextBox.Text == null || PathTextBox.Tag == PathTextBox.Text) return false;
             if (CostVariation.Text == null|| CostVariation.Tag == CostVariation.Text) return false;
             if (DesriptionVar.Text == null || DesriptionVar.Tag == DesriptionVar.Text) return false;
+            if (!int.TryParse(CostVariation.Text, out int i)) return false;
+            if (Convert.ToInt32(CostVariation.Text) <= 0) return false;
             return true;
         }
         public static Product AddVarShow(Product p)

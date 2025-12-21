@@ -55,7 +55,7 @@ namespace UI
             this.user1 = user;
             sale = SaleRep;
             this.products = products;
-            ShopCartList =user.ShoppingCard;
+            ShopCartList =user.ShoppingCart;
             this._productInShoppingCartRepository = _productInShoppingCartRepository ;
             Init();
         }
@@ -85,7 +85,7 @@ namespace UI
                     sale.Add(user1.ID, ShopCartList.Select(
                         item => new ProductInSale(item.ProductVariation, item.Quantity)).ToList());
                     user1.ShopCardDelete(ShopCartList);
-                    ShopCartList = user1.ShoppingCard;
+                    ShopCartList = user1.ShoppingCart;
                     _productInShoppingCartRepository.DeleteList(ShopCartList);
                     ShopCart.Items.Refresh();
                     AmountPaid.Text = ($"Итого: {CalculateCost()}");

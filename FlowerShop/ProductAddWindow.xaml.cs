@@ -36,6 +36,7 @@ namespace UI
             if(PathTextBox.Text == string.Empty) return false;
             if(DesriptionVar.Text == string.Empty) return false;
             if(CostVariation.Text == string.Empty) return false;
+            if (!int.TryParse(CostVariation.Text, out int i) || Convert.ToInt32(CostVariation.Text) <= 0) return false;
             return true;
         }
         private void path_Click(object sender, RoutedEventArgs e)

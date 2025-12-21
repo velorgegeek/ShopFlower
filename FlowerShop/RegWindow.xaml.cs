@@ -57,6 +57,10 @@ namespace UI
                 MessageBox.Show("Валидация не пройдена","Регистрация",MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
+            if (repository.CheckNumber(UserPhone.Text) != null)
+            {
+                MessageBox.Show("Номер занят, попробуйте другой", "Регистрация", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
             if (ValidMail())
             {
                 repository.Add(UserMail.Text, FIO.Text, UserPassword.Text, UserPhone.Text, DOMAIN.role.User);

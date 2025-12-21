@@ -64,7 +64,11 @@ namespace UI
             if (CostVariation.Text == null)return false;
             if (NameProduct.Text == null) return false;
             if (DesriptionVar.Text == null) return false;
+            if (!int.TryParse(CostVariation.Text, out int value)) return false;
+            if (Convert.ToInt32(CostVariation.Text) <= 0) return false;
             return true;
+        }
+              
         }
         private void EditProduct_Click(object sender, RoutedEventArgs e)
 

@@ -1,11 +1,12 @@
-﻿using FlowerShopDB.Data.SqlServer;
-using Data.Interfaces;
+﻿using Data.Interfaces;
 using DOMAIN;
+using FlowerShopDB.Data.SqlServer;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Printing.IndexedProperties;
+using System.Runtime.Intrinsics.X86;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -54,6 +55,13 @@ namespace UI
                 productCard.Show();
                 Close();
             }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            var productvar = new ShoppingCart(sale, user, Products, _productInShoppingCartRepository);
+            productvar.Show();
+            Close();
         }
     } 
 }
