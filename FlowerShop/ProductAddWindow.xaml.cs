@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using FlowerShopDB.Data.SqlServer;
+using System.Text.RegularExpressions;
 namespace UI
 {
     /// <summary>
@@ -36,7 +37,16 @@ namespace UI
             if(PathTextBox.Text == string.Empty) return false;
             if(DesriptionVar.Text == string.Empty) return false;
             if(CostVariation.Text == string.Empty) return false;
-            if (!int.TryParse(CostVariation.Text, out int i) || Convert.ToInt32(CostVariation.Text) <= 0) return false;
+            if (!int.TryParse(CostVariation.Text, out int i)) {
+                MessageBox.Show("Цена должна быть числового типа","Добавление продукта",MessageBoxButton.OK,MessageBoxImage.Warning);
+                return false;
+            }
+            if (Convert.ToInt32(CostVariation.Text) <= 0)
+            {
+                MessageBox.Show("Цена должна быть положительная", "Добавление продукта", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return false;
+            }
+
             return true;
         }
         private void path_Click(object sender, RoutedEventArgs e)
@@ -64,13 +74,12 @@ namespace UI
         {
             if (!valid())
             {
-                MessageBox.Show("Данные не валидные", "Ошибка добавления", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
             if (CategoryComboBox.SelectedItem is CategoryProduct catproduct)
             {
                 product = new Product(NameProduct.Text, catproduct);
-                product.AddVariation(DesriptionVar.Text, PathTextBox.Text ,Convert.ToUInt16(CostVariation.Text));
+                product.AddVariation(DesriptionVar.Text, PathTextBox.Text ,Convert.ToInt32(CostVariation.Text));
                 DialogResult = true;
                 Close();
             }

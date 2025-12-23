@@ -102,7 +102,15 @@ namespace UI
             string q = valid();
             if (q != string.Empty)
             {
-                var user = _userRepository.GetByLogin(q, PassBox.Password);
+                User user;
+                if (PassBox.Password == string.Empty)
+                {
+                    user = _userRepository.GetByLogin(q, PassTextBox.Text);
+                }
+                else
+                {
+                    user = _userRepository.GetByLogin(q, PassBox.Password);
+                }
                 if (user != null)
                 {
                     user.ShoppingCart = _productInShoppingCartRepository.GetByUser(user);

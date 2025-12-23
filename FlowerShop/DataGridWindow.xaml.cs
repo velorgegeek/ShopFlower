@@ -86,7 +86,12 @@ namespace UI
                 if (add != null)
                 {
                     MessageBox.Show("Вариация добавлена", "Добавление вариации");
+                    UpdateDataGrid();
                 }
+            }
+            else
+            {
+                MessageBox.Show("Продукт не выбран", "Добавление вариации", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
 
@@ -139,6 +144,10 @@ namespace UI
                         UpdateDataGrid();
                     }
                 }
+            }
+            else
+            {
+                MessageBox.Show("Продукт не выбран", "Удаление вариации", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
 
         }

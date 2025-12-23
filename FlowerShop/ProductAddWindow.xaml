@@ -5,15 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UI"
         mc:Ignorable="d"
-        Title="ProductAddWindow" Height="400" Width="500">
+        Title="Добавление продукта" Height="500" Width="500">
 
     <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <!-- Заголовок/информация -->
-            <RowDefinition Height="*"/>
+            <RowDefinition/>
             <!-- Основное содержимое -->
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto" MinHeight="95.04"/>
             <!-- Кнопки -->
         </Grid.RowDefinitions>
 
@@ -65,7 +65,7 @@
                     BorderThickness="1" 
                     Padding="15" 
                     CornerRadius="5">
-                <StackPanel>
+                <StackPanel Margin="0,0,0,-8">
                     <TextBlock Text="Добавление вариации" 
                                FontWeight="Bold" 
                                FontSize="16" 
@@ -95,10 +95,10 @@
                     <StackPanel Margin="0,0,0,10">
                         <TextBlock x:Name="PathTextBox" 
                                    Text="Путь к фотографии:" 
-                                   Margin="0,0,0,5" Height="55" TextWrapping="Wrap"/>
+                                   Margin="0,0,0,5" Height="70" TextWrapping="Wrap"/>
                         <Button x:Name="Path" 
                                 Content="Выбрать фотографию..." 
-                                Height="30" 
+                                Height="27" 
                                 Click="path_Click"/>
                     </StackPanel>
                 </StackPanel>
@@ -109,7 +109,7 @@
         <StackPanel Grid.Row="2" 
                     Orientation="Horizontal" 
                     HorizontalAlignment="Right" 
-                    Margin="0,15,0,0">
+                    Margin="0,15,0,0" Width="170">
             <Button Content="Отмена" 
                     Width="80" 
                     Height="30" 

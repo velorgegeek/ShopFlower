@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UI"
         mc:Ignorable="d"
-        Title="PaymentWindow" Height="400" Width="500">
+        Title="Оплата заказа" Height="400" Width="500">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="70"/>
@@ -19,7 +19,7 @@
         </Grid.ColumnDefinitions>
         <Border BorderBrush="#E0E0E0" BorderThickness="2" Margin="19,16,25,31" Padding="20" Background="White" CornerRadius="10" Grid.Column="1" Grid.Row="1">
             <StackPanel Margin="0,-12,0,-12">
-                <TextBox MaxLength="16" x:Name="NumCardTextBox" Text="Номер карты" Foreground="#FF928383" Height="30" Padding="5" Margin="0,30,0,15" FontSize="16" Tag="Номер карты" GotFocus="TextBox_GotFocus" LostFocus="TextBox_LostFocus"/>
+                <TextBox MaxLength="16" x:Name="NumCardTextBox" Text="Номер карты" Foreground="#FF928383" Height="34" Padding="5" Margin="0,30,0,15" FontSize="16" Tag="Номер карты" GotFocus="TextBox_GotFocus" LostFocus="TextBox_LostFocus"/>
 
                 <Grid Margin="0,0,0,15" Height="56">
                     <Grid.ColumnDefinitions>
@@ -31,7 +31,7 @@
 
 
                     <TextBox Focusable = "true" MaxLength="2" x:Name="MonthTextBox" Text="ММ" Foreground="#FF928383" Grid.Column="1" VerticalContentAlignment="Center" TextAlignment="Center" Margin="0,21,117,5" GotFocus="TextBox_GotFocus" LostFocus="TextBox_LostFocus" Tag="ММ"/>
-                    <TextBlock Text="/" Grid.Column="1" VerticalAlignment="Top" Margin="33,28,112,0" Height="16" Foreground="#FF928383"/>
+                    <TextBlock Text="/" Grid.Column="1" VerticalAlignment="Top" Margin="35,28,110,0" Height="16" Foreground="#FF928383"/>
                     <TextBox Focusable = "true" MaxLength="2" x:Name="YearTextBox" Text="ГГ" Foreground="#FF928383" Grid.Column="1" VerticalContentAlignment="Center" TextAlignment="Center" Margin="42,21,75,5" Tag="ГГ" GotFocus="TextBox_GotFocus" LostFocus="TextBox_LostFocus"/>
                     <TextBox Focusable = "true" MaxLength="3" x:Name="CvcTextBox" Text="CVC" Foreground="#FF928383" Grid.Column="2" VerticalContentAlignment="Center" TextAlignment="Center" Margin="43,21,0,5" Tag="CVC" GotFocus="TextBox_GotFocus" LostFocus="TextBox_LostFocus"/>
                 </Grid>

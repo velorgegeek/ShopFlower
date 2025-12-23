@@ -40,11 +40,21 @@ namespace UI
         }
         private bool valid()
         {
-            if (PathTextBox.Text == null || PathTextBox.Tag == PathTextBox.Text) return false;
-            if (CostVariation.Text == null|| CostVariation.Tag == CostVariation.Text) return false;
-            if (DesriptionVar.Text == null || DesriptionVar.Tag == DesriptionVar.Text) return false;
-            if (!int.TryParse(CostVariation.Text, out int i)) return false;
-            if (Convert.ToInt32(CostVariation.Text) <= 0) return false;
+            if (PathTextBox.Text == string.Empty || DesriptionVar.Text == string.Empty|| CostVariation.Text == string.Empty)
+            {
+                MessageBox.Show("Все поля должны быть заполненны","Добавление вариации",MessageBoxButton.OK, MessageBoxImage.Warning);
+                return false;
+            }
+            if (!int.TryParse(CostVariation.Text, out int i))
+            {
+                MessageBox.Show("Цена должна быть числового типа", "Добавление продукта", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return false;
+            }
+            if (Convert.ToInt32(CostVariation.Text) <= 0)
+            {
+                MessageBox.Show("Цена должна быть положительная", "Добавление продукта", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return false;
+            }
             return true;
         }
         public static Product AddVarShow(Product p)
@@ -63,10 +73,6 @@ namespace UI
                 product.AddVariation(DesriptionVar.Text,PathTextBox.Text,Convert.ToInt32(CostVariation.Text));
                 DialogResult = true;
                 Close();
-            }
-            else
-            {
-                MessageBox.Show("Валидация не пройдена","Добавление вариации",MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
         private void TextBox_LostFocus(object sender, RoutedEventArgs e)

@@ -73,7 +73,7 @@ namespace UI
         {
             if (ShopCartList.Count < 1)
             {
-                MessageBox.Show($"Нет в корзине товара", "Оплата", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show($"В корзине нет товара", "Оплата", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
             var app = PaymentWindow.PaymentWindowShow();
@@ -89,6 +89,7 @@ namespace UI
                     _productInShoppingCartRepository.DeleteList(ShopCartList);
                     ShopCart.Items.Refresh();
                     AmountPaid.Text = ($"Итого: {CalculateCost()}");
+                    ListSize.Text = ShopCartList.Count.ToString() + " Товара";
                 }
                 else
                 {

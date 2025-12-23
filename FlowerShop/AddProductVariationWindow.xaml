@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UI"
         mc:Ignorable="d"
-        Title="AddProductVariationWindow" Height="300" Width="400" MinWidth="200">
+        Title="Добавление вариации" Height="300" Width="400" MinWidth="200">
     <Grid Margin="10,10,10,13">
         <!-- Определяем строки Grid -->
         <Grid.RowDefinitions>
@@ -15,28 +15,33 @@
             <!-- Для TextBox'ов -->
             <RowDefinition/>
             <!-- Пустое пространство -->
-            <RowDefinition Height="55.04"/>
+            <RowDefinition Height="38.04"/>
+            <RowDefinition Height="6"/>
             <!-- Для панели кнопок -->
         </Grid.RowDefinitions>
 
         <!-- Кнопка выбора фотографии -->
 
-        <!-- Поля ввода, расположенные в столбец -->
-        <StackPanel Grid.Row="2" Height="177" VerticalAlignment="Top" Margin="0,19,0,0">
-            <TextBlock  Tag ="Путь к фотографии:" x:Name="PathTextBox" Text="Путь к фотографии:" Height="40" Width="369" Margin="5"/>
+        <Border BorderBrush="LightGray" BorderThickness="1" CornerRadius="10" Grid.RowSpan="4">
+
+            <StackPanel Grid.Row="2" Height="198" VerticalAlignment="Top" Margin="0,19,0,0">
+            <TextBlock TextWrapping="Wrap" Tag ="Путь к фотографии:" x:Name="PathTextBox" Text="Путь к фотографии:" Height="40" Width="369" Margin="5" LostFocus="TextBox_LostFocus" GotFocus="TextBox_GotFocus"/>
             <Button x:Name="Path" Content="Выбрать..." 
                     Width="100" Click="path_Click" Margin="5"/>
             <TextBox x:Name="DesriptionVar" Text="Описание вариации" 
-                     Margin="0,0,0,10" Height="39" Tag="Описание вариации"/>
-            <TextBox Tag="Цена" x:Name="CostVariation" Text="Цена"  Height="23"/>
+                     Margin="0,0,0,10" Height="52" Tag="Описание вариации" TextWrapping="Wrap" LostFocus="TextBox_LostFocus" GotFocus="TextBox_GotFocus"/>
+            <TextBox Tag="Цена" x:Name="CostVariation" Text="Цена"  Height="32" LostFocus="TextBox_LostFocus" GotFocus="TextBox_GotFocus"/>
         </StackPanel>
+
+        </Border>
 
         <!-- Панель кнопок внизу окна -->
         <StackPanel Grid.Row="3" Orientation="Horizontal" 
-                    HorizontalAlignment="Right" Margin="0,16,18,20" Width="170">
+                    HorizontalAlignment="Right" Margin="0,0,18,8" Width="170" Height="25" VerticalAlignment="Bottom">
             <Button Content="Отмена" Width="80" Margin="0,0,10,0" Click="Button_Click"/>
             <Button x:Name="CreateButton" Content="Создать" 
                     Width="80" Click="CreateButton_Click"/>
         </StackPanel>
+            <Border/>
     </Grid>
 </Window>

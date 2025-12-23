@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UI"
         mc:Ignorable="d"
-        Title="DataGridWindow" Height="450" Width="800">
+        Title="Записи" Height="450" Width="800">
 
     <TabControl>
         <TabItem Header="Продукты">
@@ -145,7 +145,7 @@
                 <DataGrid x:Name="SaleDataGrid" Margin="5" AutoGenerateColumns="False" IsReadOnly="True">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="id" Binding="{Binding Id}"/>
-                        <DataGridTextColumn Header="Ид Юзера" Binding="{Binding UserId}"/>
+                        <DataGridTextColumn Header="Ид Юзера" Binding="{Binding User.Fio}"/>
                         <DataGridTextColumn Header="Дата заказа" Binding="{Binding DateCreate}"/>
                         <DataGridTextColumn Header="Общая стоимость" Binding="{Binding amount}"/>
                         <DataGridTextColumn Header="Кол-во товаров" Binding="{Binding CountProducts}"/>

@@ -17,7 +17,6 @@ namespace FlowerShop
     /// </summary>
     public partial class MainWindow : Window
     {
-        IUserRepository _userRepository;
         ISaleRepository _saleRepository;
         IProductsRepository _productsRepository;
         ICategoryRepository _categoryRepository;

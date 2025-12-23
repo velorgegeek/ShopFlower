@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:UI"
         mc:Ignorable="d"
-        Title="DeleteVariation" Height="360" Width="610">
+        Title="Удаление вариации" Height="360" Width="610">
     <Grid Height="350" VerticalAlignment="Top">
-        <StackPanel Orientation="Horizontal" Margin="362,226,54,62" >
+        <StackPanel Orientation="Horizontal" Margin="364,272,52,16" >
             <Button Content="Закрыть" Height="29" Margin="0,0,10,0" Click="Button_Click_1"/>
             <Button Content="Удалить вариацию" Height="29" Click="Button_Click" />
 
@@ -15,7 +15,7 @@
         </StackPanel>
 
         <ListBox x:Name="VariationList" 
-         Margin="0,0,0,140" ItemsSource="{Binding Variations}" Background="White" BorderBrush="LightGray" BorderThickness="1" HorizontalAlignment="Left" Width="556">
+         Margin="0,0,0,78" ItemsSource="{Binding Variations}" Background="White" BorderBrush="LightGray" BorderThickness="1" HorizontalAlignment="Left" Width="556">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Border BorderBrush="#E0E0E0" Margin="5" Padding="10" 

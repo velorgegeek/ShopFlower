@@ -58,16 +58,34 @@ namespace UI
         }
         private bool valid()
         {
-            if (VariationList.SelectedItem == null) return false;
-            if(CategoryComboBox.SelectedItem == null) return false;
-            if (PathTextBox.Text == null) return false;
-            if (CostVariation.Text == null)return false;
-            if (NameProduct.Text == null) return false;
-            if (DesriptionVar.Text == null) return false;
-            if (!int.TryParse(CostVariation.Text, out int value)) return false;
-            if (Convert.ToInt32(CostVariation.Text) <= 0) return false;
+            if (CategoryComboBox.SelectedItem == null)
+            {
+                MessageBox.Show("Категория должна быть выбрана", "Редактирование продукта", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return false;
+            } 
+            if(VariationList.SelectedItem != null)
+            {
+                if(PathTextBox.Text == string.Empty || DesriptionVar.Text == string.Empty || CostVariation.Text == string.Empty)
+                {
+                    MessageBox.Show("Все поля вариации должны быть заполненны", "Редактирование продукта", MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
+            }
+            if (NameProduct.Text == string.Empty)
+            {
+                MessageBox.Show("Все поля должны быть заполненны", "Редактирование продукта", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return false;
+            }
+            if (!int.TryParse(CostVariation.Text, out int i))
+            {
+                MessageBox.Show("Цена должна быть числового типа", "Редактирование продукта", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return false;
+            }
+            if (Convert.ToInt32(CostVariation.Text) <= 0)
+            {
+                MessageBox.Show("Цена должна быть положительная", "Редактирование продукта", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return false;
+            }
             return true;
-        }
               
         }
         private void EditProduct_Click(object sender, RoutedEventArgs e)

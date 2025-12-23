@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:UI"
         xmlns:oxy="http://oxyplot.org/wpf"
         mc:Ignorable="d"
-        Title="StatisticsWindow" Height="450" Width="800">
+        Title="Статистика" Height="450" Width="800">
 
 
     <Grid Margin="10">

@@ -9,73 +9,75 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
-            <RowDefinition Height="535"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Button Content="В корзину" Grid.Row="0" Grid.Column ="1" Margin="10,10,10,10"/>
-        <ListBox x:Name="ProductsListBox" 
-          ItemsSource="{Binding Products}"
-          ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-          BorderThickness="0"
-          Background="Transparent"
-          Grid.ColumnSpan="2"
-          Grid.Row="1"
-          SelectionChanged="ProductsListBox_SelectionChanged">
 
-            <!-- Панель расположения элементов -->
-            <ListBox.ItemsPanel>
+        <Button Content="В корзину" Grid.Row="0" Grid.Column="1" Margin="10" Click="Button_Click"/>
+
+        <ListView x:Name="ProductsListBox" 
+                  ItemsSource="{Binding Products}"
+                  ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                  Grid.Row="1" Grid.ColumnSpan="2"
+                  SelectionChanged="ProductsListBox_SelectionChanged">
+
+            <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <UniformGrid Columns="6" Rows="0"/>
+                    <WrapPanel Orientation="Horizontal" 
+                               Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=ListView}}"/>
                 </ItemsPanelTemplate>
-            </ListBox.ItemsPanel>
+            </ListView.ItemsPanel>
 
-            <ListBox.Resources>
-                <Style TargetType="ListBoxItem">
-                    <Setter Property="Background" Value="Transparent"/>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Border BorderBrush="#E0E0E0" BorderThickness="1" 
+                            Margin="10" Background="White"
+                            Width="150" Height="200">
+                        <StackPanel>
+                            <!-- Изображение -->
+                            <Border Height="100" Background="#F5F5F5">
+                                <Image Source="{Binding MainImagePath}" 
+                                       Stretch="Uniform" 
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Center"
+                                       MaxWidth="130" MaxHeight="90"/>
+                            </Border>
+
+                            <!-- Информация -->
+                            <StackPanel Margin="10,5">
+                                <TextBlock Text="{Binding Name}" 
+                                           FontWeight="SemiBold" 
+                                           TextWrapping="Wrap"
+                                           Height="40"
+                                           Margin="0,0,0,5"
+                                           TextAlignment="Center"/>
+
+                                <TextBlock Text="{Binding Pricevar, StringFormat={}{0:N0}₽}" 
+                                           FontWeight="Bold" 
+                                           FontSize="14"
+                                           Foreground="#E53935"
+                                           TextAlignment="Center"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                    <Setter Property="VerticalContentAlignment" Value="Stretch"/>
                     <Setter Property="BorderThickness" Value="0"/>
+                    <Setter Property="Padding" Value="0"/>
+                    <Setter Property="Margin" Value="0"/>
                     <Setter Property="Template">
                         <Setter.Value>
-                            <ControlTemplate TargetType="ListBoxItem">
+                            <ControlTemplate TargetType="ListViewItem">
                                 <ContentPresenter/>
                             </ControlTemplate>
                         </Setter.Value>
                     </Setter>
                 </Style>
-            </ListBox.Resources>
-
-
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <Border BorderBrush="#E0E0E0" BorderThickness="1" 
-                     Margin="10" Background="White"
-                     Width="130" Height="180">
-                        <StackPanel>
-                            <!-- Изображение -->
-                            <Border Height="100" Background="#F5F5F5">
-                                <Image Source="{Binding MainImagePath}" 
-                                Stretch="Uniform" 
-                                VerticalAlignment="Center"
-                                HorizontalAlignment="Center"
-                                MaxWidth="200" MaxHeight="110" />
-                            </Border>
-
-                            <!-- Информация -->
-                            <StackPanel Margin="10">
-                                <TextBlock Text="{Binding Name}" 
-                                    FontWeight="SemiBold" 
-                                    TextWrapping="Wrap"
-                                    Height="40"
-                                    Margin="0,0,0,5"/>
-
-                                <TextBlock Text="{Binding Pricevar, StringFormat={}{0:N0}₽}" 
-                                    FontWeight="Bold" 
-                                    FontSize="14"
-                                    Foreground="#E53935"
-                                    Margin="0,5,0,0"/>
-                            </StackPanel>
-                        </StackPanel>
-                    </Border>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
+            </ListView.ItemContainerStyle>
+        </ListView>
     </Grid>
 </Window>
